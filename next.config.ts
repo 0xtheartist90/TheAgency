@@ -10,5 +10,9 @@ const withBundleAnalyzer = initializeBundleAnalyzer({
 
 export default withBundleAnalyzer((phase: string): NextConfig => ({
     distDir: phase === PHASE_DEVELOPMENT_SERVER ? '.next-dev' : '.next',
-    ...(phase !== PHASE_DEVELOPMENT_SERVER ? { output: 'standalone' } : {})
+    // Vercel expects the standard Next.js build output. Keep standalone output
+    // only for non-Vercel production builds such as local Docker images.
+    ...(phase !== PHASE_DEVELOPMENT_SERVER && process.env.VERCEL !== '1'
+        ? { output: 'standalone' }
+        : {})
 }));
