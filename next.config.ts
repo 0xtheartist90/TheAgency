@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 
 import initializeBundleAnalyzer from '@next/bundle-analyzer';
 
@@ -7,9 +8,7 @@ const withBundleAnalyzer = initializeBundleAnalyzer({
     enabled: process.env.BUNDLE_ANALYZER_ENABLED === 'true'
 });
 
-// https://nextjs.org/docs/pages/api-reference/next-config-js
-const nextConfig: NextConfig = {
-    output: 'standalone'
-};
-
-export default withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzer((phase: string): NextConfig => ({
+    distDir: phase === PHASE_DEVELOPMENT_SERVER ? '.next-dev' : '.next',
+    ...(phase !== PHASE_DEVELOPMENT_SERVER ? { output: 'standalone' } : {})
+}));

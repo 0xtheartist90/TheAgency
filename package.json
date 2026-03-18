@@ -5,13 +5,15 @@
     "website": "https://nextjs-15-starter-shadcn.vercel.app/",
     "license": "MIT",
     "scripts": {
-        "dev": "next dev --turbopack",
+        "dev": "rm -rf .next-dev && next dev --port 3000",
+        "dev:clean": "rm -rf .next-dev && next dev --port 3000",
+        "dev:agency": "next dev --port 3001",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
         "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
         "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-        "type-check": "tsc --noEmit"
+        "type-check": "next typegen && tsc --noEmit"
     },
     "dependencies": {
         "@hookform/resolvers": "^5.2.2",
@@ -52,6 +54,7 @@
         "date-fns": "^4.1.0",
         "embla-carousel-autoplay": "^8.6.0",
         "embla-carousel-react": "^8.6.0",
+        "framer-motion": "^12.38.0",
         "geist": "^1.5.1",
         "input-otp": "^1.4.2",
         "lucide-react": "^0.548.0",
