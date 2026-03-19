@@ -284,43 +284,44 @@ const StoryPage = async ({ params }: { params: Promise<Params> }) => {
 
             <section className='bg-[linear-gradient(180deg,#f5eee6_0%,#efe4d5_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <div className='mx-auto max-w-7xl'>
-                    <Reveal
-                        className='process-card relative overflow-hidden p-8 text-white shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:p-10'
-                        distance={38}
-                        style={{ clipPath: storyCardClipPath }}
-                    >
-                        <div className='process-card-surface absolute inset-0' />
-                        <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,109,24,0.16),transparent_24%),radial-gradient(circle_at_84%_76%,rgba(255,255,255,0.06),transparent_20%)]' />
-                        <div className='relative z-10'>
-                            <div className='max-w-3xl'>
-                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    Why teams work with us
-                                </p>
-                                <h2 className='mt-5 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
-                                    A smaller team, a tighter process, and work that actually moves.
-                                </h2>
-                                <p className='mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg'>
-                                    We built the agency around a few non-negotiables: clearer direction, stronger ownership, faster decisions, and visible progress from start to finish.
-                                </p>
-                            </div>
+                    <Reveal distance={38}>
+                        <div
+                            className='process-card relative overflow-hidden p-8 text-white shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:p-10'
+                            style={{ clipPath: storyCardClipPath }}
+                        >
+                            <div className='process-card-surface absolute inset-0' />
+                            <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,109,24,0.16),transparent_24%),radial-gradient(circle_at_84%_76%,rgba(255,255,255,0.06),transparent_20%)]' />
+                            <div className='relative z-10'>
+                                <div className='max-w-3xl'>
+                                    <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
+                                        Why teams work with us
+                                    </p>
+                                    <h2 className='mt-5 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
+                                        A smaller team, a tighter process, and work that actually moves.
+                                    </h2>
+                                    <p className='mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg'>
+                                        We built the agency around a few non-negotiables: clearer direction, stronger ownership, faster decisions, and visible progress from start to finish.
+                                    </p>
+                                </div>
 
-                            <div className='mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5'>
-                                {uspValues.map((value, index) => (
-                                    <div key={value.title} className='process-card relative overflow-hidden p-6'>
-                                        <div className='process-card-surface absolute inset-0' />
-                                        <div className='relative z-10'>
-                                            <p className='text-[0.82rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)]'>
-                                                0{index + 1}/
-                                            </p>
-                                            <p className='mt-4 text-[1.6rem] font-semibold leading-[1.05] tracking-[-0.05em] text-white'>
-                                                {value.title}
-                                            </p>
-                                            <p className='mt-4 text-sm leading-7 text-white/68'>
-                                                {value.description}
-                                            </p>
+                                <div className='mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5'>
+                                    {uspValues.map((value, index) => (
+                                        <div key={value.title} className='process-card relative overflow-hidden p-6'>
+                                            <div className='process-card-surface absolute inset-0' />
+                                            <div className='relative z-10'>
+                                                <p className='text-[0.82rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)]'>
+                                                    0{index + 1}/
+                                                </p>
+                                                <p className='mt-4 text-[1.6rem] font-semibold leading-[1.05] tracking-[-0.05em] text-white'>
+                                                    {value.title}
+                                                </p>
+                                                <p className='mt-4 text-sm leading-7 text-white/68'>
+                                                    {value.description}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </Reveal>
