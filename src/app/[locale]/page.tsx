@@ -9,10 +9,15 @@ import Reveal from '@/app/components/Reveal';
 import ServicesShowcase from '@/app/components/ServicesShowcase';
 import SiteHeader from '@/app/components/SiteHeader';
 import { getCopy, locales } from '@/app/site-content';
+import { getWorkWithUsContent } from '@/app/work-with-us-content';
 
 type Params = {
     locale: string;
 };
+
+const packageCardClipPath =
+    'polygon(0 12%, 10% 0, 64% 0, 68% 6%, 89% 6%, 94% 0, 100% 0, 100% 88%, 94% 94%, 94% 100%, 0 100%)';
+const storySectionClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
 
 const homeHighlights = {
     en: [
@@ -66,12 +71,6 @@ const homeHighlights = {
             description: 'การเปิดตัวคมขึ้น การตลาดวัดผลได้มากขึ้น และระบบการทำงานขยายได้ง่ายขึ้น.'
         }
     ]
-} as const;
-
-const footerLinks = {
-    en: ['Strategy', 'Design', 'Development', 'Growth', 'Automation'],
-    nl: ['Strategie', 'Design', 'Development', 'Groei', 'Automatisering'],
-    th: ['กลยุทธ์', 'ดีไซน์', 'Development', 'Growth', 'Automation']
 } as const;
 
 const testimonials = {
@@ -156,6 +155,27 @@ const sectionText = {
     }
 } as const;
 
+const meetAndGreetBanner = {
+    en: {
+        label: 'Meet & Greet',
+        title: 'Schedule a meet and greet',
+        body: 'Start with a quick conversation so we can understand what you are building and see if we are the right fit.',
+        cta: 'Schedule meet and greet'
+    },
+    nl: {
+        label: 'Meet & Greet',
+        title: 'Plan een meet & greet',
+        body: 'Begin met een kort gesprek zodat we kunnen begrijpen wat je wilt bouwen en kunnen kijken of we goed bij elkaar passen.',
+        cta: 'Plan een meet & greet'
+    },
+    th: {
+        label: 'Meet & Greet',
+        title: 'นัดคุยเบื้องต้น',
+        body: 'เริ่มต้นด้วยการคุยสั้น ๆ เพื่อให้เราเข้าใจว่าคุณกำลังสร้างอะไร และดูว่าเราเหมาะจะทำงานร่วมกันหรือไม่',
+        cta: 'นัดคุยเบื้องต้น'
+    }
+} as const;
+
 export function generateStaticParams() {
     return locales.map((locale) => ({ locale }));
 }
@@ -179,9 +199,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
 
     const copy = getCopy(locale);
     const highlights = homeHighlights[locale as keyof typeof homeHighlights] ?? homeHighlights.en;
-    const footerPills = footerLinks[locale as keyof typeof footerLinks] ?? footerLinks.en;
     const quotes = testimonials[locale as keyof typeof testimonials] ?? testimonials.en;
     const text = sectionText[locale as keyof typeof sectionText] ?? sectionText.en;
+    const workWithUs = getWorkWithUsContent(locale as (typeof locales)[number]);
+    const meetAndGreet = meetAndGreetBanner[locale as keyof typeof meetAndGreetBanner] ?? meetAndGreetBanner.en;
 
     return (
         <main className='agency-shell bg-[var(--agency-cream)] text-white'>
@@ -203,7 +224,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 <div className='relative z-10 mx-auto flex min-h-screen max-w-[1760px] flex-col px-4 pb-8 pt-5 sm:px-6 lg:px-8'>
                     <div className='relative flex flex-1 flex-col items-center justify-center'>
 
-                        <p className='animate-rise-in mt-8 max-w-xl text-center text-[0.86rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:mt-10 sm:text-[0.96rem]'>
+                        <p className='animate-rise-in mt-2 max-w-xl text-center text-[0.86rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:mt-4 sm:text-[0.96rem]'>
                             {copy.home.eyebrow}
                         </p>
 
@@ -256,7 +277,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             </h2>
 
                             <div className='mt-8 grid gap-5 lg:grid-cols-[0.95fr_0.75fr] lg:items-stretch'>
-                                <div className='min-h-[420px] overflow-hidden rounded-[1.9rem] lg:min-h-0 lg:h-full'>
+                                <div
+                                    className='min-h-[420px] overflow-hidden border border-white/14 shadow-[0_24px_64px_rgba(0,0,0,0.16)] lg:min-h-0 lg:h-full'
+                                    style={{ clipPath: storySectionClipPath }}
+                                >
                                     <Image
                                         src='/images/Home/ace.png'
                                         alt='Ace, founder of The Agency'
@@ -270,9 +294,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                     {copy.pages.story.sections.map((section, index) => (
                                         <div
                                             key={section}
-                                            className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden rounded-[1.5rem] px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-full hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)] lg:h-full'
+                                            className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden border border-white/14 px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-full hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)] lg:h-full'
+                                            style={{ clipPath: storySectionClipPath }}
                                         >
-                                            <div className='story-number-card-surface absolute inset-0 rounded-[1.5rem]' />
+                                            <div className='story-number-card-surface absolute inset-0' />
                                             <span className='relative z-10 flex w-28 shrink-0 items-center justify-center text-4xl font-semibold leading-none tracking-[-0.06em] text-[var(--agency-orange)] sm:text-5xl'>
                                                 0{index + 1}
                                             </span>
@@ -292,7 +317,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                         </Reveal>
 
                         <Reveal className='flex items-end lg:justify-self-end' delay={140} distance={40}>
-                            <div className='glass-panel w-full max-w-md rounded-[1.9rem] p-7'>
+                            <div
+                                className='glass-panel w-full max-w-md border border-white/14 p-7'
+                                style={{ clipPath: storySectionClipPath }}
+                            >
                                 <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
                                     {text.storyBridgeTitle}
                                 </p>
@@ -307,8 +335,19 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </div>
             </section>
 
-            <section className='bg-[linear-gradient(180deg,#f5eee6_0%,#efe4d5_100%)] px-4 py-10 sm:px-6 lg:px-8 lg:py-16'>
-                <div className='mx-auto max-w-7xl'>
+            <section className='relative overflow-hidden bg-[linear-gradient(180deg,#f5eee6_0%,#efe4d5_100%)] px-4 py-10 sm:px-6 lg:px-8 lg:py-16'>
+                <video
+                    className='absolute inset-0 h-full w-full object-cover brightness-[0.7] saturate-[0.82]'
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload='auto'
+                >
+                    <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
+                </video>
+                <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(245,238,230,0.82)_0%,rgba(239,228,213,0.78)_100%)]' />
+                <div className='relative z-10 mx-auto max-w-7xl'>
                     <div className='relative'>
                         <div
                             className='relative overflow-hidden bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] px-6 py-10 shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:px-8 sm:py-12 lg:px-10 lg:py-16'
@@ -358,9 +397,9 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                     ].map((stat) => (
                                         <div
                                             key={stat.label}
-                                            className='relative min-h-[8.2rem] overflow-hidden rounded-[1.15rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.008)_100%)] px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]'
+                                            className='relative flex min-h-[8.2rem] flex-col items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.008)_100%)] px-5 py-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]'
                                         >
-                                            <div className='mb-5'>
+                                            <div className='mb-4'>
                                                 <p className='text-[2.35rem] font-semibold leading-none tracking-[-0.09em] text-white sm:text-[2.65rem]'>
                                                     {stat.value}
                                                 </p>
@@ -369,7 +408,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                                 {stat.label}
                                             </p>
                                             <div className='absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent' />
-                                            <div className='absolute left-5 bottom-0 h-px w-14 bg-[linear-gradient(90deg,rgba(255,106,0,0.85),rgba(255,106,0,0))]' />
+                                            <div className='absolute bottom-0 left-1/2 h-px w-14 -translate-x-1/2 bg-[linear-gradient(90deg,rgba(255,106,0,0),rgba(255,106,0,0.85),rgba(255,106,0,0))]' />
                                         </div>
                                     ))}
                                 </Reveal>
@@ -380,10 +419,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal className='absolute right-0 bottom-0 sm:right-3 lg:right-6' delay={260} distance={30}>
                             <Link
                                 href={`/${locale}/work`}
-                                className='inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-[#16161a] shadow-[0_14px_30px_rgba(30,20,12,0.12)] transition hover:translate-x-1'
+                                className='inline-flex items-center gap-3 rounded-full bg-[var(--agency-orange)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_34px_rgba(255,109,24,0.26)] transition hover:translate-x-1 hover:bg-[var(--agency-orange-soft)]'
                             >
                                 {copy.nav.work}
-                                <span className='inline-flex h-6 w-6 items-center justify-center rounded-full border border-black/10 text-base leading-none'>
+                                <span className='inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/22 text-base leading-none'>
                                     +
                                 </span>
                             </Link>
@@ -394,53 +433,123 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
 
             <ProcessSection />
 
+            <section className='relative overflow-hidden bg-[linear-gradient(180deg,#17171b_0%,#121216_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
+                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,109,24,0.12),transparent_26%)]' />
+                <div className='relative z-10 mx-auto max-w-7xl'>
+                    <div className='max-w-3xl space-y-4'>
+                        <Reveal distance={36}>
+                            <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
+                                {workWithUs.sectionLabel}
+                            </p>
+                            <h2 className='text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
+                                {workWithUs.sectionTitle}
+                            </h2>
+                            <p className='max-w-2xl text-base leading-8 text-white/72'>{workWithUs.sectionIntro}</p>
+                        </Reveal>
+                    </div>
+
+                    <div className='mt-10 grid gap-5 lg:grid-cols-3'>
+                        {workWithUs.packages.map((pkg, index) => (
+                            <Reveal key={pkg.slug} delay={index * 90} distance={34} className='h-full'>
+                                <article
+                                    className='glass-panel service-glass-card flex h-full flex-col p-7 sm:p-8'
+                                    style={{ clipPath: packageCardClipPath }}
+                                >
+                                    <p className='text-sm font-semibold text-[var(--agency-orange)]'>{pkg.step}</p>
+                                    <p className='mt-4 text-2xl font-semibold tracking-[-0.04em] text-white'>{pkg.title}</p>
+                                    <h3 className='mt-4 text-xl font-semibold tracking-[-0.04em] text-white/92'>
+                                        {pkg.headline}
+                                    </h3>
+                                    <p className='mt-4 text-base leading-7 text-white/72'>{pkg.description}</p>
+                                    <div className='mt-6 rounded-[1rem] border border-white/8 bg-white/5 px-4 py-3 text-sm text-white/78'>
+                                        {pkg.includes}
+                                    </div>
+                                    <div className='mt-auto pt-7'>
+                                        <Link href={`/${locale}/${pkg.slug}`} className='agency-button agency-button--link'>
+                                            {pkg.title}
+                                        </Link>
+                                    </div>
+                                </article>
+                            </Reveal>
+                        ))}
+                    </div>
+
+                    <Reveal
+                        className='mt-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between'
+                        delay={120}
+                        distance={28}
+                    >
+                        <p className='text-base leading-8 text-white/64'>{workWithUs.unsureText}</p>
+                        <Link href={`/${locale}/work-with-us`} className='agency-button agency-button--solid'>
+                            {workWithUs.sectionCtaLabel}
+                        </Link>
+                    </Reveal>
+                </div>
+            </section>
+
+            <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
+                <video
+                    className='absolute inset-0 h-full w-full object-cover'
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload='auto'
+                >
+                    <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
+                </video>
+                <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
+
+                <Reveal className='relative z-10 mx-auto max-w-7xl' distance={34}>
+                    <div
+                        className='glass-panel relative overflow-hidden border border-white/12 px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10'
+                        style={{ clipPath: packageCardClipPath }}
+                    >
+                        <div className='absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,109,24,0.14),transparent_34%)]' />
+                        <div className='relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
+                            <div className='max-w-3xl'>
+                                <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
+                                    {meetAndGreet.label}
+                                </p>
+                                <h2 className='mt-3 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
+                                    {meetAndGreet.title}
+                                </h2>
+                                <p className='mt-4 max-w-2xl text-base leading-8 text-white/70'>
+                                    {meetAndGreet.body}
+                                </p>
+                            </div>
+
+                            <Link href={`/${locale}/contact`} className='agency-button agency-button--solid shrink-0'>
+                                {meetAndGreet.cta}
+                            </Link>
+                        </div>
+                    </div>
+                </Reveal>
+            </section>
+
             <footer className='bg-[linear-gradient(180deg,#17171b_0%,#121216_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <div className='mx-auto max-w-7xl'>
-                    <div className='overflow-hidden rounded-[2.2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(33,33,39,0.94)_0%,rgba(18,18,22,0.98)_100%)] shadow-[0_30px_90px_rgba(0,0,0,0.34)]'>
-                        <Reveal className='grid gap-10 px-6 py-8 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:py-10' distance={38}>
-                            <div className='max-w-2xl'>
-                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    The Agency
-                                </p>
-                                <Image
-                                    src='/images/Logo/the-agency-logo-orange.webp'
-                                    alt='The Agency'
-                                    width={240}
-                                    height={68}
-                                    className='mt-4 h-10 w-auto'
-                                />
-                                <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>{text.footerBody}</p>
-                            </div>
+                    <Reveal className='grid gap-10 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr]' distance={38}>
+                        <div className='max-w-2xl'>
+                            <Image
+                                src='/images/Logo/the-agency-logo-orange.webp'
+                                alt='The Agency'
+                                width={240}
+                                height={68}
+                                className='h-10 w-auto'
+                            />
+                            <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>{text.footerBody}</p>
+                        </div>
 
-                            <div className='lg:justify-self-end'>
-                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
-                                    Capabilities
-                                </p>
-                                <div className='mt-5 flex max-w-md flex-wrap gap-3'>
-                                    {footerPills.map((pill) => (
-                                        <span
-                                            key={pill}
-                                            className='rounded-full border border-white/9 bg-white/[0.04] px-4 py-2 text-[0.68rem] uppercase tracking-[0.24em] text-white/48'
-                                        >
-                                            {pill}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </Reveal>
-
-                        <div className='h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent)]' />
-
-                        <Reveal
-                            className='flex flex-col gap-5 px-6 py-5 text-sm text-white/42 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10'
-                            delay={120}
-                            distance={26}
-                        >
-                            <div className='flex flex-wrap gap-6'>
+                        <div className='lg:justify-self-end'>
+                            <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
+                                Explore
+                            </p>
+                            <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
                                 <Link href={`/${locale}/story`} className='transition hover:text-white/82'>
                                     {copy.nav.story}
                                 </Link>
-                                <Link href={`/${locale}/services`} className='transition hover:text-white/82'>
+                                <Link href={`/${locale}/services/build`} className='transition hover:text-white/82'>
                                     {copy.nav.services}
                                 </Link>
                                 <Link href={`/${locale}/work`} className='transition hover:text-white/82'>
@@ -450,9 +559,21 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                     {copy.nav.contact}
                                 </Link>
                             </div>
-                            <p className='tracking-[0.08em] text-white/34'>© 2026 The Agency. All rights reserved.</p>
-                        </Reveal>
-                    </div>
+                        </div>
+                    </Reveal>
+
+                    <div className='mt-8 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent)]' />
+
+                    <Reveal
+                        className='flex flex-col gap-5 py-5 text-sm text-white/42 lg:flex-row lg:items-center lg:justify-between'
+                        delay={120}
+                        distance={26}
+                    >
+                        <p className='tracking-[0.08em] text-white/34'>© 2026 The Agency. All rights reserved.</p>
+                        <Link href={`/${locale}/contact`} className='text-white/44 transition hover:text-white/82'>
+                            {copy.home.supportLabel}
+                        </Link>
+                    </Reveal>
                 </div>
             </footer>
         </main>

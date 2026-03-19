@@ -7,11 +7,20 @@ type LanguageSwitcherProps = {
     path: string;
 };
 
+const localeFlags = {
+    en: '🇬🇧',
+    nl: '🇳🇱',
+    th: '🇹🇭'
+} as const;
+
 const LanguageSwitcher = ({ currentLocale, path }: LanguageSwitcherProps) => {
     return (
         <details className='language-switcher'>
             <summary className='language-switcher__trigger'>
-                <span>{getCopy(currentLocale).localeLabel}</span>
+                <span className='language-switcher__flag' aria-hidden='true'>
+                    {localeFlags[currentLocale as keyof typeof localeFlags]}
+                </span>
+                <span className='sr-only'>{getCopy(currentLocale).localeLabel}</span>
                 <span className='language-switcher__chevron' aria-hidden='true'>
                     ▾
                 </span>
@@ -23,7 +32,10 @@ const LanguageSwitcher = ({ currentLocale, path }: LanguageSwitcherProps) => {
                         href={`/${locale}${path}`}
                         className={locale === currentLocale ? 'language-switcher__option is-active' : 'language-switcher__option'}
                     >
-                        {getCopy(locale).localeLabel}
+                        <span className='language-switcher__flag' aria-hidden='true'>
+                            {localeFlags[locale]}
+                        </span>
+                        <span>{getCopy(locale).localeLabel}</span>
                     </Link>
                 ))}
             </div>

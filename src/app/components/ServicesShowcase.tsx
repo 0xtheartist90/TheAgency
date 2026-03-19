@@ -11,30 +11,51 @@ type ServicesShowcaseProps = {
 const services = [
     {
         title: 'Build',
-        tagline: 'Digital products that perform',
+        tagline: 'Websites, apps, and platforms - designed, developed, and built to perform in the real world.',
         icon: '/images/Icons/image 10.webp'
     },
     {
         title: 'Grow',
-        tagline: 'Turn attention into revenue',
+        tagline: 'Marketing, ads, and content - focused on driving traffic, improving conversion, and scaling results.',
         icon: '/images/Icons/image 16.webp'
     },
     {
         title: 'Brand',
-        tagline: 'Brands that stand out',
+        tagline: 'Brand identities and systems - from logo to positioning, built to be clear, consistent, and memorable.',
         icon: '/images/Icons/image 18.webp'
     },
     {
         title: 'Automate',
-        tagline: 'Systems that scale your business',
+        tagline: 'AI, workflows, and internal systems - reducing manual work and making your operations more efficient.',
         icon: '/images/Icons/image 13.webp'
     },
     {
         title: 'Train',
-        tagline: 'Upgrade how your team works',
+        tagline: 'Agile, Scrum, and AI training - helping teams adopt better workflows and work faster with confidence.',
         icon: '/images/Icons/image 12.webp'
     }
 ] as const;
+
+const serviceCardClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
+const serviceCardPolygonPoints = '18.6,0.9 99.1,0.9 99.1,99.1 0.9,99.1 0.9,14.6';
+
+const ServiceCardOutline = ({ hover }: { hover?: boolean }) => (
+    <svg
+        className={`pointer-events-none absolute inset-0 z-10 h-full w-full transition-opacity duration-500 ease-out ${hover ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 group-hover:opacity-0'}`}
+        viewBox='0 0 100 100'
+        preserveAspectRatio='none'
+        aria-hidden='true'
+    >
+        <polygon
+            points={serviceCardPolygonPoints}
+            fill='none'
+            stroke={hover ? 'rgba(255,106,0,0.92)' : 'rgba(255,255,255,0.22)'}
+            strokeWidth='1.4'
+            strokeLinejoin='round'
+            vectorEffect='non-scaling-stroke'
+        />
+    </svg>
+);
 
 const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps) => {
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -115,7 +136,7 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                 [hoveredService]: nextValue
             }));
 
-            iteration += 0.6;
+            iteration += 1.15;
 
             if (iteration >= target.length) {
                 if (matrixTimerRef.current) {
@@ -128,7 +149,7 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                     [hoveredService]: target
                 }));
             }
-        }, 26);
+        }, 18);
 
         return () => {
             if (matrixTimerRef.current) {
@@ -154,7 +175,7 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
             >
                 <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
             </video>
-            <div className='absolute inset-0 bg-[rgba(239,229,215,0.9)]' />
+            <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
             <div className='relative mx-auto max-w-[1600px]'>
                 <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5'>
                     {services.map((service, index) => {
@@ -173,10 +194,9 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                                 }}
                             >
                                 <article
-                                    className='group relative h-full min-h-[250px] overflow-hidden border border-black/8 bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] p-6 text-left shadow-[0_28px_70px_rgba(30,20,12,0.16)] transition-all duration-500 ease-out hover:-translate-y-3 hover:border-[#FF6A00]/82 hover:bg-[rgba(255,106,0,0.2)] hover:shadow-[0_42px_100px_rgba(30,20,12,0.22)] sm:p-7'
+                                    className='process-card group relative h-full min-h-[250px] overflow-hidden p-6 text-left shadow-[0_28px_70px_rgba(30,20,12,0.16)] transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_42px_100px_rgba(30,20,12,0.22)] sm:p-7'
                                     style={{
-                                        clipPath:
-                                            'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)'
+                                        clipPath: serviceCardClipPath
                                     }}
                                     onMouseEnter={() => {
                                         setHoveredService(service.title);
@@ -195,7 +215,10 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                                         }));
                                     }}
                                 >
-                                    <div className='absolute right-5 top-4 text-[0.78rem] font-medium tracking-[-0.04em] text-white/22 transition-colors duration-500 ease-out group-hover:text-white'>
+                                    <div className='process-card-surface absolute inset-0' />
+                                    <ServiceCardOutline />
+                                    <ServiceCardOutline hover />
+                                    <div className='absolute right-5 top-4 text-[0.78rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)] transition-colors duration-500 ease-out group-hover:text-white'>
                                         0{index + 1}/
                                     </div>
 
@@ -214,7 +237,7 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                                         <h3 className='max-w-[10ch] text-[1.75rem] font-semibold leading-[1.02] tracking-[-0.05em] text-white transition-[opacity,color,transform] duration-500 ease-out group-hover:translate-y-1 group-hover:text-white group-hover:opacity-0'>
                                             {service.title}
                                         </h3>
-                                        <p className='absolute top-0 left-0 max-w-[18ch] text-[0.98rem] leading-6 text-white/0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100'>
+                                        <p className='absolute top-0 left-0 max-w-[24ch] text-[0.98rem] leading-6 text-white/0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100'>
                                             <span className='font-mono tracking-[0.08em] text-white'>
                                                 {hoveredService === service.title
                                                     ? revealedTaglines[service.title] || ''

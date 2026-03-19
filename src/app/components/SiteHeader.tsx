@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
+import { getServiceCollection } from '@/app/services-content';
 import { getCopy, getNavItems } from '@/app/site-content';
 
 type SiteHeaderProps = {
@@ -11,7 +12,8 @@ type SiteHeaderProps = {
 
 const SiteHeader = ({ locale, path = '' }: SiteHeaderProps) => {
     const copy = getCopy(locale);
-    const navItems = getNavItems(locale);
+    const navItems = getNavItems(locale).filter((item) => !item.href.endsWith('/services'));
+    const serviceItems = getServiceCollection(locale as Parameters<typeof getServiceCollection>[0]);
 
     return (
         <header
@@ -31,9 +33,32 @@ const SiteHeader = ({ locale, path = '' }: SiteHeaderProps) => {
             <div className='hidden items-center gap-8 lg:flex'>
                 <nav className='flex items-center gap-8'>
                     {navItems.map((item) => (
-                        <Link key={item.href} href={item.href} className='hero-nav-link'>
-                            {item.label}
-                        </Link>
+                        <div key={item.href} className='flex items-center'>
+                            <Link href={item.href} className='hero-nav-link'>
+                                {item.label}
+                            </Link>
+                            {item.href.endsWith('/story') ? (
+                                <details className='hero-nav-dropdown ml-8'>
+                                    <summary className={`hero-nav-link list-none ${path.startsWith('/services') ? 'is-active' : ''}`}>
+                                        {copy.nav.services}
+                                        <span className='hero-nav-dropdown__chevron' aria-hidden='true'>
+                                            ▾
+                                        </span>
+                                    </summary>
+                                    <div className='hero-nav-dropdown__menu'>
+                                        {serviceItems.map((service) => (
+                                            <Link
+                                                key={service.slug}
+                                                href={`/${locale}/services/${service.slug}`}
+                                                className='hero-nav-dropdown__item'
+                                            >
+                                                {service.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </details>
+                            ) : null}
+                        </div>
                     ))}
                     <Link href={`/${locale}/contact`} className='hero-nav-cta'>
                         {copy.home.supportLabel}

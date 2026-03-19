@@ -6,33 +6,62 @@ import Image from 'next/image';
 const processSteps = [
     {
         number: '01',
-        title: 'Campfire',
-        line: 'We get in the same room.',
-        detail: 'Context. Direction. Honesty.',
-        icon: '/images/Icons/image 64.png'
+        title: 'Meet & Greet',
+        line: 'A quick introduction to get to know each other, understand your goals, and see if we’re the right fit.',
+        detail: 'Intro. Fit. Goals.',
+        icon: '/images/Icons/image 31.webp'
     },
     {
         number: '02',
-        title: 'Discovery',
-        line: 'We find what actually matters.',
-        detail: 'Signal over noise.',
-        icon: '/images/Icons/image 9.webp'
+        title: 'Campfire',
+        line: 'You talk, we listen - understanding your story, your challenges, and what you’re trying to build.',
+        detail: 'Story. Context. Intent.',
+        icon: '/images/Icons/image 64.png'
     },
     {
         number: '03',
-        title: 'Build',
-        line: 'We design and build with intent.',
-        detail: 'Fast. Precise. Connected.',
-        icon: '/images/Icons/image 17.webp'
+        title: 'Discovery',
+        line: 'We ask the right questions to fill the gaps, challenge assumptions, and define a clear direction.',
+        detail: 'Questions. Gaps. Direction.',
+        icon: '/images/Icons/image 9.webp'
     },
     {
         number: '04',
+        title: 'Build',
+        line: 'We design and build in the open - sharing progress, gathering feedback, and refining as we go.',
+        detail: 'Open. Shared. Refined.',
+        icon: '/images/Icons/image 27.webp'
+    },
+    {
+        number: '05',
         title: 'Launch',
-        line: 'We ship, learn, and refine.',
-        detail: 'Nothing is static.',
+        line: 'We go live, measure performance, and keep improving based on real data and feedback.',
+        detail: 'Live. Measure. Improve.',
         icon: '/images/Icons/image 11.webp'
     }
 ] as const;
+
+const processCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
+const processCardPolygonPoints = '0.9,0.9 81.4,0.9 99.1,18.6 99.1,99.1 18.6,99.1 0.9,81.4';
+const PROCESS_PAGE_SIZE = 3;
+
+const ProcessCardOutline = ({ hover }: { hover?: boolean }) => (
+    <svg
+        className={`pointer-events-none absolute inset-0 z-10 h-full w-full transition-opacity duration-500 ease-out ${hover ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 group-hover:opacity-0'}`}
+        viewBox='0 0 100 100'
+        preserveAspectRatio='none'
+        aria-hidden='true'
+    >
+        <polygon
+            points={processCardPolygonPoints}
+            fill='none'
+            stroke={hover ? 'rgba(255,106,0,0.92)' : 'rgba(255,255,255,0.22)'}
+            strokeWidth='1.4'
+            strokeLinejoin='round'
+            vectorEffect='non-scaling-stroke'
+        />
+    </svg>
+);
 
 const ProcessSection = () => {
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -40,6 +69,11 @@ const ProcessSection = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [hoveredStep, setHoveredStep] = useState<string | null>(null);
     const [revealedLines, setRevealedLines] = useState<Record<string, string>>({});
+    const [currentPage, setCurrentPage] = useState(0);
+    const totalPages = processSteps.length;
+    const visibleSteps = Array.from({ length: PROCESS_PAGE_SIZE }, (_, offset) => {
+        return processSteps[(currentPage + offset) % processSteps.length];
+    });
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -106,7 +140,7 @@ const ProcessSection = () => {
                 [hoveredStep]: nextValue
             }));
 
-            iteration += 0.6;
+            iteration += 1.15;
 
             if (iteration >= target.length) {
                 if (matrixTimerRef.current) {
@@ -118,7 +152,7 @@ const ProcessSection = () => {
                     [hoveredStep]: target
                 }));
             }
-        }, 26);
+        }, 18);
 
         return () => {
             if (matrixTimerRef.current) {
@@ -143,12 +177,12 @@ const ProcessSection = () => {
             <div className='relative mx-auto max-w-[1600px]'>
                 <div className='mb-8 md:mb-10'>
                     <p className='text-[0.74rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                        Our Process
+                        Process
                     </p>
                 </div>
 
-                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4'>
-                    {processSteps.map((step, index) => (
+                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
+                    {visibleSteps.map((step, index) => (
                         <div
                             key={step.number}
                             className='h-full'
@@ -165,8 +199,7 @@ const ProcessSection = () => {
                             <article
                                 className='process-card group relative h-full min-h-[250px] overflow-hidden p-6 shadow-[0_24px_60px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_34px_85px_rgba(0,0,0,0.24)] sm:p-7'
                                 style={{
-                                    clipPath:
-                                        'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)'
+                                    clipPath: processCardClipPath
                                 }}
                                 onMouseEnter={() => {
                                     setHoveredStep(step.number);
@@ -184,16 +217,9 @@ const ProcessSection = () => {
                                 }}
                             >
                                 <div className='process-card-surface absolute inset-0' />
-                                <div
-                                    className='pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100'
-                                    style={{
-                                        clipPath:
-                                            'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)'
-                                    }}
-                                >
-                                    <div className='absolute inset-0 border border-[#FF6A00]/75' />
-                                </div>
-                                <p className='absolute right-6 bottom-5 z-10 text-[0.9rem] font-medium tracking-[-0.04em] text-white/34 transition-colors duration-500 ease-out group-hover:text-white sm:right-7 sm:bottom-6'>
+                                <ProcessCardOutline />
+                                <ProcessCardOutline hover />
+                                <p className='absolute right-6 bottom-5 z-10 text-[0.9rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)] transition-colors duration-500 ease-out group-hover:text-white sm:right-7 sm:bottom-6'>
                                     {step.number}/
                                 </p>
 
@@ -211,7 +237,7 @@ const ProcessSection = () => {
                                     <h3 className='max-w-[10ch] text-[1.45rem] font-semibold leading-[1.02] tracking-[-0.05em] text-white transition-[opacity,color,transform] duration-500 ease-out group-hover:translate-y-1 group-hover:text-white group-hover:opacity-0 sm:text-[1.6rem]'>
                                         {step.title}
                                     </h3>
-                                    <p className='absolute top-0 left-0 max-w-[18ch] text-[0.98rem] leading-6 text-white/0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100'>
+                                    <p className='absolute top-0 left-0 w-full max-w-[calc(100%-1.5rem)] text-[0.98rem] leading-6 text-white/0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100'>
                                         <span className='font-mono tracking-[0.08em] text-white'>
                                             {hoveredStep === step.number
                                                 ? revealedLines[step.number] || ''
@@ -224,6 +250,52 @@ const ProcessSection = () => {
                         </div>
                     ))}
                 </div>
+
+                {totalPages > 1 ? (
+                    <div className='mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
+                        <div className='flex items-center gap-3'>
+                            <button
+                                type='button'
+                                onClick={() => {
+                                    setCurrentPage((page) => (page - 1 + processSteps.length) % processSteps.length);
+                                    setHoveredStep(null);
+                                }}
+                                className='inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)]'
+                            >
+                                Prev
+                            </button>
+                            <button
+                                type='button'
+                                onClick={() => {
+                                    setCurrentPage((page) => (page + 1) % processSteps.length);
+                                    setHoveredStep(null);
+                                }}
+                                className='inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)]'
+                            >
+                                Next
+                            </button>
+                        </div>
+
+                        <div className='flex items-center gap-2'>
+                            {Array.from({ length: totalPages }).map((_, pageIndex) => (
+                                <button
+                                    key={pageIndex}
+                                    type='button'
+                                    onClick={() => {
+                                        setCurrentPage(pageIndex);
+                                        setHoveredStep(null);
+                                    }}
+                                    aria-label={`Go to process page ${pageIndex + 1}`}
+                                    className={`h-2.5 rounded-full transition-all ${
+                                        pageIndex === currentPage
+                                            ? 'w-10 bg-[var(--agency-orange)]'
+                                            : 'w-2.5 bg-white/32 hover:bg-white/52'
+                                    }`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ) : null}
             </div>
         </section>
     );

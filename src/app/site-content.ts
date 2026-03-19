@@ -20,6 +20,7 @@ export type SiteCopy = {
         story: string;
         services: string;
         work: string;
+        workWithUs: string;
         contact: string;
     };
     pages: {
@@ -62,6 +63,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
             story: 'Our Story',
             services: 'Services',
             work: 'Our Work',
+            workWithUs: 'Work With Us',
             contact: 'Contact'
         },
         pages: {
@@ -107,51 +109,52 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         localeLabel: 'Nederlands',
         switchLabel: 'Taal',
         home: {
-            eyebrow: 'Internationaal in visie. Gemaakt voor wereldwijde merken.',
-            ctaPrimary: 'Bekijk Ons Werk',
-            ctaSecondary: 'Ontdek Ons Verhaal',
+            eyebrow: 'Internationaal in visie. Gemaakt voor merken met ambitie.',
+            ctaPrimary: 'Bekijk ons werk',
+            ctaSecondary: 'Ontdek ons verhaal',
             supportLabel: 'Contact'
         },
         nav: {
-            story: 'Ons Verhaal',
+            story: 'Ons verhaal',
             services: 'Diensten',
-            work: 'Ons Werk',
+            work: 'Ons werk',
+            workWithUs: 'Werk met ons',
             contact: 'Contact'
         },
         pages: {
             story: {
-                title: 'Ons Verhaal',
-                intro: 'Wij bouwen met intentie.',
+                title: 'Ons verhaal',
+                intro: 'We bouwen met intentie.',
                 sections: [
-                    'Luxe mag snel bewegen.',
-                    'Alles is verbonden.',
-                    'Helderheid schaalt.'
+                    'Binnen merken. Binnen startups.',
+                    'We hebben gezien wat werkt.',
+                    'En wat niet.'
                 ]
             },
             services: {
                 title: 'Diensten',
-                intro: 'Een compacte senior-level creatieve stack voor merken die smaak en uitvoering in één ruimte nodig hebben.',
+                intro: 'Een compact senior creatief team voor merken die smaak en uitvoering in dezelfde ruimte nodig hebben.',
                 sections: [
-                    'Merkstrategie, positionering, naming-richting en messaging-architectuur.',
-                    'Identity systems, premium webdesign, landingspagina’s en conversiegerichte digitale ervaringen.',
-                    'Campagnecreatie, paid ad concepten, contentsystemen en art direction voor lanceringen.'
+                    'Merkstrategie, positionering, naamrichting en messaging-architectuur.',
+                    'Identity systems, premium webdesign, landingspagina\'s en conversiegerichte digitale ervaringen.',
+                    'Campagnecreatie, paid ad-concepten, contentsystemen en art direction voor lanceringen.'
                 ]
             },
             work: {
-                title: 'Ons Werk',
-                intro: 'Wij creëren merkwerelden die premium ogen, vloeiend bewegen en doelgericht verkopen.',
+                title: 'Ons werk',
+                intro: 'We creëren merkwerelden die premium aanvoelen, soepel bewegen en doelgericht verkopen.',
                 sections: [
                     'Launchcampagnes die aandacht omzetten in vraag.',
-                    'Premium websites die een aanbod waardevoller laten voelen nog voor de eerste klik.',
-                    'Creatieve systemen die kwaliteit over alle kanalen consistent houden.'
+                    'Premium websites die een aanbod waardevoller laten voelen nog vóór de eerste klik.',
+                    'Creatieve systemen die kwaliteit op elk kanaal consistent houden.'
                 ]
             },
             contact: {
                 title: 'Contact',
-                intro: 'Als je wilt dat het merk duurder, preciezer en memorabeler aanvoelt, moeten we praten.',
+                intro: 'Als je wilt dat je merk duurder, preciezer en memorabeler aanvoelt, moeten we praten.',
                 sections: [
-                    'Beschikbaar voor merkopbouw, website redesigns, lanceringen en langdurige creatieve partnerships.',
-                    'Beste match: founders, premium service merken, hospitality concepten en producten die een nieuw niveau ingaan.',
+                    'Beschikbaar voor merktrajecten, website redesigns, lanceringen en langdurige creatieve samenwerkingen.',
+                    'Beste match: founders, premium servicemerken, hospitalityconcepten en producten die een nieuw niveau ingaan.',
                     'Deel je timing, doelen en wat nu niet klopt. Van daaruit bepalen we de volgende stap.'
                 ]
             }
@@ -161,7 +164,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         localeLabel: 'ไทย',
         switchLabel: 'ภาษา',
         home: {
-            eyebrow: 'มุมมองระดับสากล สร้างมาเพื่อแบรนด์ระดับโลก',
+            eyebrow: 'มุมมองระดับสากล สร้างมาเพื่อแบรนด์ที่มีความทะเยอทะยาน',
             ctaPrimary: 'ดูผลงานของเรา',
             ctaSecondary: 'รู้จักเรื่องราวของเรา',
             supportLabel: 'ติดต่อเรา'
@@ -170,6 +173,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
             story: 'เรื่องราวของเรา',
             services: 'บริการ',
             work: 'ผลงาน',
+            workWithUs: 'ร่วมงานกับเรา',
             contact: 'ติดต่อ'
         },
         pages: {
@@ -177,9 +181,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
                 title: 'เรื่องราวของเรา',
                 intro: 'เราสร้างอย่างมีเจตนา',
                 sections: [
-                    'ความลักชัวรีควรไปได้เร็ว',
-                    'ทุกอย่างเชื่อมถึงกัน',
-                    'ความชัดเจนทำให้ขยายต่อได้'
+                    'เราเคยทำงานทั้งในแบรนด์ใหญ่และสตาร์ตอัป',
+                    'เราเห็นมาทั้งสิ่งที่เวิร์ก',
+                    'และสิ่งที่ไม่เวิร์ก'
                 ]
             },
             services: {
@@ -187,13 +191,13 @@ export const siteCopy: Record<Locale, SiteCopy> = {
                 intro: 'ทีมสร้างสรรค์ระดับซีเนียร์ที่กระชับ แต่ครบทั้งรสนิยมและการลงมือทำ',
                 sections: [
                     'กลยุทธ์แบรนด์ การวางตำแหน่ง การตั้งชื่อ และโครงสร้างข้อความสื่อสาร',
-                    'ระบบอัตลักษณ์ ดีไซน์เว็บไซต์ระดับพรีเมียม แลนดิ้งเพจ และประสบการณ์ดิจิทัลที่ขับเคลื่อนการเปลี่ยนเป็นลูกค้า',
+                    'ระบบอัตลักษณ์ ดีไซน์เว็บไซต์ระดับพรีเมียม แลนดิ้งเพจ และประสบการณ์ดิจิทัลที่เน้นการเปลี่ยนเป็นลูกค้า',
                     'ครีเอทีฟแคมเปญ คอนเซปต์โฆษณา ระบบคอนเทนต์ และอาร์ตไดเรกชันสำหรับการเปิดตัว'
                 ]
             },
             work: {
                 title: 'ผลงาน',
-                intro: 'เราสร้างโลกของแบรนด์ที่ดูยกระดับ เคลื่อนไหวอย่างสะอาด และขายอย่างมีเป้าหมาย',
+                intro: 'เราสร้างโลกของแบรนด์ที่ดูยกระดับ ลื่นไหล และขายอย่างมีเป้าหมาย',
                 sections: [
                     'แคมเปญเปิดตัวที่เปลี่ยนความสนใจให้กลายเป็นความต้องการ',
                     'เว็บไซต์ระดับพรีเมียมที่ทำให้ข้อเสนอของแบรนด์ดูมีมูลค่าสูงขึ้นก่อนคลิกแรก',
@@ -202,9 +206,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
             },
             contact: {
                 title: 'ติดต่อ',
-                intro: 'ถ้าคุณอยากให้แบรนด์ดูแพงขึ้น แม่นขึ้น และน่าจดจำขึ้น เราควรคุยกัน',
+                intro: 'ถ้าคุณอยากให้แบรนด์ดูแพงขึ้น คมขึ้น และน่าจดจำขึ้น เราควรคุยกัน',
                 sections: [
-                    'พร้อมรับงานสร้างแบรนด์ใหม่ รีดีไซน์เว็บไซต์ เปิดตัวแคมเปญ และงานพาร์ตเนอร์เชิงครีเอทีฟระยะยาว',
+                    'พร้อมรับงานสร้างแบรนด์ใหม่ รีดีไซน์เว็บไซต์ เปิดตัวแคมเปญ และพาร์ตเนอร์เชิงครีเอทีฟระยะยาว',
                     'เหมาะที่สุดกับผู้ก่อตั้ง แบรนด์บริการระดับพรีเมียม ธุรกิจ hospitality และโปรดักต์ที่กำลังยกระดับแบรนด์',
                     'ส่งไทม์ไลน์ เป้าหมาย และสิ่งที่ยังไม่ลงตัวมาให้เรา แล้วเราจะช่วยกำหนดก้าวต่อไป'
                 ]
@@ -223,6 +227,7 @@ export const getNavItems = (locale: string): NavItem[] => {
     return [
         { href: `/${locale}/story`, label: copy.nav.story },
         { href: `/${locale}/services`, label: copy.nav.services },
-        { href: `/${locale}/work`, label: copy.nav.work }
+        { href: `/${locale}/work`, label: copy.nav.work },
+        { href: `/${locale}/work-with-us`, label: copy.nav.workWithUs }
     ];
 };
