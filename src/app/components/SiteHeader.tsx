@@ -32,6 +32,9 @@ const SiteHeader = ({ locale, path = '' }: SiteHeaderProps) => {
 
             <div className='hidden items-center gap-8 lg:flex'>
                 <nav className='flex items-center gap-8'>
+                    <Link href={`/${locale}`} className='hero-nav-link'>
+                        Home
+                    </Link>
                     {navItems.map((item) => (
                         <div key={item.href} className='flex items-center'>
                             <Link href={item.href} className='hero-nav-link'>

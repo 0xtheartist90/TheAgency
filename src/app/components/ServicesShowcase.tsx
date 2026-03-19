@@ -10,6 +10,11 @@ type ServicesShowcaseProps = {
 
 const services = [
     {
+        title: 'Brand',
+        tagline: 'Brand identities and systems - from logo to positioning, built to be clear, consistent, and memorable.',
+        icon: '/images/Icons/image 18.webp'
+    },
+    {
         title: 'Build',
         tagline: 'Websites, apps, and platforms - designed, developed, and built to perform in the real world.',
         icon: '/images/Icons/image 10.webp'
@@ -20,20 +25,10 @@ const services = [
         icon: '/images/Icons/image 16.webp'
     },
     {
-        title: 'Brand',
-        tagline: 'Brand identities and systems - from logo to positioning, built to be clear, consistent, and memorable.',
-        icon: '/images/Icons/image 18.webp'
-    },
-    {
         title: 'Automate',
         tagline: 'AI, workflows, and internal systems - reducing manual work and making your operations more efficient.',
         icon: '/images/Icons/image 13.webp'
     },
-    {
-        title: 'Train',
-        tagline: 'Agile, Scrum, and AI training - helping teams adopt better workflows and work faster with confidence.',
-        icon: '/images/Icons/image 12.webp'
-    }
 ] as const;
 
 const serviceCardClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
@@ -177,7 +172,7 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
             </video>
             <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
             <div className='relative mx-auto max-w-[1600px]'>
-                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5'>
+                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4'>
                     {services.map((service, index) => {
                         return (
                             <div

@@ -448,6 +448,19 @@
       0 18px 44px rgba(0, 0, 0, 0.14);
   }
 
+  .process-card--static {
+    transition: none;
+  }
+
+  .process-card--static:hover .process-card-surface {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1) 36%, rgba(255, 255, 255, 0.06)),
+      linear-gradient(135deg, rgba(52, 54, 62, 0.9), rgba(14, 15, 20, 0.94));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 18px 44px rgba(0, 0, 0, 0.12);
+  }
+
   @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
     .glass-panel,
     .story-number-card-surface,
@@ -463,6 +476,12 @@
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.16) 38%, rgba(255, 255, 255, 0.09)),
         linear-gradient(135deg, rgba(255, 128, 42, 0.6), rgba(46, 26, 12, 0.76));
+    }
+
+    .process-card--static:hover .process-card-surface {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.12) 38%, rgba(255, 255, 255, 0.07) 100%),
+        linear-gradient(135deg, rgba(50, 52, 60, 0.78), rgba(12, 13, 18, 0.9));
     }
 
     @media (max-width: 768px) {

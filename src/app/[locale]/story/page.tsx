@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import Reveal from '@/app/components/Reveal';
+import FoundationTabs from '@/app/components/FoundationTabs';
 import { fireflies } from '@/app/fonts';
 import SiteHeader from '@/app/components/SiteHeader';
 import TeamShowcase from '@/app/components/TeamShowcase';
@@ -15,13 +16,10 @@ type Params = {
 };
 
 const storyBody = [
-    'We didn’t start this to be an agency.',
-    'We started it because we’d seen how things break.',
-    'Between us, we’ve worked inside big brands, fast-moving startups, and everything in between. We’ve shipped campaigns, built products, scaled ideas — and also sat through the slow, overcomplicated processes that kill them.',
-    'At some point, it stopped making sense.',
-    'So we built our own way of working.',
-    'A smaller team. Closer collaboration. Less layers. More ownership. The kind of setup where things move — and actually get finished.',
-    'We work on projects that matter to us, with people who trust the process, and where we know we can add real value.'
+    'Most projects slow down because too many people are involved — and no one owns the outcome.',
+    'We keep it simple.',
+    'A small team, working closely with you, building in the open and moving fast from idea to execution.',
+    'You see the work as it happens. You shape it with us. And it gets finished properly.'
 ];
 
 const team = [
@@ -96,27 +94,66 @@ const team = [
 const uspValues = [
     {
         title: 'Clarity first',
-        description: 'We strip away noise early so the work has a sharper direction from the start.'
+        description: 'We strip away noise early.'
     },
     {
         title: 'Focus on what matters',
-        description: 'We do not spread energy across everything. We concentrate on the moves that change outcomes.'
+        description: 'We focus on the moves that change outcomes.'
     },
     {
         title: 'Build in the open',
-        description: 'Progress stays visible, feedback stays early, and nothing disappears into a black box.'
+        description: 'Progress stays visible from start to finish.'
     },
     {
         title: 'Own the outcome',
-        description: 'We care about what ships, how it performs, and whether it actually moves the business forward.'
+        description: 'We stay accountable for what ships.'
+    }
+];
+
+const foundationItems = [
+    {
+        id: 'mission',
+        label: 'Mission',
+        title: 'To build work that actually moves things forward.',
+        description: [
+            'Not just visuals. Not just strategy decks. But real outputs — products, brands, systems — that launch, perform, and evolve.',
+            'We focus on clarity, speed, and execution. Because good ideas are everywhere — but finishing them properly is rare.'
+        ],
+        icon: '/images/Icons/image 29.webp',
+        iconScale: 1,
+        visual: '/images/Story/Mission.png',
+        visualAlt: 'Mission concept visual',
+        visualScale: 1
     },
     {
-        title: 'Keep improving',
-        description: 'Launch is not the finish line. We refine, tighten, and keep making the work stronger.'
+        id: 'vision',
+        label: 'Vision',
+        title: 'A new kind of agency model.',
+        description: [
+            'Smaller, sharper, and more involved.',
+            'Strategy and execution live in the same room. Ideas don’t get lost in handovers. Every project gets the attention it deserves.'
+        ],
+        icon: '/images/Icons/image 45.webp',
+        iconScale: 1,
+        visual: '/images/Story/vision.png',
+        visualAlt: 'Vision concept visual',
+        visualScale: 1.12
+    },
+    {
+        id: 'values',
+        label: 'Values',
+        title: 'The rules we do not compromise on.',
+        description: [
+            'A few non-negotiables shape how we work.'
+        ],
+        icon: '/images/Icons/image 41.webp',
+        iconScale: 1,
+        values: uspValues
     }
 ];
 
 const storyCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
+const serviceCardClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
 
 export function generateStaticParams() {
     return locales.map((locale) => ({ locale }));
@@ -175,10 +212,10 @@ const StoryPage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal distance={42}>
                             <div className='max-w-4xl'>
                                 <p className='text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                                    Why we built this
+                                    About
                                 </p>
                                 <p className='mt-5 max-w-3xl text-3xl font-semibold leading-[1.12] tracking-[-0.06em] text-white sm:text-4xl'>
-                                    We built this because great work dies in bloated systems.
+                                    No layers. No handovers. No black box.
                                 </p>
                                 <div className='mt-7 border-l border-[var(--agency-orange)]/40 pl-6 text-base leading-8 text-white/74 sm:pl-8 sm:text-lg'>
                                     {storyBody.map((paragraph) => (
@@ -210,125 +247,27 @@ const StoryPage = async ({ params }: { params: Promise<Params> }) => {
                 </div>
             </section>
 
-            <section className='relative overflow-hidden bg-[linear-gradient(180deg,#141419_0%,#1b1c22_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
-                <div className='absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(255,109,24,0.12),transparent_24%),radial-gradient(circle_at_82%_70%,rgba(255,255,255,0.06),transparent_22%)]' />
+            <TeamShowcase members={team} />
+
+            <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
+                <video
+                    className='absolute inset-0 h-full w-full object-cover'
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload='auto'
+                    aria-hidden='true'
+                >
+                    <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
+                </video>
+                <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
                 <div className='relative z-10 mx-auto max-w-7xl'>
-                    <div className='mb-10 max-w-3xl'>
-                        <p className='text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/86'>
-                            Foundation
-                        </p>
-                        <h2 className='mt-4 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
-                            The principles behind the work.
-                        </h2>
-                    </div>
-
-                    <div className='grid gap-4 lg:grid-cols-2'>
-                        <Reveal delay={40} distance={36}>
-                            <div className='process-card relative overflow-hidden p-7 sm:p-8' style={{ clipPath: storyCardClipPath }}>
-                                <div className='process-card-surface absolute inset-0' />
-                                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,109,24,0.14),transparent_28%)]' />
-                                <div className='relative z-10'>
-                                    <Image
-                                        src='/images/Icons/image 18.webp'
-                                        alt='Mission'
-                                        width={72}
-                                        height={72}
-                                        className='h-[72px] w-[72px] object-contain'
-                                    />
-                                    <p className='mt-5 text-[0.76rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                        Mission
-                                    </p>
-                                    <h2 className='mt-4 max-w-[14ch] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-[2.15rem]'>
-                                        To build work that actually moves things forward.
-                                    </h2>
-                                    <p className='mt-5 max-w-[34rem] text-base leading-8 text-white/74'>
-                                        Not just visuals. Not just strategy decks. But real outputs — products, brands, systems — that launch, perform, and evolve.
-                                    </p>
-                                    <p className='mt-4 max-w-[34rem] text-base leading-8 text-white/62'>
-                                        We focus on clarity, speed, and execution. Because good ideas are everywhere — but finishing them properly is rare.
-                                    </p>
-                                </div>
-                            </div>
-                        </Reveal>
-
-                        <Reveal delay={120} distance={36}>
-                            <div className='process-card relative overflow-hidden p-7 sm:p-8' style={{ clipPath: storyCardClipPath }}>
-                                <div className='process-card-surface absolute inset-0' />
-                                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,109,24,0.14),transparent_28%)]' />
-                                <div className='relative z-10'>
-                                    <Image
-                                        src='/images/Icons/image 10.webp'
-                                        alt='Vision'
-                                        width={72}
-                                        height={72}
-                                        className='h-[72px] w-[72px] object-contain'
-                                    />
-                                    <p className='mt-5 text-[0.76rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                        Vision
-                                    </p>
-                                    <h2 className='mt-4 max-w-[13ch] text-3xl font-semibold tracking-[-0.05em] text-white sm:text-[2.15rem]'>
-                                        A new kind of agency model.
-                                    </h2>
-                                    <p className='mt-5 max-w-[34rem] text-base leading-8 text-white/74'>
-                                        Smaller, sharper, and more involved.
-                                    </p>
-                                    <p className='mt-4 max-w-[34rem] text-base leading-8 text-white/62'>
-                                        Strategy and execution live in the same room. Ideas don’t get lost in handovers. Every project gets the attention it deserves.
-                                    </p>
-                                </div>
-                            </div>
-                        </Reveal>
-                    </div>
-                </div>
-            </section>
-
-            <section className='bg-[linear-gradient(180deg,#f5eee6_0%,#efe4d5_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
-                <div className='mx-auto max-w-7xl'>
-                    <Reveal distance={38}>
-                        <div
-                            className='process-card relative overflow-hidden p-8 text-white shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:p-10'
-                            style={{ clipPath: storyCardClipPath }}
-                        >
-                            <div className='process-card-surface absolute inset-0' />
-                            <div className='absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,109,24,0.16),transparent_24%),radial-gradient(circle_at_84%_76%,rgba(255,255,255,0.06),transparent_20%)]' />
-                            <div className='relative z-10'>
-                                <div className='max-w-3xl'>
-                                    <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                        Why teams work with us
-                                    </p>
-                                    <h2 className='mt-5 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
-                                        A smaller team, a tighter process, and work that actually moves.
-                                    </h2>
-                                    <p className='mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg'>
-                                        We built the agency around a few non-negotiables: clearer direction, stronger ownership, faster decisions, and visible progress from start to finish.
-                                    </p>
-                                </div>
-
-                                <div className='mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-5'>
-                                    {uspValues.map((value, index) => (
-                                        <div key={value.title} className='process-card relative overflow-hidden p-6'>
-                                            <div className='process-card-surface absolute inset-0' />
-                                            <div className='relative z-10'>
-                                                <p className='text-[0.82rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)]'>
-                                                    0{index + 1}/
-                                                </p>
-                                                <p className='mt-4 text-[1.6rem] font-semibold leading-[1.05] tracking-[-0.05em] text-white'>
-                                                    {value.title}
-                                                </p>
-                                                <p className='mt-4 text-sm leading-7 text-white/68'>
-                                                    {value.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                    <Reveal delay={40} distance={36}>
+                        <FoundationTabs items={foundationItems} clipPath={serviceCardClipPath} />
                     </Reveal>
                 </div>
             </section>
-
-            <TeamShowcase members={team} />
 
             <footer className='bg-[linear-gradient(180deg,#17171b_0%,#121216_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <div className='mx-auto max-w-7xl'>

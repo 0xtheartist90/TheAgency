@@ -55,14 +55,14 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         switchLabel: 'Language',
         home: {
             eyebrow: 'Not an agency',
-            ctaPrimary: 'View Our Work',
+            ctaPrimary: 'View Portfolio',
             ctaSecondary: 'Discover Our Story',
             supportLabel: 'Contact Us'
         },
         nav: {
             story: 'Our Story',
             services: 'Services',
-            work: 'Our Work',
+            work: 'Portfolio',
             workWithUs: 'Work With Us',
             contact: 'Contact'
         },
@@ -86,7 +86,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
                 ]
             },
             work: {
-                title: 'Our Work',
+                title: 'Portfolio',
                 intro: 'We create brand worlds that look elevated, move cleanly, and sell with intent.',
                 sections: [
                     'Launch campaigns that turn attention into demand.',
@@ -110,14 +110,14 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         switchLabel: 'Taal',
         home: {
             eyebrow: 'Internationaal in visie. Gemaakt voor merken met ambitie.',
-            ctaPrimary: 'Bekijk ons werk',
+            ctaPrimary: 'Bekijk portfolio',
             ctaSecondary: 'Ontdek ons verhaal',
             supportLabel: 'Contact'
         },
         nav: {
             story: 'Ons verhaal',
             services: 'Diensten',
-            work: 'Ons werk',
+            work: 'Portfolio',
             workWithUs: 'Werk met ons',
             contact: 'Contact'
         },
@@ -141,7 +141,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
                 ]
             },
             work: {
-                title: 'Ons werk',
+                title: 'Portfolio',
                 intro: 'We creëren merkwerelden die premium aanvoelen, soepel bewegen en doelgericht verkopen.',
                 sections: [
                     'Launchcampagnes die aandacht omzetten in vraag.',
@@ -165,14 +165,14 @@ export const siteCopy: Record<Locale, SiteCopy> = {
         switchLabel: 'ภาษา',
         home: {
             eyebrow: 'มุมมองระดับสากล สร้างมาเพื่อแบรนด์ที่มีความทะเยอทะยาน',
-            ctaPrimary: 'ดูผลงานของเรา',
+            ctaPrimary: 'ดูพอร์ตโฟลิโอ',
             ctaSecondary: 'รู้จักเรื่องราวของเรา',
             supportLabel: 'ติดต่อเรา'
         },
         nav: {
             story: 'เรื่องราวของเรา',
             services: 'บริการ',
-            work: 'ผลงาน',
+            work: 'พอร์ตโฟลิโอ',
             workWithUs: 'ร่วมงานกับเรา',
             contact: 'ติดต่อ'
         },
@@ -196,7 +196,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
                 ]
             },
             work: {
-                title: 'ผลงาน',
+                title: 'พอร์ตโฟลิโอ',
                 intro: 'เราสร้างโลกของแบรนด์ที่ดูยกระดับ ลื่นไหล และขายอย่างมีเป้าหมาย',
                 sections: [
                     'แคมเปญเปิดตัวที่เปลี่ยนความสนใจให้กลายเป็นความต้องการ',
