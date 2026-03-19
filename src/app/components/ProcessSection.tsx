@@ -260,7 +260,7 @@ const ProcessSection = () => {
                                     setCurrentPage((page) => (page - 1 + processSteps.length) % processSteps.length);
                                     setHoveredStep(null);
                                 }}
-                                className='inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)]'
+                                className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
                             >
                                 Prev
                             </button>
@@ -270,7 +270,7 @@ const ProcessSection = () => {
                                     setCurrentPage((page) => (page + 1) % processSteps.length);
                                     setHoveredStep(null);
                                 }}
-                                className='inline-flex min-h-[2.6rem] items-center justify-center rounded-full border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)]'
+                                className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
                             >
                                 Next
                             </button>

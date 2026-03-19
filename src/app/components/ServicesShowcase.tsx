@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
@@ -11,21 +12,25 @@ type ServicesShowcaseProps = {
 const services = [
     {
         title: 'Brand',
+        slug: 'brand',
         tagline: 'Brand identities and systems - from logo to positioning, built to be clear, consistent, and memorable.',
         icon: '/images/Icons/image 18.webp'
     },
     {
         title: 'Build',
+        slug: 'build',
         tagline: 'Websites, apps, and platforms - designed, developed, and built to perform in the real world.',
         icon: '/images/Icons/image 10.webp'
     },
     {
         title: 'Grow',
+        slug: 'grow',
         tagline: 'Marketing, ads, and content - focused on driving traffic, improving conversion, and scaling results.',
         icon: '/images/Icons/image 16.webp'
     },
     {
         title: 'Automate',
+        slug: 'automate',
         tagline: 'AI, workflows, and internal systems - reducing manual work and making your operations more efficient.',
         icon: '/images/Icons/image 13.webp'
     },
@@ -52,7 +57,7 @@ const ServiceCardOutline = ({ hover }: { hover?: boolean }) => (
     </svg>
 );
 
-const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps) => {
+const ServicesShowcase = ({ locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps) => {
     const sectionRef = useRef<HTMLElement | null>(null);
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const matrixTimerRef = useRef<number | null>(null);
@@ -241,6 +246,19 @@ const ServicesShowcase = ({ locale: _locale, ctaLabel: _ctaLabel }: ServicesShow
                                         </p>
                                     </div>
                                     <div className='mt-4 min-h-[3.75rem]' />
+
+                                    <div className='relative mt-2 flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[var(--agency-orange)] opacity-0 transition-[opacity,transform,color] duration-500 ease-out group-hover:translate-y-1 group-hover:opacity-100 group-hover:text-white'>
+                                        <span>Explore</span>
+                                        <span aria-hidden='true' className='text-[0.9rem] leading-none'>
+                                            →
+                                        </span>
+                                    </div>
+
+                                    <Link
+                                        href={`/${locale}/services/${service.slug}`}
+                                        aria-label={`Explore ${service.title}`}
+                                        className='absolute inset-0 z-20'
+                                    />
                                 </article>
                             </div>
                         );

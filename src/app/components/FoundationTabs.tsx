@@ -48,7 +48,7 @@ const ServiceCardOutline = ({ hover }: { hover?: boolean }) => (
 const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
     const [activeId, setActiveId] = useState(items[0]?.id ?? '');
     const activeItem = items.find((item) => item.id === activeId) ?? items[0];
-    const isValuesTab = Boolean(activeItem.values);
+    const activeIndex = items.findIndex((item) => item.id === activeItem?.id);
 
     if (!activeItem) {
         return null;
@@ -65,45 +65,50 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
 
             <div className='relative z-10 min-h-[31rem]'>
                 <div className='flex justify-end'>
-                    <div className='inline-flex rounded-full border border-white/12 bg-black/12 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]'>
-                    {items.map((item) => {
-                        const isActive = item.id === activeItem.id;
+                    <div
+                        className='relative inline-grid border border-white/12 bg-black/12 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] [clip-path:polygon(0.9rem_0,100%_0,calc(100%-0.9rem)_100%,0_100%)]'
+                        style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
+                    >
+                        <div
+                            className='foundation-tab-switch__highlight absolute top-1 bottom-1 left-1 z-0 bg-[var(--agency-orange)] shadow-[0_10px_24px_rgba(255,109,24,0.28)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
+                            style={{
+                                width: `calc((100% - 0.5rem) / ${items.length})`,
+                                transform: `translateX(${Math.max(activeIndex, 0) * 100}%)`
+                            }}
+                        />
+                        {items.map((item) => {
+                            const isActive = item.id === activeItem.id;
 
-                        return (
-                            <button
-                                key={item.id}
-                                type='button'
-                                onClick={() => setActiveId(item.id)}
-                                className={`rounded-full px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] transition ${
-                                    isActive
-                                        ? 'bg-[var(--agency-orange)] text-white shadow-[0_10px_24px_rgba(255,109,24,0.28)]'
-                                        : 'text-white/68 hover:text-white'
-                                }`}
-                            >
-                                {item.label}
-                            </button>
-                        );
-                    })}
+                            return (
+                                <button
+                                    key={item.id}
+                                    type='button'
+                                    onClick={() => setActiveId(item.id)}
+                                    className={`foundation-tab-switch__button relative z-10 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)] ${
+                                        isActive ? 'text-white' : 'text-white/68 hover:text-white'
+                                    }`}
+                                >
+                                    {item.label}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
 
                 <div
-                    className={`mt-6 grid gap-8 ${isValuesTab ? 'lg:grid-cols-1' : 'lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-start'}`}
+                    key={activeItem.id}
+                    className='foundation-tab-panel mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-start'
                 >
-                    <div className='flex min-h-[21rem] flex-col justify-start'>
-                        {!isValuesTab ? (
-                            <div className='relative h-[88px] w-[88px]'>
-                                <Image
-                                    src={activeItem.icon}
-                                    alt={activeItem.label}
-                                    fill
-                                    className='object-contain object-left'
-                                    style={{ transform: `scale(${activeItem.iconScale ?? 1})` }}
-                                />
-                            </div>
-                        ) : (
-                            <div className='h-[88px] w-[88px]' aria-hidden='true' />
-                        )}
+                    <div className='foundation-tab-panel__copy flex min-h-[21rem] flex-col justify-start lg:max-h-[21rem]'>
+                        <div className='relative h-[88px] w-[88px]'>
+                            <Image
+                                src={activeItem.icon}
+                                alt={activeItem.label}
+                                fill
+                                className='object-contain object-left'
+                                style={{ transform: `scale(${activeItem.iconScale ?? 1})` }}
+                            />
+                        </div>
                         <p className='mt-5 text-[0.76rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
                             {activeItem.label}
                         </p>
@@ -118,21 +123,20 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                                 </p>
                             ))}
                         </div>
-
                         {activeItem.values ? (
-                            <div className='mt-6 grid gap-3 sm:grid-cols-2'>
+                            <div className='mt-5 grid gap-2 sm:grid-cols-2 lg:mt-auto lg:grid-cols-4'>
                                 {activeItem.values.map((value, index) => (
                                     <div
                                         key={value.title}
-                                        className='rounded-[1.15rem] border border-white/10 bg-white/[0.03] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]'
+                                        className='rounded-[1rem] border border-white/10 bg-white/[0.03] px-3 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]'
                                     >
-                                        <p className='text-[0.75rem] font-semibold tracking-[0.02em] text-[var(--agency-orange)]'>
+                                        <p className='text-[0.72rem] font-semibold tracking-[0.02em] text-[var(--agency-orange)]'>
                                             0{index + 1}/
                                         </p>
-                                        <p className='mt-2 text-base font-semibold leading-tight text-white'>
+                                        <p className='mt-1.5 text-[0.92rem] font-semibold leading-tight text-white'>
                                             {value.title}
                                         </p>
-                                        <p className='mt-1 text-[0.92rem] leading-6 text-white/62'>
+                                        <p className='mt-1 text-[0.8rem] leading-[1.35] text-white/62'>
                                             {value.description}
                                         </p>
                                     </div>
@@ -141,42 +145,40 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                         ) : null}
                     </div>
 
-                    {!isValuesTab ? (
-                        <div className='relative self-start overflow-hidden'>
-                            <div className='absolute inset-0 bg-[radial-gradient(circle_at_26%_24%,rgba(255,109,24,0.12),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0)_32%)]' />
-                            {activeItem.visual ? (
-                                <div
-                                    className='relative z-10 aspect-[4/3] w-full overflow-hidden'
-                                    style={{ clipPath }}
-                                >
-                                    <Image
-                                        src={activeItem.visual}
-                                        alt={activeItem.visualAlt ?? `${activeItem.label} visual`}
-                                        fill
-                                        className='object-cover'
-                                        style={{ transform: `scale(${activeItem.visualScale ?? 1})` }}
-                                    />
+                    <div className='foundation-tab-panel__visual relative self-start overflow-hidden'>
+                        <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0)_32%)]' />
+                        {activeItem.visual ? (
+                            <div
+                                className='relative z-10 aspect-[4/3] w-full overflow-hidden'
+                                style={{ clipPath }}
+                            >
+                                <Image
+                                    src={activeItem.visual}
+                                    alt={activeItem.visualAlt ?? `${activeItem.label} visual`}
+                                    fill
+                                    className='object-cover'
+                                    style={{ transform: `scale(${activeItem.visualScale ?? 1})` }}
+                                />
+                            </div>
+                        ) : (
+                            <div
+                                className='relative z-10 flex aspect-[4/3] w-full items-center justify-center border border-dashed border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-6 text-center'
+                                style={{ clipPath }}
+                            >
+                                <div>
+                                    <span className='text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[var(--agency-orange)]'>
+                                        Visual Slot
+                                    </span>
+                                    <p className='mt-4 max-w-[16ch] text-[2rem] font-semibold leading-[1.02] tracking-[-0.06em] text-white'>
+                                        {activeItem.label} visual here
+                                    </p>
+                                    <p className='mt-4 max-w-[24ch] text-sm leading-7 text-white/56'>
+                                        Drop in the supporting visual for the {activeItem.label.toLowerCase()} tab without changing the card layout.
+                                    </p>
                                 </div>
-                            ) : (
-                                <div
-                                    className='relative z-10 flex aspect-[4/3] w-full items-center justify-center border border-dashed border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-6 text-center'
-                                    style={{ clipPath }}
-                                >
-                                    <div>
-                                        <span className='text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[var(--agency-orange)]'>
-                                            Visual Slot
-                                        </span>
-                                        <p className='mt-4 max-w-[16ch] text-[2rem] font-semibold leading-[1.02] tracking-[-0.06em] text-white'>
-                                            {activeItem.label} image here
-                                        </p>
-                                        <p className='mt-4 max-w-[24ch] text-sm leading-7 text-white/56'>
-                                            Drop in the supporting visual for the {activeItem.label.toLowerCase()} tab without changing the card layout.
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    ) : null}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

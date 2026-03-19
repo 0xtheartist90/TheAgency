@@ -57,7 +57,7 @@ const BrandScopeSection = ({ groups, clipPath }: BrandScopeSectionProps) => {
                                                 [group.title]: item.label
                                             }))
                                         }
-                                        className={`rounded-[1rem] border px-4 py-3 text-left text-sm transition ${
+                                        className={`border px-4 py-3 text-left text-sm transition [clip-path:polygon(0.9rem_0,100%_0,calc(100%-0.9rem)_100%,0_100%)] ${
                                             isActive
                                                 ? 'border-[var(--agency-orange)] bg-white/8 text-white'
                                                 : 'border-white/8 bg-white/5 text-white/80 hover:border-[var(--agency-orange)]/45 hover:bg-white/8 hover:text-white'

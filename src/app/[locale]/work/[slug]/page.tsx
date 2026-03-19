@@ -115,8 +115,29 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
 
                         <Reveal delay={120} distance={38}>
                             <div className='glass-panel border border-white/12 p-5 sm:p-6' style={{ clipPath: detailCardClipPath }}>
-                                <div className='rounded-[1.4rem] border border-dashed border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_100%)] p-4'>
-                                    <div className='flex aspect-[4/3] items-center justify-center rounded-[1.1rem] border border-white/10 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)]'>
+                                {project.visual ? (
+                                    project.visualContain ? (
+                                        <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#2f2e35] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
+                                            <div className='absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,109,24,0.12),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_34%)]' />
+                                            <Image
+                                                src={project.visual}
+                                                alt={project.visualAlt ?? `${project.title} visual`}
+                                                fill
+                                                className='object-cover'
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
+                                            <Image
+                                                src={project.visual}
+                                                alt={project.visualAlt ?? `${project.title} visual`}
+                                                fill
+                                                className='object-cover'
+                                            />
+                                        </div>
+                                    )
+                                ) : (
+                                    <div className='flex aspect-[4/3] items-center justify-center rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
                                         <div className='text-center'>
                                             <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
                                                 Image placeholder
@@ -126,7 +147,7 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                         </Reveal>
                     </div>

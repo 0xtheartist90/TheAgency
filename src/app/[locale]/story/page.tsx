@@ -94,19 +94,19 @@ const team = [
 const uspValues = [
     {
         title: 'Clarity first',
-        description: 'We strip away noise early.'
+        description: 'We strip away noise.'
     },
     {
         title: 'Focus on what matters',
-        description: 'We focus on the moves that change outcomes.'
+        description: 'We focus on what changes outcomes.'
     },
     {
         title: 'Build in the open',
-        description: 'Progress stays visible from start to finish.'
+        description: 'Progress stays visible.'
     },
     {
         title: 'Own the outcome',
-        description: 'We stay accountable for what ships.'
+        description: 'We stay accountable.'
     }
 ];
 
@@ -233,13 +233,16 @@ const StoryPage = async ({ params }: { params: Promise<Params> }) => {
                                 <div className='process-card-surface absolute inset-0' />
                                 <div className='absolute inset-0 bg-[radial-gradient(circle_at_26%_20%,rgba(255,109,24,0.18),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_38%)]' />
                                 <div className='relative z-10 overflow-hidden' style={{ clipPath: storyCardClipPath }}>
-                                    <Image
-                                        src='/images/Story/carryingcube.png'
-                                        alt='Carrying cube'
-                                        width={1200}
-                                        height={1400}
-                                        className='h-auto w-full object-cover'
-                                    />
+                                    <video
+                                        className='h-full w-full object-cover'
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        preload='auto'
+                                    >
+                                        <source src='/images/Story/storyvideo.mp4' type='video/mp4' />
+                                    </video>
                                 </div>
                             </div>
                         </Reveal>

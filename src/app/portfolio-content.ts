@@ -8,6 +8,9 @@ export type PortfolioProject = {
     intro: string;
     overview: string;
     deliverables: readonly string[];
+    visual?: string;
+    visualAlt?: string;
+    visualContain?: boolean;
 };
 
 export const portfolioProjects: readonly PortfolioProject[] = [
@@ -31,7 +34,10 @@ export const portfolioProjects: readonly PortfolioProject[] = [
         tags: ['Web design', 'Development', 'Content system'],
         intro: 'A product and website build focused on clarity, experience, and clean rollout.',
         overview: 'This page is set up as a compact case study shell, ready for final visuals, project story, and outcome details.',
-        deliverables: ['Website design', 'Development', 'Content structure']
+        deliverables: ['Website design', 'Development', 'Content structure'],
+        visual: '/images/Portfolio/Fanflow logo.png',
+        visualAlt: 'Fanflow logo',
+        visualContain: true
     },
     {
         slug: 'msports',

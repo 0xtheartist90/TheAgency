@@ -56,7 +56,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                 </div>
 
                 <div className='hidden flex-1 xl:block'>
-                    <div className='relative h-[calc(100svh-22rem)] min-h-[46rem] overflow-hidden'>
+                    <div className='relative h-[calc(100svh-22rem)] min-h-[46rem] overflow-visible'>
                         {members.map((member, index) => {
                             const isActive = member.name === activeMemberName;
                             const hasActiveMember = activeMemberName !== null;
@@ -77,7 +77,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                                     onClick={() => {
                                         setActiveMemberName((current) => (current === member.name ? null : member.name));
                                     }}
-                                    className='group absolute top-0 bottom-0 overflow-hidden border border-white/22 bg-[#121216] text-left shadow-[0_24px_60px_rgba(0,0,0,0.28)] transition-[left,width,filter,opacity,border-color,box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none'
+                                    className='team-panel-card group absolute top-0 bottom-0 overflow-hidden border border-white/22 bg-[#121216] text-left shadow-[0_24px_60px_rgba(0,0,0,0.28)] focus:outline-none'
                                     style={{
                                         left: panelLeft,
                                         width: isActive ? EXPANDED_WIDTH : CLOSED_WIDTH,
@@ -188,7 +188,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                                 onClick={() => {
                                     setActiveMemberName((current) => (current === member.name ? null : member.name));
                                 }}
-                                className='process-card relative overflow-hidden p-6 text-left'
+                                className='team-mobile-card process-card relative overflow-hidden p-6 text-left'
                             >
                                 <div className='process-card-surface absolute inset-0' />
                                 <div className='relative z-10'>

@@ -224,7 +224,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 <div className='relative z-10 mx-auto flex min-h-screen max-w-[1760px] flex-col px-4 pb-8 pt-5 sm:px-6 lg:px-8'>
                     <div className='relative flex flex-1 flex-col items-center justify-center'>
 
-                        <p className='animate-rise-in mt-2 max-w-xl text-center text-[0.86rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:mt-4 sm:text-[0.96rem]'>
+                        <p className='animate-rise-in -mt-4 max-w-xl text-center text-[0.96rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:-mt-6 sm:text-[1.08rem]'>
                             {copy.home.eyebrow}
                         </p>
 
@@ -241,7 +241,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
 
                         <div className='animate-rise-in animation-delay-2 mt-8 flex flex-col items-center gap-5 text-center'>
                             <div className='flex flex-wrap justify-center gap-4'>
-                                <Link href={`/${locale}/work`} className='agency-button agency-button--solid'>
+                                <Link href={`/${locale}/work`} className='agency-button agency-button--solid hero-primary-cta'>
                                     {copy.home.ctaPrimary}
                                 </Link>
                                 <Link href={`/${locale}/story`} className='agency-button agency-button--link'>
@@ -268,48 +268,45 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </video>
                 <div className='relative z-10 mx-auto max-w-7xl'>
                     <div className='grid min-h-[760px] gap-10 py-6 lg:grid-cols-[1.18fr_0.82fr] lg:items-end lg:py-10'>
-                        <Reveal className='max-w-5xl' distance={44}>
-                            <p className='text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                                {copy.nav.story}
+                        <Reveal className='relative max-w-5xl' distance={44}>
+                            <div className='pointer-events-none absolute bottom-[-6rem] left-[-11rem] z-0 hidden lg:block'>
+                                <Image
+                                    src='/images/Home/carrycube.png'
+                                    alt='Carry cube visual'
+                                    width={900}
+                                    height={1125}
+                                    className='h-[45rem] w-auto max-w-none object-contain'
+                                />
+                            </div>
+
+                            <p className='relative z-10 text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
+                                {copy.nav.workWithUs}
                             </p>
-                            <h2 className='mt-5 text-5xl font-semibold tracking-[-0.07em] text-white sm:text-6xl lg:text-7xl'>
+                            <h2 className='relative z-10 mt-5 text-5xl font-semibold tracking-[-0.07em] text-white sm:text-6xl lg:text-7xl'>
                                 {copy.pages.story.intro}
                             </h2>
 
-                            <div className='mt-8 grid gap-5 lg:grid-cols-[0.95fr_0.75fr] lg:items-stretch'>
-                                <div
-                                    className='min-h-[420px] overflow-hidden border border-white/14 shadow-[0_24px_64px_rgba(0,0,0,0.16)] lg:min-h-0 lg:h-full'
-                                    style={{ clipPath: storySectionClipPath }}
-                                >
-                                    <Image
-                                        src='/images/Home/ace.png'
-                                        alt='Ace, founder of The Agency'
-                                        width={900}
-                                        height={1125}
-                                        className='h-full w-full object-cover'
-                                    />
-                                </div>
-
-                                <div className='grid gap-5 lg:h-full lg:grid-rows-3'>
-                                    {copy.pages.story.sections.map((section, index) => (
+                            <div className='relative z-10 mt-8 lg:min-h-[27rem]'>
+                                <div className='relative z-10 grid gap-5 lg:ml-[20rem] lg:w-fit lg:grid-rows-[repeat(3,7rem)]'>
+                                    {workWithUs.packages.map((pkg, index) => (
                                         <div
-                                            key={section}
-                                            className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden border border-white/14 px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-full hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)] lg:h-full'
+                                            key={pkg.slug}
+                                            className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden border border-white/14 px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-[24rem] hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)]'
                                             style={{ clipPath: storySectionClipPath }}
                                         >
                                             <div className='story-number-card-surface absolute inset-0' />
                                             <span className='relative z-10 flex w-28 shrink-0 items-center justify-center text-4xl font-semibold leading-none tracking-[-0.06em] text-[var(--agency-orange)] sm:text-5xl'>
                                                 0{index + 1}
                                             </span>
-                                            <p className='relative z-10 max-w-0 overflow-hidden pl-0 text-sm leading-7 whitespace-nowrap text-white/82 opacity-0 transition-[max-width,padding,opacity] duration-500 ease-out group-hover:max-w-md group-hover:pl-4 group-hover:opacity-100 sm:text-base'>
-                                                {section}
+                                            <p className='relative z-10 max-w-0 overflow-hidden pl-0 pr-1 text-sm leading-6 text-white/82 opacity-0 transition-[max-width,padding,opacity] duration-500 ease-out group-hover:max-w-[16rem] group-hover:pl-4 group-hover:opacity-100 sm:text-base'>
+                                                {pkg.title}. {pkg.headline}
                                             </p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className='mt-8 flex flex-wrap items-center gap-5'>
+                            <div className='relative z-10 mt-8 flex flex-wrap items-center justify-center gap-5 lg:ml-[20rem] lg:justify-start'>
                                 <Link href={`/${locale}/story`} className='agency-button agency-button--solid'>
                                     Meet the team
                                 </Link>
@@ -319,7 +316,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal className='flex items-end lg:justify-self-end' delay={140} distance={40}>
                             <div
                                 className='glass-panel w-full max-w-md border border-white/14 p-7'
-                                style={{ clipPath: storySectionClipPath }}
+                                style={{ clipPath: packageCardClipPath }}
                             >
                                 <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
                                     {text.storyBridgeTitle}
@@ -349,6 +346,20 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(245,238,230,0.82)_0%,rgba(239,228,213,0.78)_100%)]' />
                 <div className='relative z-10 mx-auto max-w-7xl'>
                     <div className='relative'>
+                        <Reveal
+                            className='pointer-events-none absolute right-[13.5rem] bottom-0 z-20 hidden lg:block xl:right-[16rem]'
+                            delay={200}
+                            distance={36}
+                        >
+                            <Image
+                                src='/images/Home/carrysmallcube.png'
+                                alt='Carrying small cube visual'
+                                width={540}
+                                height={820}
+                                className='h-[29rem] w-auto max-w-none xl:h-[32rem]'
+                            />
+                        </Reveal>
+
                         <div
                             className='relative overflow-hidden bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] px-6 py-10 shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:px-8 sm:py-12 lg:px-10 lg:py-16'
                             style={{
@@ -433,60 +444,6 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
 
             <ProcessSection />
 
-            <section className='relative overflow-hidden bg-[linear-gradient(180deg,#17171b_0%,#121216_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
-                <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,109,24,0.12),transparent_26%)]' />
-                <div className='relative z-10 mx-auto max-w-7xl'>
-                    <div className='max-w-3xl space-y-4'>
-                        <Reveal distance={36}>
-                            <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
-                                {workWithUs.sectionLabel}
-                            </p>
-                            <h2 className='text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
-                                {workWithUs.sectionTitle}
-                            </h2>
-                            <p className='max-w-2xl text-base leading-8 text-white/72'>{workWithUs.sectionIntro}</p>
-                        </Reveal>
-                    </div>
-
-                    <div className='mt-10 grid gap-5 lg:grid-cols-3'>
-                        {workWithUs.packages.map((pkg, index) => (
-                            <Reveal key={pkg.slug} delay={index * 90} distance={34} className='h-full'>
-                                <article
-                                    className='glass-panel service-glass-card flex h-full flex-col p-7 sm:p-8'
-                                    style={{ clipPath: packageCardClipPath }}
-                                >
-                                    <p className='text-sm font-semibold text-[var(--agency-orange)]'>{pkg.step}</p>
-                                    <p className='mt-4 text-2xl font-semibold tracking-[-0.04em] text-white'>{pkg.title}</p>
-                                    <h3 className='mt-4 text-xl font-semibold tracking-[-0.04em] text-white/92'>
-                                        {pkg.headline}
-                                    </h3>
-                                    <p className='mt-4 text-base leading-7 text-white/72'>{pkg.description}</p>
-                                    <div className='mt-6 rounded-[1rem] border border-white/8 bg-white/5 px-4 py-3 text-sm text-white/78'>
-                                        {pkg.includes}
-                                    </div>
-                                    <div className='mt-auto pt-7'>
-                                        <Link href={`/${locale}/${pkg.slug}`} className='agency-button agency-button--link'>
-                                            {pkg.title}
-                                        </Link>
-                                    </div>
-                                </article>
-                            </Reveal>
-                        ))}
-                    </div>
-
-                    <Reveal
-                        className='mt-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between'
-                        delay={120}
-                        distance={28}
-                    >
-                        <p className='text-base leading-8 text-white/64'>{workWithUs.unsureText}</p>
-                        <Link href={`/${locale}/work-with-us`} className='agency-button agency-button--solid'>
-                            {workWithUs.sectionCtaLabel}
-                        </Link>
-                    </Reveal>
-                </div>
-            </section>
-
             <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <video
                     className='absolute inset-0 h-full w-full object-cover'
@@ -500,26 +457,36 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </video>
                 <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
 
-                <Reveal className='relative z-10 mx-auto max-w-7xl' distance={34}>
+                <Reveal className='relative z-10 mx-auto max-w-7xl pt-8 lg:pt-10' distance={34}>
+                    <div className='pointer-events-none absolute bottom-0 left-[60%] z-20 hidden -translate-x-1/2 lg:block'>
+                        <Image
+                            src='/images/Home/meetgreet.png'
+                            alt='Meet and greet visual'
+                            width={620}
+                            height={760}
+                            className='h-[21rem] w-auto max-w-none'
+                        />
+                    </div>
+
                     <div
                         className='glass-panel relative overflow-hidden border border-white/12 px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10'
                         style={{ clipPath: packageCardClipPath }}
                     >
                         <div className='absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,109,24,0.14),transparent_34%)]' />
                         <div className='relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
-                            <div className='max-w-3xl'>
+                            <div className='max-w-[34rem]'>
                                 <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
                                     {meetAndGreet.label}
                                 </p>
                                 <h2 className='mt-3 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
                                     {meetAndGreet.title}
                                 </h2>
-                                <p className='mt-4 max-w-2xl text-base leading-8 text-white/70'>
+                                <p className='mt-4 max-w-[30rem] text-base leading-8 text-white/70'>
                                     {meetAndGreet.body}
                                 </p>
                             </div>
 
-                            <Link href={`/${locale}/contact`} className='agency-button agency-button--solid shrink-0'>
+                            <Link href={`/${locale}/contact`} className='agency-button agency-button--solid shrink-0 lg:mr-6'>
                                 {meetAndGreet.cta}
                             </Link>
                         </div>
