@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 import LanguageSwitcher from '@/app/components/LanguageSwitcher';
 import { getServiceCollection } from '@/app/services-content';
-import { getCopy, getNavItems } from '@/app/site-content';
+import { getCopy, getNavItems, type Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 
 type SiteHeaderProps = {
     locale: string;
@@ -12,6 +13,7 @@ type SiteHeaderProps = {
 
 const SiteHeader = ({ locale, path = '' }: SiteHeaderProps) => {
     const copy = getCopy(locale);
+    const ui = getUiCopy(locale as Locale);
     const navItems = getNavItems(locale).filter((item) => !item.href.endsWith('/services'));
     const serviceItems = getServiceCollection(locale as Parameters<typeof getServiceCollection>[0]);
 
@@ -36,7 +38,7 @@ const SiteHeader = ({ locale, path = '' }: SiteHeaderProps) => {
                 <div className='hidden items-center gap-8 lg:flex'>
                     <nav className='flex items-center gap-8'>
                         <Link href={`/${locale}`} className='hero-nav-link'>
-                            Home
+                            {ui.navigation.home}
                         </Link>
                         {navItems.map((item) => (
                             <div key={item.href} className='flex items-center'>

@@ -5,6 +5,7 @@ import Reveal from '@/app/components/Reveal';
 import SiteHeader from '@/app/components/SiteHeader';
 import { fireflies } from '@/app/fonts';
 import { type Locale, getCopy } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 import { getWorkWithUsContent } from '@/app/work-with-us-content';
 
 const packageCardClipPath =
@@ -13,6 +14,7 @@ const storyCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 
 
 const WorkWithUsPageView = ({ locale }: { locale: string }) => {
     const copy = getCopy(locale);
+    const ui = getUiCopy(locale as Locale);
     const content = getWorkWithUsContent(locale as Locale);
 
     return (
@@ -136,7 +138,7 @@ const WorkWithUsPageView = ({ locale }: { locale: string }) => {
                                     <p className='mt-4 text-base leading-7 text-white/72'>{pkg.longDescription}</p>
                                     <div className='mt-6'>
                                         <p className='text-[0.72rem] uppercase tracking-[0.28em] text-white/42'>
-                                            Includes
+                                            {ui.workWithUs.includes}
                                         </p>
                                         <div className='mt-4 grid gap-3'>
                                             {pkg.detailedIncludes.map((item) => (
@@ -207,7 +209,7 @@ const WorkWithUsPageView = ({ locale }: { locale: string }) => {
                         <div className='rounded-[2rem] bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] p-8 text-white shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:p-10'>
                             <div className='max-w-3xl'>
                                 <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    Next
+                                    {ui.workWithUs.next}
                                 </p>
                                 <h2 className='mt-5 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
                                     {content.finalTitle}
@@ -238,17 +240,17 @@ const WorkWithUsPageView = ({ locale }: { locale: string }) => {
                                 className='h-10 w-auto'
                             />
                             <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>
-                                Small team. Sharp execution. Built for work that needs taste, momentum, and real follow-through.
+                                {ui.footer.storyBody}
                             </p>
                         </div>
 
                         <div className='lg:justify-self-end'>
                             <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
-                                Explore
+                                {ui.footer.explore}
                             </p>
                             <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
                                 <Link href={`/${locale}`} className='transition hover:text-white/82'>
-                                    Home
+                                    {ui.navigation.home}
                                 </Link>
                                 <Link href={`/${locale}/services/build`} className='transition hover:text-white/82'>
                                     {copy.nav.services}

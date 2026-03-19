@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
+import Reveal from '@/app/components/Reveal';
+
 type TeamMember = {
     number: string;
     name: string;
@@ -16,6 +18,13 @@ type TeamMember = {
 
 type TeamShowcaseProps = {
     members: TeamMember[];
+    copy: {
+        eyebrow: string;
+        title: string;
+        intro: string;
+        contributionLabel: string;
+        focusLabel: string;
+    };
 };
 
 const CLOSED_WIDTH = '21.7391%';
@@ -31,7 +40,7 @@ const CLOSED_LEFTS = [
     '78.261%'
 ] as const;
 
-const TeamShowcase = ({ members }: TeamShowcaseProps) => {
+const TeamShowcase = ({ members, copy }: TeamShowcaseProps) => {
     const [activeMemberName, setActiveMemberName] = useState<string | null>(null);
     const activeMember = members.find((member) => member.name === activeMemberName) ?? null;
     const activeIndex = activeMemberName ? members.findIndex((member) => member.name === activeMemberName) : -1;
@@ -46,17 +55,23 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
 
             <div className='relative mx-auto flex max-w-[1760px] flex-col xl:min-h-[calc(100svh-7rem)]'>
                 <div className='mb-10 max-w-3xl'>
-                    <p className='text-[0.74rem] font-semibold uppercase tracking-[0.34em] text-white/88'>THE TEAM</p>
-                    <h2 className='mt-5 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
-                        A small team, built on trust.
-                    </h2>
-                    <p className='mt-5 max-w-2xl text-lg leading-8 text-white/72'>
-                        Click a teammate to open the section and see how they contribute to the work.
-                    </p>
+                    <Reveal distance={22}>
+                        <p className='text-[0.74rem] font-semibold uppercase tracking-[0.34em] text-white/88'>{copy.eyebrow}</p>
+                    </Reveal>
+                    <Reveal delay={60} distance={30}>
+                        <h2 className='mt-5 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl'>
+                            {copy.title}
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={120} distance={22}>
+                        <p className='mt-5 max-w-2xl text-lg leading-8 text-white/72'>
+                            {copy.intro}
+                        </p>
+                    </Reveal>
                 </div>
 
                 <div className='hidden flex-1 xl:block'>
-                    <div className='relative h-[calc(100svh-22rem)] min-h-[46rem] overflow-visible'>
+                    <Reveal className='relative h-[calc(100svh-22rem)] min-h-[46rem] overflow-visible' delay={160} distance={34}>
                         {members.map((member, index) => {
                             const isActive = member.name === activeMemberName;
                             const hasActiveMember = activeMemberName !== null;
@@ -146,7 +161,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                                             <div className='relative max-w-[44rem] pl-[15%] pr-[13%]'>
                                                 <div className='mb-4 w-full bg-[linear-gradient(180deg,rgba(10,10,14,0.72),rgba(10,10,14,0.38))] px-6 py-5 shadow-[0_18px_54px_rgba(0,0,0,0.22)] backdrop-blur-[3px]'>
                                                     <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[var(--agency-orange)]'>
-                                                        Contribution
+                                                        {copy.contributionLabel}
                                                     </p>
                                                     <p className='mt-3 text-[1rem] leading-7 text-white/78'>
                                                         {member.summary}
@@ -159,7 +174,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                                                             <div className='process-card-surface absolute inset-0' />
                                                             <div className='relative z-10'>
                                                                 <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-[var(--agency-orange)]'>
-                                                                    Focus
+                                                                    {copy.focusLabel}
                                                                 </p>
                                                                 <p className='mt-3 text-lg font-semibold tracking-[-0.04em] text-white'>
                                                                     {strength}
@@ -174,7 +189,7 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                                 </button>
                             );
                         })}
-                    </div>
+                    </Reveal>
                 </div>
 
                 <div className='grid gap-4 xl:hidden'>
@@ -182,44 +197,45 @@ const TeamShowcase = ({ members }: TeamShowcaseProps) => {
                         const isActive = member.name === activeMemberName;
 
                         return (
-                            <button
-                                key={member.name}
-                                type='button'
-                                onClick={() => {
-                                    setActiveMemberName((current) => (current === member.name ? null : member.name));
-                                }}
-                                className='team-mobile-card process-card relative overflow-hidden p-6 text-left'
-                            >
-                                <div className='process-card-surface absolute inset-0' />
-                                <div className='relative z-10'>
-                                    <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
-                                        {member.number}
-                                    </p>
-                                    <h3 className='mt-3 text-2xl font-semibold tracking-[-0.05em] text-white'>
-                                        {member.name}
-                                    </h3>
-                                    <p className='mt-2 text-sm uppercase tracking-[0.28em] text-white/58'>
-                                        {member.role}
-                                    </p>
-                                    <div
-                                        className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out ${
-                                            isActive ? 'mt-5 grid-rows-[1fr] opacity-100' : 'mt-0 grid-rows-[0fr] opacity-0'
-                                        }`}
-                                    >
-                                        <div className='overflow-hidden'>
-                                            <p className='text-base leading-8 text-white/74'>{member.summary}</p>
-                                            <p className='mt-4 text-sm leading-7 text-white/62'>{member.detail}</p>
-                                            <div className='mt-5 grid gap-3 sm:grid-cols-3'>
-                                                {member.strengths.map((strength) => (
-                                                    <div key={strength} className='rounded-[1rem] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/78'>
-                                                        {strength}
-                                                    </div>
-                                                ))}
+                            <Reveal key={member.name} delay={160 + Number(member.number) * 45} distance={24}>
+                                <button
+                                    type='button'
+                                    onClick={() => {
+                                        setActiveMemberName((current) => (current === member.name ? null : member.name));
+                                    }}
+                                    className='team-mobile-card process-card relative overflow-hidden p-6 text-left'
+                                >
+                                    <div className='process-card-surface absolute inset-0' />
+                                    <div className='relative z-10'>
+                                        <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
+                                            {member.number}
+                                        </p>
+                                        <h3 className='mt-3 text-2xl font-semibold tracking-[-0.05em] text-white'>
+                                            {member.name}
+                                        </h3>
+                                        <p className='mt-2 text-sm uppercase tracking-[0.28em] text-white/58'>
+                                            {member.role}
+                                        </p>
+                                        <div
+                                            className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out ${
+                                                isActive ? 'mt-5 grid-rows-[1fr] opacity-100' : 'mt-0 grid-rows-[0fr] opacity-0'
+                                            }`}
+                                        >
+                                            <div className='overflow-hidden'>
+                                                <p className='text-base leading-8 text-white/74'>{member.summary}</p>
+                                                <p className='mt-4 text-sm leading-7 text-white/62'>{member.detail}</p>
+                                                <div className='mt-5 grid gap-3 sm:grid-cols-3'>
+                                                    {member.strengths.map((strength) => (
+                                                        <div key={strength} className='rounded-[1rem] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/78'>
+                                                            {strength}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </button>
+                                </button>
+                            </Reveal>
                         );
                     })}
                 </div>

@@ -9,6 +9,7 @@ import SiteHeader from '@/app/components/SiteHeader';
 import { portfolioProjects, getPortfolioProjectBySlug } from '@/app/portfolio-content';
 import { fireflies } from '@/app/fonts';
 import { getCopy, locales, type Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 
 type Params = {
     locale: string;
@@ -16,6 +17,7 @@ type Params = {
 };
 
 const detailCardClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
+const portfolioVisualClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
 
 export function generateStaticParams() {
     return locales.flatMap((locale) =>
@@ -27,8 +29,10 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-    const { slug } = await params;
-    const project = getPortfolioProjectBySlug(slug);
+    const { locale, slug } = await params;
+    const project = locales.includes(locale as Locale)
+        ? getPortfolioProjectBySlug(locale as Locale, slug)
+        : null;
 
     if (!project) {
         return {
@@ -49,12 +53,13 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
         notFound();
     }
 
-    const project = getPortfolioProjectBySlug(slug);
+    const project = getPortfolioProjectBySlug(locale as Locale, slug);
     if (!project) {
         notFound();
     }
 
     const copy = getCopy(locale);
+    const ui = getUiCopy(locale as Locale);
 
     return (
         <main className='agency-shell bg-[var(--agency-cream)] text-white'>
@@ -93,7 +98,7 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal distance={34}>
                             <div className='max-w-3xl'>
                                 <p className='text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                                    Case overview
+                                    {ui.portfolio.caseOverview}
                                 </p>
                                 <h2 className='mt-5 text-3xl font-semibold leading-[1.12] tracking-[-0.06em] text-white sm:text-4xl'>
                                     {project.intro}
@@ -104,10 +109,10 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                 </div>
                                 <div className='mt-8 flex flex-wrap gap-4'>
                                     <Link href={`/${locale}/work`} className='agency-button agency-button--link'>
-                                        Back to {copy.nav.work}
+                                        {ui.portfolio.backTo} {copy.nav.work}
                                     </Link>
                                     <Link href={`/${locale}/contact`} className='agency-button agency-button--solid'>
-                                        Start your project
+                                        {ui.portfolio.startProject}
                                     </Link>
                                 </div>
                             </div>
@@ -117,7 +122,10 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                             <div className='glass-panel border border-white/12 p-5 sm:p-6' style={{ clipPath: detailCardClipPath }}>
                                 {project.visual ? (
                                     project.visualContain ? (
-                                        <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#2f2e35] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
+                                        <div
+                                            className='relative aspect-[4/3] overflow-hidden border border-white/8 bg-[#2f2e35] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'
+                                            style={{ clipPath: portfolioVisualClipPath }}
+                                        >
                                             <div className='absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,109,24,0.12),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_34%)]' />
                                             <Image
                                                 src={project.visual}
@@ -127,7 +135,10 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                             />
                                         </div>
                                     ) : (
-                                        <div className='relative aspect-[4/3] overflow-hidden rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
+                                        <div
+                                            className='relative aspect-[4/3] overflow-hidden border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'
+                                            style={{ clipPath: portfolioVisualClipPath }}
+                                        >
                                             <Image
                                                 src={project.visual}
                                                 alt={project.visualAlt ?? `${project.title} visual`}
@@ -137,13 +148,16 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                         </div>
                                     )
                                 ) : (
-                                    <div className='flex aspect-[4/3] items-center justify-center rounded-[1.5rem] border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'>
+                                    <div
+                                        className='flex aspect-[4/3] items-center justify-center border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'
+                                        style={{ clipPath: portfolioVisualClipPath }}
+                                    >
                                         <div className='text-center'>
                                             <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                                Image placeholder
+                                                {ui.portfolio.imagePlaceholder}
                                             </p>
                                             <p className='mt-3 text-sm leading-7 text-white/62'>
-                                                Add final project visual here
+                                                {ui.portfolio.addFinalVisual}
                                             </p>
                                         </div>
                                     </div>
@@ -172,12 +186,12 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal distance={28}>
                             <div className='glass-panel h-full border border-white/12 p-7 sm:p-8' style={{ clipPath: detailCardClipPath }}>
                                 <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    Project
+                                    {ui.portfolio.project}
                                 </p>
                                 <div className='mt-6 grid gap-4 text-[var(--agency-ink)]'>
                                     <div>
                                         <p className='text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[var(--agency-ink)]/52'>
-                                            Number
+                                            {ui.portfolio.number}
                                         </p>
                                         <p className='mt-2 text-2xl font-semibold tracking-[-0.05em] text-white'>
                                             {project.number}
@@ -185,7 +199,7 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                     </div>
                                     <div>
                                         <p className='text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[var(--agency-ink)]/52'>
-                                            Category
+                                            {ui.portfolio.category}
                                         </p>
                                         <p className='mt-2 text-2xl font-semibold tracking-[-0.05em] text-white'>
                                             {project.category}
@@ -198,7 +212,7 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                         <Reveal delay={90} distance={28}>
                             <div className='glass-panel h-full border border-white/12 p-7 sm:p-8' style={{ clipPath: detailCardClipPath }}>
                                 <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    Deliverables
+                                    {ui.portfolio.deliverables}
                                 </p>
                                 <div className='mt-6 grid gap-3 sm:grid-cols-3'>
                                     {project.deliverables.map((item) => (
@@ -238,17 +252,17 @@ const PortfolioDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                 className='h-10 w-auto'
                             />
                             <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>
-                                Small team. Sharp execution. Built for work that needs taste, momentum, and real follow-through.
+                                {ui.footer.storyBody}
                             </p>
                         </div>
 
                         <div className='lg:justify-self-end'>
                             <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
-                                Explore
+                                {ui.footer.explore}
                             </p>
                             <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
                                 <Link href={`/${locale}`} className='transition hover:text-white/82'>
-                                    Home
+                                    {ui.navigation.home}
                                 </Link>
                                 <Link href={`/${locale}/services/build`} className='transition hover:text-white/82'>
                                     {copy.nav.services}

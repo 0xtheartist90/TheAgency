@@ -100,14 +100,18 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                     className='foundation-tab-panel mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-start'
                 >
                     <div className='foundation-tab-panel__copy flex min-h-[21rem] flex-col justify-start lg:max-h-[21rem]'>
-                        <div className='relative h-[88px] w-[88px]'>
-                            <Image
-                                src={activeItem.icon}
-                                alt={activeItem.label}
-                                fill
-                                className='object-contain object-left'
+                        <div className='flex h-[88px] w-[88px] items-center justify-center'>
+                            <div
+                                className='relative h-[72px] w-[72px] drop-shadow-[0_10px_24px_rgba(0,0,0,0.22)]'
                                 style={{ transform: `scale(${activeItem.iconScale ?? 1})` }}
-                            />
+                            >
+                                <Image
+                                    src={activeItem.icon}
+                                    alt={activeItem.label}
+                                    fill
+                                    className='object-contain'
+                                />
+                            </div>
                         </div>
                         <p className='mt-5 text-[0.76rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
                             {activeItem.label}
@@ -162,21 +166,9 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                             </div>
                         ) : (
                             <div
-                                className='relative z-10 flex aspect-[4/3] w-full items-center justify-center border border-dashed border-white/14 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] px-6 text-center'
+                                className='relative z-10 aspect-[4/3] w-full overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]'
                                 style={{ clipPath }}
-                            >
-                                <div>
-                                    <span className='text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-[var(--agency-orange)]'>
-                                        Visual Slot
-                                    </span>
-                                    <p className='mt-4 max-w-[16ch] text-[2rem] font-semibold leading-[1.02] tracking-[-0.06em] text-white'>
-                                        {activeItem.label} visual here
-                                    </p>
-                                    <p className='mt-4 max-w-[24ch] text-sm leading-7 text-white/56'>
-                                        Drop in the supporting visual for the {activeItem.label.toLowerCase()} tab without changing the card layout.
-                                    </p>
-                                </div>
-                            </div>
+                            />
                         )}
                     </div>
                 </div>

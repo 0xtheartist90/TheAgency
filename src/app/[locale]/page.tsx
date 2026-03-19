@@ -8,7 +8,8 @@ import ProcessSection from '@/app/components/ProcessSection';
 import Reveal from '@/app/components/Reveal';
 import ServicesShowcase from '@/app/components/ServicesShowcase';
 import SiteHeader from '@/app/components/SiteHeader';
-import { getCopy, locales } from '@/app/site-content';
+import { getCopy, locales, type Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 import { getWorkWithUsContent } from '@/app/work-with-us-content';
 
 type Params = {
@@ -203,6 +204,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
     const text = sectionText[locale as keyof typeof sectionText] ?? sectionText.en;
     const workWithUs = getWorkWithUsContent(locale as (typeof locales)[number]);
     const meetAndGreet = meetAndGreetBanner[locale as keyof typeof meetAndGreetBanner] ?? meetAndGreetBanner.en;
+    const ui = getUiCopy(locale as Locale);
 
     return (
         <main className='agency-shell bg-[var(--agency-cream)] text-white'>
@@ -239,14 +241,18 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             />
                         </div>
 
-                        <div className='animate-rise-in animation-delay-2 mt-8 flex flex-col items-center gap-5 text-center'>
+                        <div className='mt-8 flex flex-col items-center gap-5 text-center'>
                             <div className='flex flex-wrap justify-center gap-4'>
-                                <Link href={`/${locale}/work`} className='agency-button agency-button--solid hero-primary-cta'>
-                                    {copy.home.ctaPrimary}
-                                </Link>
-                                <Link href={`/${locale}/story`} className='agency-button agency-button--link'>
-                                    {copy.home.ctaSecondary}
-                                </Link>
+                                <Reveal delay={220} distance={-44} axis='x'>
+                                    <Link href={`/${locale}/work`} className='agency-button agency-button--solid hero-primary-cta'>
+                                        {copy.home.ctaPrimary}
+                                    </Link>
+                                </Reveal>
+                                <Reveal delay={280} distance={44} axis='x'>
+                                    <Link href={`/${locale}/story`} className='agency-button agency-button--link'>
+                                        {copy.home.ctaSecondary}
+                                    </Link>
+                                </Reveal>
                             </div>
                         </div>
                     </div>
@@ -268,8 +274,8 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </video>
                 <div className='relative z-10 mx-auto max-w-7xl'>
                     <div className='grid min-h-[760px] gap-10 py-6 lg:grid-cols-[1.18fr_0.82fr] lg:items-end lg:py-10'>
-                        <Reveal className='relative max-w-5xl' distance={44}>
-                            <div className='pointer-events-none absolute bottom-[-6rem] left-[-11rem] z-0 hidden lg:block'>
+                        <div className='relative max-w-5xl'>
+                            <Reveal className='pointer-events-none absolute bottom-[-6rem] left-[-11rem] z-0 hidden lg:block' delay={120} distance={-56} axis='x'>
                                 <Image
                                     src='/images/Home/carrycube.png'
                                     alt='Carry cube visual'
@@ -277,54 +283,67 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                     height={1125}
                                     className='h-[45rem] w-auto max-w-none object-contain'
                                 />
-                            </div>
+                            </Reveal>
 
-                            <p className='relative z-10 text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                                {copy.nav.workWithUs}
-                            </p>
-                            <h2 className='relative z-10 mt-5 text-5xl font-semibold tracking-[-0.07em] text-white sm:text-6xl lg:text-7xl'>
-                                {copy.pages.story.intro}
-                            </h2>
+                            <Reveal className='relative z-10' distance={28}>
+                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
+                                    {copy.nav.workWithUs}
+                                </p>
+                            </Reveal>
+                            <Reveal className='relative z-10' delay={70} distance={34}>
+                                <h2 className='mt-5 text-5xl font-semibold tracking-[-0.07em] text-white sm:text-6xl lg:text-7xl'>
+                                    {copy.pages.story.intro}
+                                </h2>
+                            </Reveal>
 
                             <div className='relative z-10 mt-8 lg:min-h-[27rem]'>
                                 <div className='relative z-10 grid gap-5 lg:ml-[20rem] lg:w-fit lg:grid-rows-[repeat(3,7rem)]'>
                                     {workWithUs.packages.map((pkg, index) => (
-                                        <div
-                                            key={pkg.slug}
-                                            className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden border border-white/14 px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-[24rem] hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)]'
-                                            style={{ clipPath: storySectionClipPath }}
-                                        >
-                                            <div className='story-number-card-surface absolute inset-0' />
-                                            <span className='relative z-10 flex w-28 shrink-0 items-center justify-center text-4xl font-semibold leading-none tracking-[-0.06em] text-[var(--agency-orange)] sm:text-5xl'>
-                                                0{index + 1}
-                                            </span>
-                                            <p className='relative z-10 max-w-0 overflow-hidden pl-0 pr-1 text-sm leading-6 text-white/82 opacity-0 transition-[max-width,padding,opacity] duration-500 ease-out group-hover:max-w-[16rem] group-hover:pl-4 group-hover:opacity-100 sm:text-base'>
-                                                {pkg.title}. {pkg.headline}
-                                            </p>
-                                        </div>
+                                        <Reveal key={pkg.slug} delay={140 + index * 90} distance={44} axis='x'>
+                                            <div
+                                                className='story-number-card group relative flex h-28 w-28 items-center overflow-hidden border border-white/14 px-0 transition-[width,padding,box-shadow] duration-500 ease-out hover:w-[24rem] hover:px-5 hover:shadow-[0_35px_90px_rgba(0,0,0,0.18)]'
+                                                style={{ clipPath: storySectionClipPath }}
+                                            >
+                                                <div className='story-number-card-surface absolute inset-0' />
+                                                <span className='relative z-10 flex w-28 shrink-0 items-center justify-center text-4xl font-semibold leading-none tracking-[-0.06em] text-[var(--agency-orange)] sm:text-5xl'>
+                                                    0{index + 1}
+                                                </span>
+                                                <p className='relative z-10 max-w-0 overflow-hidden pl-0 pr-1 text-sm leading-6 text-white/82 opacity-0 transition-[max-width,padding,opacity] duration-500 ease-out group-hover:max-w-[16rem] group-hover:pl-4 group-hover:opacity-100 sm:text-base'>
+                                                    {pkg.title}. {pkg.headline}
+                                                </p>
+                                            </div>
+                                        </Reveal>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className='relative z-10 mt-8 flex flex-wrap items-center justify-center gap-5 lg:ml-[20rem] lg:justify-start'>
+                            <Reveal
+                                className='relative z-10 mt-8 flex flex-wrap items-center justify-center gap-5 lg:ml-[20rem] lg:justify-start'
+                                delay={430}
+                                distance={24}
+                            >
                                 <Link href={`/${locale}/story`} className='agency-button agency-button--solid'>
-                                    Meet the team
+                                    {ui.home.meetTeam}
                                 </Link>
-                            </div>
-                        </Reveal>
+                            </Reveal>
+                        </div>
 
-                        <Reveal className='flex items-end lg:justify-self-end' delay={140} distance={40}>
+                        <Reveal className='flex items-end lg:justify-self-end' delay={210} distance={40}>
                             <div
                                 className='glass-panel w-full max-w-md border border-white/14 p-7'
                                 style={{ clipPath: packageCardClipPath }}
                             >
-                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                    {text.storyBridgeTitle}
-                                </p>
-                                {text.storyBridgeBody ? (
-                                    <p className='mt-4 text-lg leading-8 text-white/78'>
-                                        {text.storyBridgeBody}
+                                <Reveal distance={20}>
+                                    <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
+                                        {text.storyBridgeTitle}
                                     </p>
+                                </Reveal>
+                                {text.storyBridgeBody ? (
+                                    <Reveal delay={70} distance={22}>
+                                        <p className='mt-4 text-lg leading-8 text-white/78'>
+                                            {text.storyBridgeBody}
+                                        </p>
+                                    </Reveal>
                                 ) : null}
                             </div>
                         </Reveal>
@@ -348,7 +367,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                     <div className='relative'>
                         <Reveal
                             className='pointer-events-none absolute right-[13.5rem] bottom-0 z-20 hidden lg:block xl:right-[16rem]'
-                            delay={200}
+                            delay={220}
                             distance={36}
                         >
                             <Image
@@ -371,63 +390,66 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             <div className='absolute left-6 bottom-4 h-px w-36 -rotate-[20deg] bg-white/58 sm:w-48' />
 
                             <div className='grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-start'>
-                                <Reveal className='max-w-3xl' distance={42}>
-                                    <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                        {copy.nav.work}
-                                    </p>
-                                    <h2 className='mt-4 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl lg:text-6xl'>
-                                        {text.workHeading}
-                                    </h2>
-                                    <p className='mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg'>
-                                        {text.workBody}
-                                    </p>
-                                </Reveal>
+                                <div className='max-w-3xl'>
+                                    <Reveal distance={28}>
+                                        <p className='text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
+                                            {copy.nav.work}
+                                        </p>
+                                    </Reveal>
+                                    <Reveal delay={70} distance={34}>
+                                        <h2 className='mt-4 text-4xl font-semibold tracking-[-0.07em] text-white sm:text-5xl lg:text-6xl'>
+                                            {text.workHeading}
+                                        </h2>
+                                    </Reveal>
+                                    <Reveal delay={150} distance={28}>
+                                        <p className='mt-5 max-w-2xl text-base leading-8 text-white/72 sm:text-lg'>
+                                            {text.workBody}
+                                        </p>
+                                    </Reveal>
+                                </div>
 
-                                <Reveal
-                                    className='grid gap-3 sm:grid-cols-2 lg:mb-16 lg:max-w-[27rem] lg:justify-self-end lg:self-start'
-                                    delay={160}
-                                    distance={46}
-                                >
+                                <div className='grid gap-3 sm:grid-cols-2 lg:mb-16 lg:max-w-[27rem] lg:justify-self-end lg:self-start'>
                                     {[
                                         {
                                             value: '150+',
-                                            label: 'Projects'
+                                            label: ui.home.stats.projects
                                         },
                                         {
                                             value: '15+',
-                                            label: 'Countries'
+                                            label: ui.home.stats.countries
                                         },
                                         {
                                             value: '10+',
-                                            label: 'Industries'
+                                            label: ui.home.stats.industries
                                         },
                                         {
                                             value: '5+',
-                                            label: 'Years'
+                                            label: ui.home.stats.years
                                         }
-                                    ].map((stat) => (
-                                        <div
-                                            key={stat.label}
-                                            className='relative flex min-h-[8.2rem] flex-col items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.008)_100%)] px-5 py-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]'
-                                        >
-                                            <div className='mb-4'>
-                                                <p className='text-[2.35rem] font-semibold leading-none tracking-[-0.09em] text-white sm:text-[2.65rem]'>
-                                                    {stat.value}
+                                    ].map((stat, index) => (
+                                        <Reveal key={stat.label} delay={180 + index * 80} distance={26}>
+                                            <div
+                                                className='relative flex min-h-[8.2rem] flex-col items-center justify-center overflow-hidden rounded-[1.15rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.02)_0%,rgba(255,255,255,0.008)_100%)] px-5 py-4 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]'
+                                            >
+                                                <div className='mb-4'>
+                                                    <p className='text-[2.35rem] font-semibold leading-none tracking-[-0.09em] text-white sm:text-[2.65rem]'>
+                                                        {stat.value}
+                                                    </p>
+                                                </div>
+                                                <p className='max-w-[10ch] text-[0.74rem] font-medium uppercase tracking-[0.24em] text-white/54'>
+                                                    {stat.label}
                                                 </p>
+                                                <div className='absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent' />
+                                                <div className='absolute bottom-0 left-1/2 h-px w-14 -translate-x-1/2 bg-[linear-gradient(90deg,rgba(255,106,0,0),rgba(255,106,0,0.85),rgba(255,106,0,0))]' />
                                             </div>
-                                            <p className='max-w-[10ch] text-[0.74rem] font-medium uppercase tracking-[0.24em] text-white/54'>
-                                                {stat.label}
-                                            </p>
-                                            <div className='absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent' />
-                                            <div className='absolute bottom-0 left-1/2 h-px w-14 -translate-x-1/2 bg-[linear-gradient(90deg,rgba(255,106,0,0),rgba(255,106,0,0.85),rgba(255,106,0,0))]' />
-                                        </div>
+                                        </Reveal>
                                     ))}
-                                </Reveal>
+                                </div>
                             </div>
 
                         </div>
 
-                        <Reveal className='absolute right-0 bottom-0 sm:right-3 lg:right-6' delay={260} distance={30}>
+                        <Reveal className='absolute right-0 bottom-0 sm:right-3 lg:right-6' delay={520} distance={30}>
                             <Link
                                 href={`/${locale}/work`}
                                 className='inline-flex items-center gap-3 rounded-full bg-[var(--agency-orange)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_34px_rgba(255,109,24,0.26)] transition hover:translate-x-1 hover:bg-[var(--agency-orange-soft)]'
@@ -442,7 +464,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </div>
             </section>
 
-            <ProcessSection />
+            <ProcessSection locale={locale as Locale} />
 
             <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <video
@@ -457,8 +479,8 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </video>
                 <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
 
-                <Reveal className='relative z-10 mx-auto max-w-7xl pt-8 lg:pt-10' distance={34}>
-                    <div className='pointer-events-none absolute bottom-0 left-[60%] z-20 hidden -translate-x-1/2 lg:block'>
+                <div className='relative z-10 mx-auto max-w-7xl pt-8 lg:pt-10'>
+                    <Reveal className='pointer-events-none absolute bottom-0 left-[60%] z-20 hidden -translate-x-1/2 lg:block' delay={180} distance={30}>
                         <Image
                             src='/images/Home/meetgreet.png'
                             alt='Meet and greet visual'
@@ -466,7 +488,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             height={760}
                             className='h-[21rem] w-auto max-w-none'
                         />
-                    </div>
+                    </Reveal>
 
                     <div
                         className='glass-panel relative overflow-hidden border border-white/12 px-6 py-7 sm:px-8 sm:py-8 lg:px-10 lg:py-10'
@@ -475,72 +497,88 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                         <div className='absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(255,109,24,0.14),transparent_34%)]' />
                         <div className='relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between'>
                             <div className='max-w-[34rem]'>
-                                <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
-                                    {meetAndGreet.label}
-                                </p>
-                                <h2 className='mt-3 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
-                                    {meetAndGreet.title}
-                                </h2>
-                                <p className='mt-4 max-w-[30rem] text-base leading-8 text-white/70'>
-                                    {meetAndGreet.body}
-                                </p>
+                                <Reveal distance={20}>
+                                    <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
+                                        {meetAndGreet.label}
+                                    </p>
+                                </Reveal>
+                                <Reveal delay={70} distance={24}>
+                                    <h2 className='mt-3 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
+                                        {meetAndGreet.title}
+                                    </h2>
+                                </Reveal>
+                                <Reveal delay={140} distance={20}>
+                                    <p className='mt-4 max-w-[30rem] text-base leading-8 text-white/70'>
+                                        {meetAndGreet.body}
+                                    </p>
+                                </Reveal>
                             </div>
 
-                            <Link href={`/${locale}/contact`} className='agency-button agency-button--solid shrink-0 lg:mr-6'>
-                                {meetAndGreet.cta}
-                            </Link>
+                            <Reveal delay={220} distance={22}>
+                                <Link href={`/${locale}/contact`} className='agency-button agency-button--solid shrink-0 lg:mr-6'>
+                                    {meetAndGreet.cta}
+                                </Link>
+                            </Reveal>
                         </div>
                     </div>
-                </Reveal>
+                </div>
             </section>
 
             <footer className='bg-[linear-gradient(180deg,#17171b_0%,#121216_100%)] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
                 <div className='mx-auto max-w-7xl'>
-                    <Reveal className='grid gap-10 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr]' distance={38}>
+                    <div className='grid gap-10 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr]'>
                         <div className='max-w-2xl'>
-                            <Image
-                                src='/images/Logo/the-agency-logo-orange.webp'
-                                alt='The Agency'
-                                width={240}
-                                height={68}
-                                className='h-10 w-auto'
-                            />
-                            <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>{text.footerBody}</p>
+                            <Reveal distance={22}>
+                                <Image
+                                    src='/images/Logo/the-agency-logo-orange.webp'
+                                    alt='The Agency'
+                                    width={240}
+                                    height={68}
+                                    className='h-10 w-auto'
+                                />
+                            </Reveal>
+                            <Reveal delay={80} distance={20}>
+                                <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>{text.footerBody}</p>
+                            </Reveal>
                         </div>
 
                         <div className='lg:justify-self-end'>
-                            <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
-                                Explore
-                            </p>
-                            <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
-                                <Link href={`/${locale}/story`} className='transition hover:text-white/82'>
-                                    {copy.nav.story}
-                                </Link>
-                                <Link href={`/${locale}/services/build`} className='transition hover:text-white/82'>
-                                    {copy.nav.services}
-                                </Link>
-                                <Link href={`/${locale}/work`} className='transition hover:text-white/82'>
-                                    {copy.nav.work}
-                                </Link>
-                                <Link href={`/${locale}/contact`} className='transition hover:text-white/82'>
-                                    {copy.nav.contact}
-                                </Link>
-                            </div>
+                            <Reveal delay={60} distance={20}>
+                                <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
+                                    {ui.footer.explore}
+                                </p>
+                            </Reveal>
+                            <Reveal delay={130} distance={22}>
+                                <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
+                                    <Link href={`/${locale}/story`} className='transition hover:text-white/82'>
+                                        {copy.nav.story}
+                                    </Link>
+                                    <Link href={`/${locale}/services/build`} className='transition hover:text-white/82'>
+                                        {copy.nav.services}
+                                    </Link>
+                                    <Link href={`/${locale}/work`} className='transition hover:text-white/82'>
+                                        {copy.nav.work}
+                                    </Link>
+                                    <Link href={`/${locale}/contact`} className='transition hover:text-white/82'>
+                                        {copy.nav.contact}
+                                    </Link>
+                                </div>
+                            </Reveal>
                         </div>
-                    </Reveal>
+                    </div>
 
                     <div className='mt-8 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent)]' />
 
-                    <Reveal
-                        className='flex flex-col gap-5 py-5 text-sm text-white/42 lg:flex-row lg:items-center lg:justify-between'
-                        delay={120}
-                        distance={26}
-                    >
-                        <p className='tracking-[0.08em] text-white/34'>© 2026 The Agency. All rights reserved.</p>
-                        <Link href={`/${locale}/contact`} className='text-white/44 transition hover:text-white/82'>
-                            {copy.home.supportLabel}
-                        </Link>
-                    </Reveal>
+                    <div className='flex flex-col gap-5 py-5 text-sm text-white/42 lg:flex-row lg:items-center lg:justify-between'>
+                        <Reveal distance={18}>
+                            <p className='tracking-[0.08em] text-white/34'>{ui.footer.rightsReserved}</p>
+                        </Reveal>
+                        <Reveal delay={70} distance={18}>
+                            <Link href={`/${locale}/contact`} className='text-white/44 transition hover:text-white/82'>
+                                {copy.home.supportLabel}
+                            </Link>
+                        </Reveal>
+                    </div>
                 </div>
             </footer>
         </main>

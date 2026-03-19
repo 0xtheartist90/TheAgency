@@ -9,6 +9,7 @@ type RevealProps = {
     duration?: number;
     distance?: number;
     threshold?: number;
+    axis?: 'x' | 'y';
 };
 
 const Reveal = ({
@@ -17,10 +18,13 @@ const Reveal = ({
     delay = 0,
     duration = 1100,
     distance = 36,
-    threshold = 0.18
+    threshold = 0.18,
+    axis = 'y'
 }: RevealProps) => {
     const ref = useRef<HTMLDivElement | null>(null);
     const [isVisible, setIsVisible] = useState(false);
+    const hiddenTransform =
+        axis === 'x' ? `translate3d(${distance}px, 0, 0)` : `translate3d(0, ${distance}px, 0)`;
 
     useEffect(() => {
         const node = ref.current;
@@ -48,7 +52,7 @@ const Reveal = ({
             className={className}
             style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? undefined : `translate3d(0, ${distance}px, 0)`,
+                transform: isVisible ? undefined : hiddenTransform,
                 filter: isVisible ? undefined : 'blur(10px)',
                 transition: [
                     `opacity ${duration}ms cubic-bezier(0.22,1,0.36,1)`,

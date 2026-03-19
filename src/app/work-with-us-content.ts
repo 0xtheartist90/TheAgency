@@ -105,9 +105,9 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
         heroIntro: 'Of je nu vanaf nul start of wilt doorgroeien op wat al werkt, we structureren onze samenwerking rond duidelijke uitkomsten.',
         heroPrimaryCta: 'Start een project',
         heroSecondaryCta: 'Neem contact op',
-        packagesTitle: 'Packages',
+        packagesTitle: 'Pakketten',
         packagesIntro: 'Drie duidelijke manieren om met ons samen te werken, afhankelijk van je fase, tempo en gewenste betrokkenheid.',
-        packageCtaLabel: 'Start dit package',
+        packageCtaLabel: 'Start dit pakket',
         comparisonTitle: 'Beste match',
         flexibleTitle: 'Iets specifieks nodig?',
         flexibleIntro: 'Zoek je een kleinere scope - zoals een logo, website of specifieke service - dan kunnen we daar ook mee helpen.',
@@ -124,9 +124,9 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 title: 'Startup',
                 headline: 'Van idee naar iets echts',
                 description: 'Voor ideeën in een vroeg stadium - we helpen je om je product vorm te geven, te bouwen en te lanceren.',
-                includes: 'Brand, product en launch support',
+                includes: 'Brand, product en launch-ondersteuning',
                 longDescription: 'Voor founders en teams die vanaf nul beginnen - we brengen je van idee naar een product dat klaar is voor lancering.',
-                detailedIncludes: ['Brand', 'Product (website of app)', 'Launch support'],
+                detailedIncludes: ['Brand', 'Product (website of app)', 'Launch-ondersteuning'],
                 note: 'Typische doorlooptijd: 4-8 weken',
                 bestFor: 'Beste voor nieuwe ideeën'
             },
@@ -147,9 +147,9 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 title: 'Partner',
                 headline: 'Een team dat met je meebouwt',
                 description: 'Voor doorlopende ondersteuning - we werken als verlengstuk van je team op product, merk en groei.',
-                includes: 'Doorlopende design, development en strategie',
+                includes: 'Doorlopend design, development en strategie',
                 longDescription: 'Voor teams die structurele ondersteuning nodig hebben - we werken als verlengstuk van je team.',
-                detailedIncludes: ['Doorlopende design', 'Development', 'Strategie'],
+                detailedIncludes: ['Doorlopend design', 'Development', 'Strategie'],
                 bestFor: 'Beste voor langdurige samenwerking'
             }
         ]
@@ -163,7 +163,7 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
         heroIntro: 'ไม่ว่าคุณจะเริ่มจากศูนย์หรือกำลังขยายสิ่งที่เวิร์กอยู่แล้ว เราจะวางรูปแบบการทำงานจากผลลัพธ์ที่ชัดเจน.',
         heroPrimaryCta: 'เริ่มโปรเจกต์',
         heroSecondaryCta: 'ติดต่อเรา',
-        packagesTitle: 'Packages',
+        packagesTitle: 'แพ็กเกจ',
         packagesIntro: '3 รูปแบบการร่วมงานที่ชัดเจน ตามช่วงของธุรกิจ จังหวะการทำงาน และระดับการซัพพอร์ตที่คุณต้องการ.',
         packageCtaLabel: 'เริ่มแพ็กเกจนี้',
         comparisonTitle: 'เหมาะกับใคร',
@@ -182,9 +182,9 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 title: 'Startup',
                 headline: 'เปลี่ยนไอเดียให้เป็นของจริง',
                 description: 'สำหรับไอเดียระยะเริ่มต้น - เราช่วยคุณวางรูปแบบ สร้าง และเปิดตัวโปรดักต์.',
-                includes: 'Brand, product และ launch support',
+                includes: 'Brand, product และการซัพพอร์ตช่วง launch',
                 longDescription: 'สำหรับผู้ก่อตั้งและทีมที่เริ่มจากศูนย์ - เราพาคุณจากไอเดียไปสู่โปรดักต์ที่พร้อมเปิดตัว.',
-                detailedIncludes: ['Brand', 'Product (เว็บไซต์หรือแอป)', 'Launch support'],
+                detailedIncludes: ['Brand', 'Product (เว็บไซต์หรือแอป)', 'การซัพพอร์ตช่วง launch'],
                 note: 'ระยะเวลาโดยทั่วไป: 4-8 สัปดาห์',
                 bestFor: 'เหมาะกับไอเดียใหม่'
             },
@@ -194,9 +194,9 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 title: 'Scale',
                 headline: 'ขยายสิ่งที่กำลังเวิร์กอยู่แล้ว',
                 description: 'สำหรับธุรกิจที่มี traction แล้ว - เราช่วยปรับ ปรับปรุง และขยายทั้งโปรดักต์และการเติบโต.',
-                includes: 'Product, marketing และ optimization',
+                includes: 'Product, marketing และการปรับให้ดีขึ้น',
                 longDescription: 'สำหรับธุรกิจที่มี traction แล้ว - เราปรับ ปรับปรุง และขยายสิ่งที่กำลังเวิร์กอยู่แล้ว.',
-                detailedIncludes: ['การปรับปรุงโปรดักต์', 'Marketing', 'Optimization'],
+                detailedIncludes: ['การปรับปรุงโปรดักต์', 'Marketing', 'การปรับให้ดีขึ้น'],
                 bestFor: 'เหมาะกับธุรกิจที่กำลังเติบโต'
             },
             {

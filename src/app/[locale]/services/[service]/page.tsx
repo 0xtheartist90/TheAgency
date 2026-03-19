@@ -8,8 +8,10 @@ import BrandScopeSection from '@/app/components/BrandScopeSection';
 import Reveal from '@/app/components/Reveal';
 import SiteHeader from '@/app/components/SiteHeader';
 import { fireflies } from '@/app/fonts';
+import { getServiceDetailContent } from '@/app/service-detail-content';
 import { getServiceBySlug, serviceSlugs } from '@/app/services-content';
 import { getCopy, locales, type Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 
 type Params = {
     locale: string;
@@ -19,295 +21,22 @@ type Params = {
 const detailCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
 const packageCardClipPath =
     'polygon(0 12%, 10% 0, 64% 0, 68% 6%, 89% 6%, 94% 0, 100% 0, 100% 88%, 94% 94%, 94% 100%, 0 100%)';
-
-const brandScopeGroups = [
-    {
-        number: '01',
-        title: 'Strategy',
-        items: [
-            {
-                label: 'Positioning',
-                detail: 'Define what the brand stands for, how it is framed, and why people should care.'
-            },
-            {
-                label: 'Messaging',
-                detail: 'Shape the core language so the brand sounds clear, consistent, and easy to understand.'
-            },
-            {
-                label: 'Brand direction',
-                detail: 'Set the overall creative direction so the system feels intentional before design starts.'
-            }
-        ]
-    },
-    {
-        number: '02',
-        title: 'Identity',
-        items: [
-            {
-                label: 'Logo design',
-                detail: 'Create a logo that feels ownable, legible, and strong enough to carry the brand.'
-            },
-            {
-                label: 'Visual identity system',
-                detail: 'Build the broader visual system so the brand stays recognizable beyond a single mark.'
-            },
-            {
-                label: 'Typography and color',
-                detail: 'Choose the type and color rules that make the brand feel consistent across every surface.'
-            }
-        ]
-    },
-    {
-        number: '03',
-        title: 'Application',
-        items: [
-            {
-                label: 'Product mockups',
-                detail: 'Show how the brand lands on products, pages, and launch materials before rollout.'
-            },
-            {
-                label: 'Packaging',
-                detail: 'Translate the system into packaging that feels considered, premium, and shelf-ready.'
-            },
-            {
-                label: 'Marketing & social visuals',
-                detail: 'Extend the brand into campaign and social assets that still feel coherent and on-brand.'
-            }
-        ]
-    }
-] as const;
-
-const brandProcessSteps = [
-    { number: '01', title: 'Meet & Greet', line: 'Intro and fit check.' },
-    { number: '02', title: 'Campfire', line: 'You talk, we listen.' },
-    { number: '03', title: 'Discovery', line: 'We define direction.' },
-    { number: '04', title: 'Build', line: 'Design in the open.' },
-    { number: '05', title: 'Launch', line: 'Refine and deliver.' }
-] as const;
-
-const brandWorkPreviews = [
-    { title: 'Identity systems' },
-    { title: 'Rebrands' },
-    { title: 'Applications' }
-] as const;
-
-const buildScopeGroups = [
-    {
-        number: '01',
-        title: 'Websites',
-        items: [
-            {
-                label: 'Marketing sites',
-                detail: 'High-end websites built to communicate clearly, move fast, and convert with confidence.'
-            },
-            {
-                label: 'Landing pages',
-                detail: 'Focused pages for campaigns, launches, and offers that need a sharper conversion path.'
-            },
-            {
-                label: 'CMS setup',
-                detail: 'Content systems your team can actually update without breaking the design or flow.'
-            }
-        ]
-    },
-    {
-        number: '02',
-        title: 'Products',
-        items: [
-            {
-                label: 'Apps',
-                detail: 'Product experiences built to feel clean, intuitive, and ready for real users.'
-            },
-            {
-                label: 'Dashboards',
-                detail: 'Internal and user-facing dashboards that make complex information easier to act on.'
-            },
-            {
-                label: 'Flows',
-                detail: 'Core user flows shaped to reduce friction and keep the product moving forward.'
-            }
-        ]
-    },
-    {
-        number: '03',
-        title: 'Systems',
-        items: [
-            {
-                label: 'Frontend build',
-                detail: 'Clean implementation that turns polished design into something production-ready.'
-            },
-            {
-                label: 'Design systems',
-                detail: 'Reusable UI foundations that help products stay consistent as they grow.'
-            },
-            {
-                label: 'Implementation support',
-                detail: 'Technical support that keeps delivery aligned from design decisions through launch.'
-            }
-        ]
-    }
-] as const;
-
-const buildWorkPreviews = [{ title: 'Marketing sites' }, { title: 'Products' }, { title: 'Systems' }] as const;
-
-const growScopeGroups = [
-    {
-        number: '01',
-        title: 'Social',
-        items: [
-            {
-                label: 'Social media management',
-                detail: 'Plan, organize, and run social channels so the brand stays active, consistent, and commercially useful.'
-            },
-            {
-                label: 'Content planning',
-                detail: 'Shape the content calendar around campaigns, offers, launches, and the kind of attention you want to build.'
-            },
-            {
-                label: 'Creative direction',
-                detail: 'Keep the output visually sharp so posts, stories, and campaign assets all feel aligned.'
-            }
-        ]
-    },
-    {
-        number: '02',
-        title: 'Ads',
-        items: [
-            {
-                label: 'Meta ads',
-                detail: 'Run paid campaigns across Meta with clearer structure, better creative, and tighter performance feedback.'
-            },
-            {
-                label: 'Google ads',
-                detail: 'Build search and intent-driven campaigns that capture demand without wasting budget.'
-            },
-            {
-                label: 'Campaign setup',
-                detail: 'Set up the account, targeting, conversion flow, and ad structure so performance has a clean base.'
-            }
-        ]
-    },
-    {
-        number: '03',
-        title: 'Optimization',
-        items: [
-            {
-                label: 'Testing',
-                detail: 'Test angles, messaging, formats, and creatives to find what actually moves attention into action.'
-            },
-            {
-                label: 'Reporting',
-                detail: 'Track what matters clearly so decisions are made from signal, not guesswork.'
-            },
-            {
-                label: 'Scaling',
-                detail: 'Increase spend and output carefully once the system is working, without losing efficiency too early.'
-            }
-        ]
-    }
-] as const;
-
-const growWorkPreviews = [{ title: 'Paid campaigns' }, { title: 'Social systems' }, { title: 'Performance loops' }] as const;
-
-const automateScopeGroups = [
-    {
-        number: '01',
-        title: 'Workflows',
-        items: [
-            {
-                label: 'Process automation',
-                detail: 'Automate repetitive steps so the team spends less time moving information manually.'
-            },
-            {
-                label: 'Task flows',
-                detail: 'Build cleaner internal flows for handoff, follow-up, approvals, and routine operations.'
-            },
-            {
-                label: 'Operational logic',
-                detail: 'Map the rules behind the workflow so the system runs consistently instead of relying on memory.'
-            }
-        ]
-    },
-    {
-        number: '02',
-        title: 'Systems',
-        items: [
-            {
-                label: 'Internal tools',
-                detail: 'Create practical internal systems that make day-to-day work easier to manage and easier to scale.'
-            },
-            {
-                label: 'CRM setup',
-                detail: 'Structure the CRM so contacts, leads, and follow-up live in a cleaner working system.'
-            },
-            {
-                label: 'Integrations',
-                detail: 'Connect the platforms you already use so data and actions move without extra admin.'
-            }
-        ]
-    },
-    {
-        number: '03',
-        title: 'AI',
-        items: [
-            {
-                label: 'AI workflows',
-                detail: 'Use AI where it removes friction, speeds up output, and supports the team in practical ways.'
-            },
-            {
-                label: 'Assistants',
-                detail: 'Set up lightweight assistants for research, drafting, routing, and repetitive internal tasks.'
-            },
-            {
-                label: 'Implementation support',
-                detail: 'Help the team put the system into use so the automation actually sticks after setup.'
-            }
-        ]
-    }
-] as const;
-
-const automateWorkPreviews = [{ title: 'Workflow systems' }, { title: 'Internal tools' }, { title: 'AI automations' }] as const;
-
-const customServiceConfigs = {
+const customServiceVisuals = {
     brand: {
-        scopeGroups: brandScopeGroups,
-        workPreviews: brandWorkPreviews,
-        workIntro: 'A few examples of the kind of brand work we shape across identity, rollout, and application.',
-        finalTitle: "Let's build a brand that holds up",
-        finalIntro:
-            "Start with a simple conversation — we'll figure out the right direction together. Building from scratch? The Startup Package is the fastest way to shape the full brand system.",
-        secondaryCtaLabel: 'Explore Startup Package',
-        secondaryCtaHref: '/startup'
+        workVisual: '/images/Services/brand.png',
+        ctaVisual: '/images/Services/next1.png'
     },
     build: {
-        scopeGroups: buildScopeGroups,
-        workPreviews: buildWorkPreviews,
-        workIntro: 'A few examples of the kind of build work we shape across websites, products, and systems.',
-        finalTitle: "Let's build something people can use",
-        finalIntro:
-            "Start with a simple conversation — we'll figure out the right direction together. Building from scratch? The Startup Package is the fastest way to shape the full product and launch system.",
-        secondaryCtaLabel: 'Explore Startup Package',
-        secondaryCtaHref: '/startup'
+        workVisual: '/images/Services/build.png',
+        ctaVisual: '/images/Services/next2.png'
     },
     grow: {
-        scopeGroups: growScopeGroups,
-        workPreviews: growWorkPreviews,
-        workIntro: 'A few examples of the kind of growth work we shape across paid campaigns, social systems, and ongoing optimization.',
-        finalTitle: "Let's grow what already has potential",
-        finalIntro:
-            "Start with a simple conversation — we'll figure out the right direction together. Need growth support around a broader launch? The Scale Package is the fastest way to connect demand generation with ongoing performance.",
-        secondaryCtaLabel: 'Explore Scale Package',
-        secondaryCtaHref: '/scale'
+        workVisual: '/images/Services/grow.png',
+        ctaVisual: '/images/Services/next3.png'
     },
     automate: {
-        scopeGroups: automateScopeGroups,
-        workPreviews: automateWorkPreviews,
-        workIntro: 'A few examples of the kind of automation work we shape across workflows, internal systems, and AI support.',
-        finalTitle: "Let's remove the manual work",
-        finalIntro:
-            "Start with a simple conversation — we'll figure out the right direction together. Need deeper systems support across the business? The Partner Package is the fastest way to build with us more closely over time.",
-        secondaryCtaLabel: 'Explore Partner Package',
-        secondaryCtaHref: '/partner'
+        workVisual: '/images/Services/automate.png',
+        ctaVisual: '/images/Services/next4.png'
     }
 } as const;
 
@@ -341,6 +70,8 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
     }
 
     const copy = getCopy(locale);
+    const ui = getUiCopy(locale as Locale);
+    const serviceDetail = getServiceDetailContent(locale as Locale);
     const serviceContent = getServiceBySlug(locale as Locale, service);
 
     if (!serviceContent) {
@@ -360,13 +91,13 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                             className='h-10 w-auto'
                         />
                         <p className='mt-5 max-w-xl text-sm leading-7 text-white/58'>
-                            High-end brand systems, digital products, performance marketing, and automation for businesses ready to look and operate at a higher level.
+                            {ui.footer.servicesBody}
                         </p>
                     </div>
 
                     <div className='lg:justify-self-end'>
                         <p className='text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-white/34'>
-                            Explore
+                            {ui.footer.explore}
                         </p>
                         <div className='mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/44'>
                             <Link href={`/${locale}/story`} className='transition hover:text-white/82'>
@@ -392,7 +123,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     delay={120}
                     distance={26}
                 >
-                    <p className='tracking-[0.08em] text-white/34'>© 2026 The Agency. All rights reserved.</p>
+                    <p className='tracking-[0.08em] text-white/34'>{ui.footer.rightsReserved}</p>
                     <Link href={`/${locale}/contact`} className='text-white/44 transition hover:text-white/82'>
                         {copy.home.supportLabel}
                     </Link>
@@ -403,7 +134,10 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
 
     const customServiceConfig =
         service === 'brand' || service === 'build' || service === 'grow' || service === 'automate'
-            ? customServiceConfigs[service as keyof typeof customServiceConfigs]
+            ? {
+                  ...serviceDetail.services[service as keyof typeof serviceDetail.services],
+                  ...customServiceVisuals[service as keyof typeof customServiceVisuals]
+              }
             : null;
 
     if (customServiceConfig) {
@@ -453,7 +187,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     <div className='relative z-10 mx-auto max-w-7xl'>
                         <div className='max-w-3xl'>
                             <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                What we do
+                                {ui.serviceDetail.whatWeDo}
                             </p>
                         </div>
 
@@ -477,15 +211,15 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     <div className='relative z-10 mx-auto max-w-7xl'>
                         <div className='max-w-3xl'>
                             <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-white/88'>
-                                How we work
+                                {ui.serviceDetail.howWeWork}
                             </p>
                             <p className='mt-5 text-base leading-8 text-white/72 sm:text-lg'>
-                                A clear, collaborative process — with you involved at every step.
+                                {ui.serviceDetail.howWeWorkIntro}
                             </p>
                         </div>
 
                         <div className='mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5'>
-                            {brandProcessSteps.map((step, index) => (
+                            {serviceDetail.processSteps.map((step, index) => (
                                 <Reveal key={step.number} delay={index * 70} distance={26}>
                                     <article className='process-card process-card--static relative min-h-[200px] overflow-hidden p-6 sm:p-7' style={{ clipPath: detailCardClipPath }}>
                                         <div className='process-card-surface absolute inset-0' />
@@ -520,26 +254,43 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     <div className='relative z-10 mx-auto max-w-7xl'>
                         <div className='max-w-3xl'>
                             <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                Work
+                                {ui.serviceDetail.work}
                             </p>
                             <p className='mt-5 text-base leading-8 text-[var(--agency-ink)]/78 sm:text-lg'>
                                 {customServiceConfig.workIntro}
                             </p>
                         </div>
 
-                        <div className='mt-8 grid gap-5 lg:grid-cols-3'>
-                            {customServiceConfig.workPreviews.map((item, index) => (
-                                <Reveal key={item.title} delay={index * 70} distance={28}>
-                                    <article className='glass-panel h-full border border-white/12 p-7 sm:p-8' style={{ clipPath: detailCardClipPath }}>
-                                        <p className='text-2xl font-semibold tracking-[-0.05em] text-white'>{item.title}</p>
-                                    </article>
-                                </Reveal>
-                            ))}
+                        <div className='mt-8 grid gap-5 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)] lg:items-start'>
+                            <Reveal distance={28}>
+                                <div
+                                    className='relative aspect-[16/9] overflow-hidden border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'
+                                    style={{ clipPath: detailCardClipPath }}
+                                >
+                                    <Image
+                                        src={customServiceConfig.workVisual}
+                                        alt={customServiceConfig.workVisualAlt}
+                                        fill
+                                        className='object-cover'
+                                    />
+                                    <div className='absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,109,24,0.12),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_34%)]' />
+                                </div>
+                            </Reveal>
+
+                            <div className='grid gap-5'>
+                                {customServiceConfig.workPreviews.map((item, index) => (
+                                    <Reveal key={item.title} delay={index * 70} distance={28}>
+                                        <article className='glass-panel h-full border border-white/12 p-7 sm:p-8' style={{ clipPath: detailCardClipPath }}>
+                                            <p className='text-2xl font-semibold tracking-[-0.05em] text-white'>{item.title}</p>
+                                        </article>
+                                    </Reveal>
+                                ))}
+                            </div>
                         </div>
 
                         <Reveal className='mt-8 flex flex-wrap gap-4' delay={100} distance={24}>
                             <Link href={`/${locale}/work`} className='agency-button agency-button--link text-[var(--agency-ink)] hover:text-[var(--agency-ink)]'>
-                                View work
+                                {ui.serviceDetail.viewWork}
                             </Link>
                         </Reveal>
                     </div>
@@ -556,12 +307,22 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     >
                         <source src='/images/Home/conveyer.webm' type='video/webm' />
                     </video>
-                    <div className='relative z-10 mx-auto max-w-7xl'>
+                    <div className='relative z-10 mx-auto max-w-7xl pt-8 lg:pt-10'>
+                        <Reveal className='pointer-events-none absolute bottom-0 left-[77%] z-20 hidden -translate-x-1/2 lg:block' delay={180} distance={30}>
+                            <Image
+                                src={customServiceConfig.ctaVisual}
+                                alt={customServiceConfig.ctaVisualAlt}
+                                width={620}
+                                height={760}
+                                className='h-[25rem] w-auto max-w-none'
+                            />
+                        </Reveal>
+
                         <Reveal distance={30}>
                             <div className='rounded-[2rem] bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] p-8 text-white shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:p-10'>
                                 <div className='max-w-3xl'>
                                     <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                        Next
+                                        {ui.serviceDetail.next}
                                     </p>
                                     <h2 className='mt-5 text-3xl font-semibold tracking-[-0.06em] text-white sm:text-4xl'>
                                         {customServiceConfig.finalTitle}
@@ -571,7 +332,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                     </p>
                                     <div className='mt-8 flex flex-wrap gap-4'>
                                         <Link href={`/${locale}/contact`} className='agency-button agency-button--solid'>
-                                            Start your project
+                                            {ui.serviceDetail.startProject}
                                         </Link>
                                         <Link href={`/${locale}${customServiceConfig.secondaryCtaHref}`} className='agency-button agency-button--link'>
                                             {customServiceConfig.secondaryCtaLabel}
@@ -666,7 +427,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                             {serviceContent.ctaLabel}
                         </Link>
                         <Link href={`/${locale}/services/build`} className='agency-button agency-button--link'>
-                            All service details
+                            {ui.serviceDetail.allServiceDetails}
                         </Link>
                     </Reveal>
                 </div>

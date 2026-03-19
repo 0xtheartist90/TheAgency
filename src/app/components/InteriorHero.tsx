@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
 import SiteHeader from '@/app/components/SiteHeader';
-import { getCopy } from '@/app/site-content';
+import { getCopy, type Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 
 type InteriorHeroProps = {
     locale: string;
@@ -10,6 +11,7 @@ type InteriorHeroProps = {
 
 const InteriorHero = ({ locale, pageKey }: InteriorHeroProps) => {
     const copy = getCopy(locale);
+    const ui = getUiCopy(locale as Locale);
     const page = copy.pages[pageKey];
 
     return (
@@ -34,7 +36,7 @@ const InteriorHero = ({ locale, pageKey }: InteriorHeroProps) => {
                                         {copy.home.supportLabel}
                                     </Link>
                                     <Link href={`/${locale}`} className='agency-button agency-button--link'>
-                                        Home
+                                        {ui.navigation.home}
                                     </Link>
                                 </div>
                             </div>

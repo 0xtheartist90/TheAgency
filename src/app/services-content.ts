@@ -80,12 +80,12 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'Diensten',
             intro: 'Brand identities en systemen, van logo tot positionering, gebouwd om helder, consistent en memorabel te zijn.',
             includeTitle: 'Wat zit erin',
-            includes: ['Identity systems', 'Positionering', 'Messaging direction', 'Visuele taal', 'Brand guidelines'],
+            includes: ['Identiteitssystemen', 'Positionering', 'Boodschapsrichting', 'Visuele taal', 'Merkrichtlijnen'],
             bestForTitle: 'Beste voor',
             bestFor: 'Founders en teams die hun merk doelbewuster, premiumer en betrouwbaarder willen laten voelen.',
             outcomeTitle: 'Wat het oplevert',
             outcome: 'Het creëert een merksysteem dat coherent oogt, helder communiceert en over elk touchpoint kan meegroeien.',
-            ctaLabel: 'Start een brand project'
+            ctaLabel: 'Start een Brand-project'
         },
         {
             slug: 'build',
@@ -93,12 +93,12 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'Diensten',
             intro: 'Websites, apps en platforms die ontworpen, ontwikkeld en gebouwd zijn om in de echte wereld te presteren.',
             includeTitle: 'Wat zit erin',
-            includes: ['Websites', 'Apps', 'Platforms', 'Product design', 'Frontend build'],
+            includes: ['Websites', 'Apps', 'Platforms', 'Productdesign', 'Frontend development'],
             bestForTitle: 'Beste voor',
             bestFor: 'Teams die een idee, redesign of productrichting willen omzetten naar iets dat klaar is voor launch.',
             outcomeTitle: 'Wat het oplevert',
             outcome: 'Het geeft het bedrijf een scherper digitaal product dat premium voelt, strak werkt en klaar is om live te gaan.',
-            ctaLabel: 'Start een build project'
+            ctaLabel: 'Start een Build-project'
         },
         {
             slug: 'grow',
@@ -106,12 +106,12 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'Diensten',
             intro: 'Marketing, ads en content gericht op meer verkeer, betere conversie en schaalbare resultaten.',
             includeTitle: 'Wat zit erin',
-            includes: ['Paid media', 'Contentsystemen', 'Campagneplanning', 'Conversiedenken', 'Growth reporting'],
+            includes: ['Paid media', 'Contentsystemen', 'Campagneplanning', 'Conversiedenken', 'Groeirapportage'],
             bestForTitle: 'Beste voor',
             bestFor: 'Merken met tractie die een scherper groeisysteem en betere performance support nodig hebben.',
             outcomeTitle: 'Wat het oplevert',
             outcome: 'Het maakt van aandacht een meetbaarder groeisysteem met duidelijkere campagnes en strakkere optimalisatie.',
-            ctaLabel: 'Start een growth project'
+            ctaLabel: 'Start een Grow-project'
         },
         {
             slug: 'automate',
@@ -119,12 +119,12 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'Diensten',
             intro: 'AI, workflows en interne systemen die handmatig werk verminderen en operations efficiënter maken.',
             includeTitle: 'Wat zit erin',
-            includes: ['Workflow automation', 'AI-integraties', 'Interne tools', 'CRM setup', 'Operationele systemen'],
+            includes: ['Workflow-automatisering', 'AI-integraties', 'Interne tools', 'CRM-inrichting', 'Operationele systemen'],
             bestForTitle: 'Beste voor',
             bestFor: 'Bedrijven die snel groeien en hun backend schoner, lichter en makkelijker te runnen willen maken.',
             outcomeTitle: 'Wat het oplevert',
             outcome: 'Het haalt frictie uit de business zodat het team sneller kan bewegen zonder extra proceslast.',
-            ctaLabel: 'Start een automation project'
+            ctaLabel: 'Start een Automate-project'
         },
     ],
     th: [
@@ -134,7 +134,7 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'บริการ',
             intro: 'อัตลักษณ์และระบบแบรนด์ ตั้งแต่โลโก้จนถึง positioning ที่ชัดเจน สม่ำเสมอ และน่าจดจำ.',
             includeTitle: 'สิ่งที่รวมอยู่',
-            includes: ['Identity systems', 'Positioning', 'Messaging direction', 'ภาษาภาพลักษณ์', 'Brand guidelines'],
+            includes: ['ระบบอัตลักษณ์', 'การวางตำแหน่ง', 'ทิศทางการสื่อสาร', 'ภาษาภาพลักษณ์', 'คู่มือแบรนด์'],
             bestForTitle: 'เหมาะสำหรับ',
             bestFor: 'ผู้ก่อตั้งและทีมที่ต้องการให้แบรนด์ดูตั้งใจมากขึ้น ดูพรีเมียมขึ้น และน่าเชื่อถือขึ้น.',
             outcomeTitle: 'ผลลัพธ์',
@@ -147,7 +147,7 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'บริการ',
             intro: 'เว็บไซต์ แอป และแพลตฟอร์มที่ออกแบบ พัฒนา และสร้างมาเพื่อให้ใช้งานได้จริงในโลกธุรกิจ.',
             includeTitle: 'สิ่งที่รวมอยู่',
-            includes: ['เว็บไซต์', 'แอป', 'แพลตฟอร์ม', 'Product design', 'Frontend build'],
+            includes: ['เว็บไซต์', 'แอป', 'แพลตฟอร์ม', 'การออกแบบโปรดักต์', 'Frontend development'],
             bestForTitle: 'เหมาะสำหรับ',
             bestFor: 'ทีมที่ต้องการเปลี่ยนไอเดีย รีดีไซน์ หรือทิศทางโปรดักต์ให้กลายเป็นสิ่งที่พร้อมเปิดตัว.',
             outcomeTitle: 'ผลลัพธ์',
@@ -160,7 +160,7 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'บริการ',
             intro: 'การตลาด โฆษณา และคอนเทนต์ที่เน้นการเพิ่มทราฟฟิก ปรับ conversion และขยายผลลัพธ์.',
             includeTitle: 'สิ่งที่รวมอยู่',
-            includes: ['Paid media', 'ระบบคอนเทนต์', 'วางแผนแคมเปญ', 'Conversion thinking', 'รายงานการเติบโต'],
+            includes: ['สื่อแบบชำระเงิน', 'ระบบคอนเทนต์', 'วางแผนแคมเปญ', 'แนวคิดด้านคอนเวอร์ชัน', 'รายงานการเติบโต'],
             bestForTitle: 'เหมาะสำหรับ',
             bestFor: 'แบรนด์ที่เริ่มมี traction และต้องการระบบ growth ที่คมขึ้นและวัดผลได้มากขึ้น.',
             outcomeTitle: 'ผลลัพธ์',
@@ -173,7 +173,7 @@ const servicesContent: Record<Locale, ServiceEntry[]> = {
             eyebrow: 'บริการ',
             intro: 'AI, workflow และระบบภายในที่ช่วยลดงาน manual และทำให้การดำเนินงานมีประสิทธิภาพมากขึ้น.',
             includeTitle: 'สิ่งที่รวมอยู่',
-            includes: ['Workflow automation', 'AI integrations', 'เครื่องมือภายใน', 'ตั้งค่า CRM', 'ระบบปฏิบัติการภายใน'],
+            includes: ['เวิร์กโฟลว์อัตโนมัติ', 'AI integrations', 'เครื่องมือภายใน', 'ตั้งค่า CRM', 'ระบบปฏิบัติการภายใน'],
             bestForTitle: 'เหมาะสำหรับ',
             bestFor: 'ธุรกิจที่กำลังโตเร็วและต้องการให้ระบบหลังบ้านสะอาดขึ้น เบาขึ้น และดูแลง่ายขึ้น.',
             outcomeTitle: 'ผลลัพธ์',

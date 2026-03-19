@@ -4,37 +4,20 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
+import { getServiceCollection } from '@/app/services-content';
+import type { Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 type ServicesShowcaseProps = {
     locale: string;
     ctaLabel: string;
 };
 
-const services = [
-    {
-        title: 'Brand',
-        slug: 'brand',
-        tagline: 'Brand identities and systems - from logo to positioning, built to be clear, consistent, and memorable.',
-        icon: '/images/Icons/image 18.webp'
-    },
-    {
-        title: 'Build',
-        slug: 'build',
-        tagline: 'Websites, apps, and platforms - designed, developed, and built to perform in the real world.',
-        icon: '/images/Icons/image 10.webp'
-    },
-    {
-        title: 'Grow',
-        slug: 'grow',
-        tagline: 'Marketing, ads, and content - focused on driving traffic, improving conversion, and scaling results.',
-        icon: '/images/Icons/image 16.webp'
-    },
-    {
-        title: 'Automate',
-        slug: 'automate',
-        tagline: 'AI, workflows, and internal systems - reducing manual work and making your operations more efficient.',
-        icon: '/images/Icons/image 13.webp'
-    },
-] as const;
+const serviceIcons = {
+    brand: '/images/Icons/image 18.webp',
+    build: '/images/Icons/image 10.webp',
+    grow: '/images/Icons/image 16.webp',
+    automate: '/images/Icons/image 13.webp'
+} as const;
 
 const serviceCardClipPath = 'polygon(18% 0, 100% 0, 100% 100%, 0 100%, 0 14%)';
 const serviceCardPolygonPoints = '18.6,0.9 99.1,0.9 99.1,99.1 0.9,99.1 0.9,14.6';
@@ -58,6 +41,13 @@ const ServiceCardOutline = ({ hover }: { hover?: boolean }) => (
 );
 
 const ServicesShowcase = ({ locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps) => {
+    const ui = getUiCopy(locale as Locale);
+    const services = getServiceCollection(locale as Locale).map((service) => ({
+        title: service.title,
+        slug: service.slug,
+        tagline: service.intro,
+        icon: serviceIcons[service.slug]
+    }));
     const sectionRef = useRef<HTMLElement | null>(null);
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const matrixTimerRef = useRef<number | null>(null);
@@ -248,7 +238,7 @@ const ServicesShowcase = ({ locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps
                                     <div className='mt-4 min-h-[3.75rem]' />
 
                                     <div className='relative mt-2 flex items-center gap-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-[var(--agency-orange)] opacity-0 transition-[opacity,transform,color] duration-500 ease-out group-hover:translate-y-1 group-hover:opacity-100 group-hover:text-white'>
-                                        <span>Explore</span>
+                                        <span>{ui.servicesShowcase.explore}</span>
                                         <span aria-hidden='true' className='text-[0.9rem] leading-none'>
                                             →
                                         </span>
@@ -256,7 +246,7 @@ const ServicesShowcase = ({ locale, ctaLabel: _ctaLabel }: ServicesShowcaseProps
 
                                     <Link
                                         href={`/${locale}/services/${service.slug}`}
-                                        aria-label={`Explore ${service.title}`}
+                                        aria-label={ui.servicesShowcase.exploreAria(service.title)}
                                         className='absolute inset-0 z-20'
                                     />
                                 </article>

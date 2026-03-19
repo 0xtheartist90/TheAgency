@@ -2,44 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-
-const processSteps = [
-    {
-        number: '01',
-        title: 'Meet & Greet',
-        line: 'A quick introduction to get to know each other, understand your goals, and see if we’re the right fit.',
-        detail: 'Intro. Fit. Goals.',
-        icon: '/images/Icons/image 31.webp'
-    },
-    {
-        number: '02',
-        title: 'Campfire',
-        line: 'You talk, we listen - understanding your story, your challenges, and what you’re trying to build.',
-        detail: 'Story. Context. Intent.',
-        icon: '/images/Icons/image 64.png'
-    },
-    {
-        number: '03',
-        title: 'Discovery',
-        line: 'We ask the right questions to fill the gaps, challenge assumptions, and define a clear direction.',
-        detail: 'Questions. Gaps. Direction.',
-        icon: '/images/Icons/image 9.webp'
-    },
-    {
-        number: '04',
-        title: 'Build',
-        line: 'We design and build in the open - sharing progress, gathering feedback, and refining as we go.',
-        detail: 'Open. Shared. Refined.',
-        icon: '/images/Icons/image 27.webp'
-    },
-    {
-        number: '05',
-        title: 'Launch',
-        line: 'We go live, measure performance, and keep improving based on real data and feedback.',
-        detail: 'Live. Measure. Improve.',
-        icon: '/images/Icons/image 11.webp'
-    }
-] as const;
+import type { Locale } from '@/app/site-content';
+import { getUiCopy } from '@/app/ui-content';
 
 const processCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
 const processCardPolygonPoints = '0.9,0.9 81.4,0.9 99.1,18.6 99.1,99.1 18.6,99.1 0.9,81.4';
@@ -63,7 +27,9 @@ const ProcessCardOutline = ({ hover }: { hover?: boolean }) => (
     </svg>
 );
 
-const ProcessSection = () => {
+const ProcessSection = ({ locale }: { locale: Locale }) => {
+    const ui = getUiCopy(locale);
+    const processSteps = ui.process.steps;
     const sectionRef = useRef<HTMLElement | null>(null);
     const matrixTimerRef = useRef<number | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -176,8 +142,8 @@ const ProcessSection = () => {
             </video>
             <div className='relative mx-auto max-w-[1600px]'>
                 <div className='mb-8 md:mb-10'>
-                    <p className='text-[0.74rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
-                        Process
+                        <p className='text-[0.74rem] font-semibold uppercase tracking-[0.34em] text-white/88'>
+                        {ui.process.label}
                     </p>
                 </div>
 
@@ -262,7 +228,7 @@ const ProcessSection = () => {
                                 }}
                                 className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
                             >
-                                Prev
+                                {ui.process.prev}
                             </button>
                             <button
                                 type='button'
@@ -272,7 +238,7 @@ const ProcessSection = () => {
                                 }}
                                 className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
                             >
-                                Next
+                                {ui.process.next}
                             </button>
                         </div>
 
@@ -285,7 +251,7 @@ const ProcessSection = () => {
                                         setCurrentPage(pageIndex);
                                         setHoveredStep(null);
                                     }}
-                                    aria-label={`Go to process page ${pageIndex + 1}`}
+                                    aria-label={ui.process.goToPageAria(pageIndex + 1)}
                                     className={`h-2.5 rounded-full transition-all ${
                                         pageIndex === currentPage
                                             ? 'w-10 bg-[var(--agency-orange)]'
