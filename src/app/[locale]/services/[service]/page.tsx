@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 
 import BrandScopeSection from '@/app/components/BrandScopeSection';
 import Reveal from '@/app/components/Reveal';
+import ServiceWorkShowcase from '@/app/components/ServiceWorkShowcase';
 import SiteHeader from '@/app/components/SiteHeader';
 import { fireflies } from '@/app/fonts';
 import { getServiceDetailContent } from '@/app/service-detail-content';
@@ -211,9 +212,41 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                     <div className='relative z-10 mx-auto max-w-7xl'>
                         <div className='max-w-3xl'>
                             <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-white/88'>
-                                {ui.serviceDetail.howWeWork}
+                                {ui.serviceDetail.work}
                             </p>
                             <p className='mt-5 text-base leading-8 text-white/72 sm:text-lg'>
+                                {customServiceConfig.workIntro}
+                            </p>
+                        </div>
+
+                        <ServiceWorkShowcase
+                            items={customServiceConfig.workPreviews}
+                            defaultVisual={customServiceConfig.workVisual}
+                            defaultVisualAlt={customServiceConfig.workVisualAlt}
+                            clipPath={detailCardClipPath}
+                            locale={locale}
+                        />
+                    </div>
+                </section>
+
+                <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
+                    <video
+                        className='absolute inset-0 h-full w-full object-cover'
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        aria-hidden='true'
+                    >
+                        <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
+                    </video>
+                    <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
+                    <div className='relative z-10 mx-auto max-w-7xl'>
+                        <div className='max-w-3xl'>
+                            <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
+                                {ui.serviceDetail.howWeWork}
+                            </p>
+                            <p className='mt-5 text-base leading-8 text-[var(--agency-ink)]/78 sm:text-lg'>
                                 {ui.serviceDetail.howWeWorkIntro}
                             </p>
                         </div>
@@ -236,63 +269,6 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                                 </Reveal>
                             ))}
                         </div>
-                    </div>
-                </section>
-
-                <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-16'>
-                    <video
-                        className='absolute inset-0 h-full w-full object-cover'
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        aria-hidden='true'
-                    >
-                        <source src='/images/Home/smoothbg.mp4' type='video/mp4' />
-                    </video>
-                    <div className='absolute inset-0 bg-[rgba(239,229,215,0.85)]' />
-                    <div className='relative z-10 mx-auto max-w-7xl'>
-                        <div className='max-w-3xl'>
-                            <p className='text-[0.74rem] font-semibold uppercase tracking-[0.3em] text-[var(--agency-orange)]'>
-                                {ui.serviceDetail.work}
-                            </p>
-                            <p className='mt-5 text-base leading-8 text-[var(--agency-ink)]/78 sm:text-lg'>
-                                {customServiceConfig.workIntro}
-                            </p>
-                        </div>
-
-                        <div className='mt-8 grid gap-5 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)] lg:items-start'>
-                            <Reveal distance={28}>
-                                <div
-                                    className='relative aspect-[16/9] overflow-hidden border border-white/8 bg-[linear-gradient(180deg,rgba(24,24,30,0.72)_0%,rgba(18,18,24,0.9)_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_50px_rgba(0,0,0,0.12)]'
-                                    style={{ clipPath: detailCardClipPath }}
-                                >
-                                    <Image
-                                        src={customServiceConfig.workVisual}
-                                        alt={customServiceConfig.workVisualAlt}
-                                        fill
-                                        className='object-cover'
-                                    />
-                                    <div className='absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,109,24,0.12),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0)_34%)]' />
-                                </div>
-                            </Reveal>
-
-                            <div className='grid gap-5'>
-                                {customServiceConfig.workPreviews.map((item, index) => (
-                                    <Reveal key={item.title} delay={index * 70} distance={28}>
-                                        <article className='glass-panel h-full border border-white/12 p-7 sm:p-8' style={{ clipPath: detailCardClipPath }}>
-                                            <p className='text-2xl font-semibold tracking-[-0.05em] text-white'>{item.title}</p>
-                                        </article>
-                                    </Reveal>
-                                ))}
-                            </div>
-                        </div>
-
-                        <Reveal className='mt-8 flex flex-wrap gap-4' delay={100} distance={24}>
-                            <Link href={`/${locale}/work`} className='agency-button agency-button--link text-[var(--agency-ink)] hover:text-[var(--agency-ink)]'>
-                                {ui.serviceDetail.viewWork}
-                            </Link>
-                        </Reveal>
                     </div>
                 </section>
 

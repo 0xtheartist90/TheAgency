@@ -10,7 +10,13 @@ export type ServiceScopeGroup = {
 };
 
 export type ServicePreview = {
+    detailLabel?: string;
     title: string;
+    summary: string;
+    tags: string[];
+    visual?: string;
+    visualAlt?: string;
+    href?: string;
 };
 
 export type ServiceDetailConfig = {
@@ -74,7 +80,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         ]
                     }
                 ],
-                workPreviews: [{ title: 'Identity systems' }, { title: 'Rebrands' }, { title: 'Applications' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Strategy',
+                        title: 'Brand guide',
+                        summary: 'Guidelines shaped into a working brand guide teams can actually use across rollout, content, and delivery.',
+                        tags: ['Guidelines', 'Systems', 'Rollout'],
+                        visual: '/images/Services/brand - brand guide.png',
+                        visualAlt: 'Brand guide visual',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Identity',
+                        title: 'Logo design',
+                        summary: 'Logo direction shaped to feel ownable, readable, and strong enough to carry the brand across real-world use.',
+                        tags: ['Positioning', 'Identity', 'Guidelines'],
+                        visual: '/images/Services/brand - logo design.png',
+                        visualAlt: 'Logo design brand visual',
+                        href: '/work/birdiez'
+                    },
+                    {
+                        detailLabel: 'Application',
+                        title: 'Packaging',
+                        summary: 'Packaging systems shaped to feel considered, premium, and consistent with the rest of the brand world.',
+                        tags: ['Packaging', 'Rollout', 'Identity'],
+                        visual: '/images/Services/brand - packaging.png',
+                        visualAlt: 'Packaging brand visual',
+                        href: '/work/ultimate-shape'
+                    }
+                ],
                 workIntro: 'A few examples of the kind of brand work we shape across identity, rollout, and application.',
                 workVisualAlt: 'Brand work preview',
                 ctaVisualAlt: 'Next step visual',
@@ -113,7 +147,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         ]
                     }
                 ],
-                workPreviews: [{ title: 'Marketing sites' }, { title: 'Products' }, { title: 'Systems' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Websites',
+                        title: 'Marketing sites',
+                        summary: 'Web experiences built to communicate clearly, feel premium, and convert with less friction.',
+                        tags: ['Website', 'Content', 'Conversion'],
+                        visual: '/images/Services/build - marketing website.png',
+                        visualAlt: 'Marketing website visual',
+                        href: '/work/amplify'
+                    },
+                    {
+                        detailLabel: 'Products',
+                        title: 'App',
+                        summary: 'User-facing products and dashboards shaped around cleaner flows and sharper interaction design.',
+                        tags: ['App', 'UX', 'Flows'],
+                        visual: '/images/Services/build - apps.png',
+                        visualAlt: 'App build visual',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'Front end',
+                        summary: 'Frontend builds and reusable UI foundations that keep implementation clean as things grow.',
+                        tags: ['Frontend', 'UI system', 'Delivery'],
+                        visual: '/images/Services/build - front end build.png',
+                        visualAlt: 'Front end build visual',
+                        href: '/work/msports'
+                    }
+                ],
                 workIntro: 'A few examples of the kind of build work we shape across websites, products, and systems.',
                 workVisualAlt: 'Build work preview',
                 ctaVisualAlt: 'Next step visual',
@@ -152,7 +214,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         ]
                     }
                 ],
-                workPreviews: [{ title: 'Paid campaigns' }, { title: 'Social systems' }, { title: 'Performance loops' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Social',
+                        title: 'Paid campaigns',
+                        summary: 'Acquisition systems built around clearer structure, stronger creative, and cleaner conversion paths.',
+                        tags: ['Meta', 'Google', 'Campaigns']
+                    },
+                    {
+                        detailLabel: 'Ads',
+                        title: 'Social systems',
+                        summary: 'Content direction and channel management that keep the brand active, sharp, and commercially useful.',
+                        tags: ['Content', 'Social', 'Direction']
+                    },
+                    {
+                        detailLabel: 'Optimization',
+                        title: 'Performance loops',
+                        summary: 'Testing, reporting, and scaling routines that turn attention into a more measurable growth engine.',
+                        tags: ['Testing', 'Reporting', 'Scaling']
+                    }
+                ],
                 workIntro: 'A few examples of the kind of growth work we shape across paid campaigns, social systems, and ongoing optimization.',
                 workVisualAlt: 'Grow work preview',
                 ctaVisualAlt: 'Next step visual',
@@ -191,7 +272,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         ]
                     }
                 ],
-                workPreviews: [{ title: 'Workflow systems' }, { title: 'Internal tools' }, { title: 'AI automations' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Workflows',
+                        title: 'Workflow systems',
+                        summary: 'Operational flows mapped and automated so repetitive steps stop slowing the team down.',
+                        tags: ['Automation', 'Process', 'Logic']
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'Internal tools',
+                        summary: 'Practical internal systems that make follow-up, approvals, and day-to-day work easier to run.',
+                        tags: ['Tools', 'CRM', 'Integrations']
+                    },
+                    {
+                        detailLabel: 'AI',
+                        title: 'AI automations',
+                        summary: 'AI-supported workflows that reduce friction without making the business harder to manage.',
+                        tags: ['AI', 'Assistants', 'Support']
+                    }
+                ],
                 workIntro: 'A few examples of the kind of automation work we shape across workflows, internal systems, and AI support.',
                 workVisualAlt: 'Automate work preview',
                 ctaVisualAlt: 'Next step visual',
@@ -229,7 +329,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Marketing & social visuals', detail: 'Het merk doortrekken naar campagne- en social assets die nog steeds coherent aanvoelen.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'Identiteitssystemen' }, { title: 'Rebrands' }, { title: 'Toepassingen' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Strategy',
+                        title: 'Brand guide',
+                        summary: 'Richtlijnen uitgewerkt tot een bruikbare brand guide die teams echt kunnen gebruiken tijdens rollout, content en uitvoering.',
+                        tags: ['Guidelines', 'Systems', 'Rollout'],
+                        visual: '/images/Services/brand - brand guide.png',
+                        visualAlt: 'Brand guide visual',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Identity',
+                        title: 'Logo design',
+                        summary: 'Logorichting gevormd om eigen te voelen, leesbaar te blijven en sterk genoeg te zijn voor echt gebruik.',
+                        tags: ['Positionering', 'Identity', 'Richtlijnen'],
+                        visual: '/images/Services/brand - logo design.png',
+                        visualAlt: 'Logo design brandvisual',
+                        href: '/work/birdiez'
+                    },
+                    {
+                        detailLabel: 'Application',
+                        title: 'Packaging',
+                        summary: 'Packaging-systemen uitgewerkt zodat ze doordacht, premium en consistent aanvoelen met de rest van het merk.',
+                        tags: ['Packaging', 'Rollout', 'Identity'],
+                        visual: '/images/Services/brand - packaging.png',
+                        visualAlt: 'Packaging brandvisual',
+                        href: '/work/ultimate-shape'
+                    }
+                ],
                 workIntro: 'Een paar voorbeelden van het soort Brand-werk dat we vormgeven over identiteit, uitrol en toepassing.',
                 workVisualAlt: 'Preview van brandwerk',
                 ctaVisualAlt: 'Visual voor volgende stap',
@@ -256,7 +384,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Implementation support', detail: 'Technische support die delivery in lijn houdt van designbeslissingen tot launch.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'Marketingwebsites' }, { title: 'Producten' }, { title: 'Systemen' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Websites',
+                        title: 'Marketing sites',
+                        summary: 'Webervaringen gebouwd om helder te communiceren, premium te voelen en met minder frictie te converteren.',
+                        tags: ['Website', 'Content', 'Conversie'],
+                        visual: '/images/Services/build - marketing website.png',
+                        visualAlt: 'Marketing website visual',
+                        href: '/work/amplify'
+                    },
+                    {
+                        detailLabel: 'Products',
+                        title: 'App',
+                        summary: 'Gebruiksvriendelijke producten en dashboards gevormd rond schonere flows en scherpere interacties.',
+                        tags: ['App', 'UX', 'Flows'],
+                        visual: '/images/Services/build - apps.png',
+                        visualAlt: 'App build visual',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'Front end',
+                        summary: 'Frontend builds en herbruikbare UI-basis die implementatie schoon houden terwijl alles groeit.',
+                        tags: ['Frontend', 'UI-systeem', 'Delivery'],
+                        visual: '/images/Services/build - front end build.png',
+                        visualAlt: 'Front end build visual',
+                        href: '/work/msports'
+                    }
+                ],
                 workIntro: 'Een paar voorbeelden van het soort Build-werk dat we vormgeven over websites, producten en systemen.',
                 workVisualAlt: 'Preview van buildwerk',
                 ctaVisualAlt: 'Visual voor volgende stap',
@@ -283,7 +439,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Scaling', detail: 'Spend en output voorzichtig vergroten zodra het systeem werkt, zonder te vroeg efficiëntie te verliezen.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'Paid campagnes' }, { title: 'Social systemen' }, { title: 'Performance-lussen' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Social',
+                        title: 'Paid campagnes',
+                        summary: 'Acquisitiesystemen gebouwd rond helderdere structuur, sterker creatief werk en schonere conversiepaden.',
+                        tags: ['Meta', 'Google', 'Campagnes']
+                    },
+                    {
+                        detailLabel: 'Ads',
+                        title: 'Social systemen',
+                        summary: 'Contentrichting en kanaalbeheer die het merk actief, scherp en commercieel bruikbaar houden.',
+                        tags: ['Content', 'Social', 'Richting']
+                    },
+                    {
+                        detailLabel: 'Optimization',
+                        title: 'Performance-lussen',
+                        summary: 'Testing, rapportage en schaalroutines die aandacht omzetten in een meetbaarder groeisysteem.',
+                        tags: ['Testing', 'Rapportage', 'Scaling']
+                    }
+                ],
                 workIntro: 'Een paar voorbeelden van het soort Grow-werk dat we vormgeven over paid campagnes, social systemen en doorlopende optimalisatie.',
                 workVisualAlt: 'Preview van growthwerk',
                 ctaVisualAlt: 'Visual voor volgende stap',
@@ -310,7 +485,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Implementation support', detail: 'Het team helpen het systeem echt te gebruiken zodat de automation na setup blijft hangen.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'Workflowsystemen' }, { title: 'Interne tools' }, { title: 'AI-automations' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Workflows',
+                        title: 'Workflowsystemen',
+                        summary: 'Operationele flows in kaart gebracht en geautomatiseerd zodat herhalend werk het team niet meer vertraagt.',
+                        tags: ['Automatisering', 'Proces', 'Logica']
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'Interne tools',
+                        summary: 'Praktische interne systemen die follow-up, approvals en dagelijks werk makkelijker laten draaien.',
+                        tags: ['Tools', 'CRM', 'Integraties']
+                    },
+                    {
+                        detailLabel: 'AI',
+                        title: 'AI-automations',
+                        summary: 'AI-ondersteunde workflows die frictie wegnemen zonder de business lastiger te maken om te beheren.',
+                        tags: ['AI', 'Assistants', 'Support']
+                    }
+                ],
                 workIntro: 'Een paar voorbeelden van het soort Automate-werk dat we vormgeven over workflows, interne systemen en AI-support.',
                 workVisualAlt: 'Preview van automationwerk',
                 ctaVisualAlt: 'Visual voor volgende stap',
@@ -348,7 +542,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Marketing & social visuals', detail: 'ขยายแบรนด์ไปสู่แคมเปญและ social assets ที่ยังคงรู้สึกเป็นระบบเดียวกัน.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'ระบบอัตลักษณ์' }, { title: 'รีแบรนด์' }, { title: 'การประยุกต์ใช้' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Strategy',
+                        title: 'Brand guide',
+                        summary: 'วางแนวทางเป็น brand guide ที่ทีมสามารถนำไปใช้จริงต่อได้ทั้งงาน rollout, content และการส่งมอบ.',
+                        tags: ['Guidelines', 'Systems', 'Rollout'],
+                        visual: '/images/Services/brand - brand guide.png',
+                        visualAlt: 'ภาพงานแบรนด์ไกด์',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Identity',
+                        title: 'Logo design',
+                        summary: 'ทิศทางของโลโก้ที่ถูกออกแบบให้จดจำได้ อ่านชัด และแข็งแรงพอจะเป็นแกนของแบรนด์ในการใช้งานจริง.',
+                        tags: ['Positioning', 'Identity', 'Guidelines'],
+                        visual: '/images/Services/brand - logo design.png',
+                        visualAlt: 'ภาพงานโลโก้ดีไซน์',
+                        href: '/work/birdiez'
+                    },
+                    {
+                        detailLabel: 'Application',
+                        title: 'Packaging',
+                        summary: 'ออกแบบระบบแพ็กเกจจิ้งให้ดูตั้งใจ พรีเมียม และไปในทิศทางเดียวกับโลกของแบรนด์ทั้งหมด.',
+                        tags: ['Packaging', 'Rollout', 'Identity'],
+                        visual: '/images/Services/brand - packaging.png',
+                        visualAlt: 'ภาพงานแพ็กเกจจิ้ง',
+                        href: '/work/ultimate-shape'
+                    }
+                ],
                 workIntro: 'ตัวอย่างบางส่วนของงาน Brand ที่เราดูแลตั้งแต่ระบบอัตลักษณ์ไปจนถึงการ rollout และการประยุกต์ใช้.',
                 workVisualAlt: 'ตัวอย่างงาน Brand',
                 ctaVisualAlt: 'ภาพประกอบขั้นถัดไป',
@@ -375,7 +597,35 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Implementation support', detail: 'การซัพพอร์ตทางเทคนิคที่ทำให้การส่งมอบยังสอดคล้องตั้งแต่การตัดสินใจด้านดีไซน์ไปจนถึง launch.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'เว็บไซต์การตลาด' }, { title: 'โปรดักต์' }, { title: 'ระบบ' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Websites',
+                        title: 'Marketing sites',
+                        summary: 'ประสบการณ์บนเว็บที่สร้างมาเพื่อสื่อสารให้ชัด ดูพรีเมียม และเปลี่ยนคนดูเป็นลูกค้าได้ลื่นขึ้น.',
+                        tags: ['Website', 'Content', 'Conversion'],
+                        visual: '/images/Services/build - marketing website.png',
+                        visualAlt: 'ภาพงานเว็บไซต์การตลาด',
+                        href: '/work/amplify'
+                    },
+                    {
+                        detailLabel: 'Products',
+                        title: 'App',
+                        summary: 'โปรดักต์และแดชบอร์ดที่จัดโฟลว์การใช้งานให้สะอาดขึ้นและใช้งานได้ชัดขึ้น.',
+                        tags: ['App', 'UX', 'Flows'],
+                        visual: '/images/Services/build - apps.png',
+                        visualAlt: 'ภาพงานแอป',
+                        href: '/work/fanflow'
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'Front end',
+                        summary: 'งาน frontend และฐาน UI ที่นำกลับมาใช้ซ้ำได้ เพื่อให้การพัฒนายังสะอาดเมื่อระบบโตขึ้น.',
+                        tags: ['Frontend', 'UI system', 'Delivery'],
+                        visual: '/images/Services/build - front end build.png',
+                        visualAlt: 'ภาพงานฟรอนต์เอนด์',
+                        href: '/work/msports'
+                    }
+                ],
                 workIntro: 'ตัวอย่างบางส่วนของงาน Build ที่เราดูแลครอบคลุมเว็บไซต์ โปรดักต์ และระบบ.',
                 workVisualAlt: 'ตัวอย่างงาน Build',
                 ctaVisualAlt: 'ภาพประกอบขั้นถัดไป',
@@ -402,7 +652,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Scaling', detail: 'เพิ่มงบและ output อย่างระมัดระวังเมื่อระบบเริ่มทำงาน โดยไม่เสียประสิทธิภาพเร็วเกินไป.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'แคมเปญแบบชำระเงิน' }, { title: 'ระบบ Social' }, { title: 'วงจร Performance' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Social',
+                        title: 'แคมเปญแบบชำระเงิน',
+                        summary: 'ระบบหาลูกค้าที่วางบนโครงสร้างชัดขึ้น ครีเอทีฟที่ดีขึ้น และเส้นทาง conversion ที่สะอาดกว่าเดิม.',
+                        tags: ['Meta', 'Google', 'Campaigns']
+                    },
+                    {
+                        detailLabel: 'Ads',
+                        title: 'ระบบ Social',
+                        summary: 'ทิศทางคอนเทนต์และการดูแลช่องทางที่ทำให้แบรนด์ยัง active คม และใช้ได้เชิงธุรกิจ.',
+                        tags: ['Content', 'Social', 'Direction']
+                    },
+                    {
+                        detailLabel: 'Optimization',
+                        title: 'วงจร Performance',
+                        summary: 'การทดสอบ รายงานผล และการขยายระบบที่เปลี่ยนความสนใจให้กลายเป็นเครื่องยนต์เติบโตที่วัดผลได้.',
+                        tags: ['Testing', 'Reporting', 'Scaling']
+                    }
+                ],
                 workIntro: 'ตัวอย่างบางส่วนของงาน Grow ที่เราดูแล ทั้งแคมเปญแบบชำระเงิน ระบบ Social และการ optimize ต่อเนื่อง.',
                 workVisualAlt: 'ตัวอย่างงาน Grow',
                 ctaVisualAlt: 'ภาพประกอบขั้นถัดไป',
@@ -429,7 +698,26 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Implementation support', detail: 'ช่วยทีมเอาระบบไปใช้จริง เพื่อให้ automation ใช้งานต่อได้หลังจาก setup.' }
                     ]}
                 ],
-                workPreviews: [{ title: 'ระบบเวิร์กโฟลว์' }, { title: 'เครื่องมือภายใน' }, { title: 'AI automations' }],
+                workPreviews: [
+                    {
+                        detailLabel: 'Workflows',
+                        title: 'ระบบเวิร์กโฟลว์',
+                        summary: 'วางและทำระบบการทำงานให้เป็นอัตโนมัติ เพื่อลดเวลาที่ทีมต้องเสียกับขั้นตอนซ้ำ ๆ.',
+                        tags: ['Automation', 'Process', 'Logic']
+                    },
+                    {
+                        detailLabel: 'Systems',
+                        title: 'เครื่องมือภายใน',
+                        summary: 'ระบบภายในที่ใช้งานได้จริง ช่วยให้ follow-up, approvals และงานประจำวันจัดการได้ง่ายขึ้น.',
+                        tags: ['Tools', 'CRM', 'Integrations']
+                    },
+                    {
+                        detailLabel: 'AI',
+                        title: 'AI automations',
+                        summary: 'เวิร์กโฟลว์ที่มี AI ช่วยลดแรงเสียดทาน โดยไม่ทำให้การบริหารธุรกิจซับซ้อนขึ้น.',
+                        tags: ['AI', 'Assistants', 'Support']
+                    }
+                ],
                 workIntro: 'ตัวอย่างบางส่วนของงาน Automate ที่เราดูแล ทั้งเวิร์กโฟลว์ ระบบภายใน และ AI support.',
                 workVisualAlt: 'ตัวอย่างงาน Automate',
                 ctaVisualAlt: 'ภาพประกอบขั้นถัดไป',

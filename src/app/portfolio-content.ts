@@ -242,7 +242,7 @@ const portfolioProjectEntries: readonly PortfolioProjectEntry[] = [
         listVisual: '/images/Portfolio/cutienails portfolio.png',
         listVisualContain: false,
         badgeColor: '#E89DB6',
-        badgeTextColor: '#25161D',
+        badgeTextColor: '#FFFFFF',
         content: {
             en: {
                 summary: 'Conversion-focused storefront and product experience.',
@@ -365,7 +365,7 @@ const portfolioProjectEntries: readonly PortfolioProjectEntry[] = [
         listVisual: '/images/Portfolio/goldenbeauty portfolio.png',
         listVisualContain: false,
         badgeColor: '#C7A24A',
-        badgeTextColor: '#17120A',
+        badgeTextColor: '#FFFFFF',
         content: {
             en: {
                 summary: 'Full launch direction across identity, site, and assets.',
