@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import HomeWorkWithUsAccordion from '@/app/components/HomeWorkWithUsAccordion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -223,14 +224,14 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                 </video>
                 <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.14)_22%,rgba(255,255,255,0.16)_48%,rgba(10,10,12,0.12)_100%)]' />
 
-                <div className='relative z-10 mx-auto flex min-h-screen max-w-[1760px] flex-col px-4 pb-8 pt-5 sm:px-6 lg:px-8'>
-                    <div className='relative flex flex-1 flex-col items-center justify-center'>
+                <div className='pointer-events-none relative z-10 mx-auto flex min-h-screen max-w-[1760px] flex-col px-4 pb-8 pt-5 sm:px-6 lg:px-8'>
+                    <div className='relative flex flex-1 flex-col items-center justify-center pb-0'>
 
-                        <p className='animate-rise-in -mt-4 max-w-xl text-center text-[0.96rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:-mt-6 sm:text-[1.08rem]'>
+                        <p className='animate-rise-in absolute top-[7.25rem] left-1/2 z-10 max-w-xl -translate-x-1/2 text-center text-[0.96rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)] sm:static sm:left-auto sm:top-auto sm:translate-x-0 sm:-mt-6 sm:text-[1.08rem]'>
                             {copy.home.eyebrow}
                         </p>
 
-                        <div className='animate-rise-in animation-delay-1 flex w-full justify-center px-4 pt-10 sm:px-10 lg:px-16'>
+                        <div className='animate-rise-in animation-delay-1 flex w-full justify-center px-4 sm:px-10 lg:px-16'>
                             <Image
                                 src='/images/Logo/the-agency-logo.webp'
                                 alt='The Agency'
@@ -241,7 +242,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             />
                         </div>
 
-                        <div className='mt-8 flex flex-col items-center gap-5 text-center'>
+                        <div className='pointer-events-auto absolute bottom-10 left-1/2 flex w-full -translate-x-1/2 flex-col items-center gap-5 px-4 text-center sm:static sm:mt-8 sm:w-auto sm:translate-x-0 sm:px-0'>
                             <div className='flex flex-wrap justify-center gap-4'>
                                 <Reveal delay={220} distance={-44} axis='x'>
                                     <Link href={`/${locale}/work`} className='agency-button agency-button--solid hero-primary-cta'>
@@ -296,8 +297,10 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                 </h2>
                             </Reveal>
 
+                            <HomeWorkWithUsAccordion packages={workWithUs.packages} />
+
                             <div className='relative z-10 mt-8 lg:min-h-[27rem]'>
-                                <div className='relative z-10 grid gap-5 lg:ml-[20rem] lg:w-fit lg:grid-rows-[repeat(3,7rem)]'>
+                                <div className='relative z-10 hidden gap-5 lg:ml-[20rem] lg:grid lg:w-fit lg:grid-rows-[repeat(3,7rem)]'>
                                     {workWithUs.packages.map((pkg, index) => (
                                         <Reveal key={pkg.slug} delay={140 + index * 90} distance={44} axis='x'>
                                             <div
@@ -379,12 +382,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             />
                         </Reveal>
 
-                        <div
-                            className='relative overflow-hidden bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] px-6 py-10 shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:px-8 sm:py-12 lg:px-10 lg:py-16'
-                            style={{
-                                clipPath: 'polygon(4% 0, 100% 0, 100% 86%, 84% 86%, 80% 100%, 0 100%, 0 16%)'
-                            }}
-                        >
+                        <div className='portfolio-home-panel relative overflow-hidden bg-[linear-gradient(135deg,#17171b_0%,#232329_100%)] px-6 py-10 shadow-[0_28px_90px_rgba(30,20,12,0.16)] sm:px-8 sm:py-12 lg:px-10 lg:py-16'>
                             <div className='absolute left-0 bottom-10 h-px w-44 -rotate-[20deg] bg-white/58 sm:w-56' />
                             <div className='absolute left-3 bottom-7 h-px w-40 -rotate-[20deg] bg-white/58 sm:w-52' />
                             <div className='absolute left-6 bottom-4 h-px w-36 -rotate-[20deg] bg-white/58 sm:w-48' />
@@ -408,7 +406,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                                     </Reveal>
                                 </div>
 
-                                <div className='grid gap-3 sm:grid-cols-2 lg:mb-16 lg:max-w-[27rem] lg:justify-self-end lg:self-start'>
+                                <div className='grid grid-cols-2 gap-3 lg:mb-16 lg:max-w-[27rem] lg:justify-self-end lg:self-start'>
                                     {[
                                         {
                                             value: '150+',
@@ -449,7 +447,7 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
 
                         </div>
 
-                        <Reveal className='absolute right-0 bottom-0 sm:right-3 lg:right-6' delay={520} distance={30}>
+                        <Reveal className='absolute right-0 bottom-0 hidden sm:right-3 lg:right-6 lg:block' delay={520} distance={30}>
                             <Link
                                 href={`/${locale}/work`}
                                 className='inline-flex items-center gap-3 rounded-full bg-[var(--agency-orange)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[0_18px_34px_rgba(255,109,24,0.26)] transition hover:translate-x-1 hover:bg-[var(--agency-orange-soft)]'
@@ -461,6 +459,14 @@ const LocalizedHomePage = async ({ params }: { params: Promise<Params> }) => {
                             </Link>
                         </Reveal>
                     </div>
+                    <Reveal className='mt-6 flex justify-center lg:hidden' delay={420} distance={24}>
+                        <Link
+                            href={`/${locale}/work`}
+                            className='agency-button agency-button--solid'
+                        >
+                            {copy.nav.work}
+                        </Link>
+                    </Reveal>
                 </div>
             </section>
 

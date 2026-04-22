@@ -69,7 +69,6 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 includes: 'Brand, product, and launch support',
                 longDescription: 'For founders and teams starting from zero - we take you from idea to a launch-ready product.',
                 detailedIncludes: ['Brand', 'Product (website or app)', 'Launch support'],
-                note: 'Typical timeline: 4-8 weeks',
                 bestFor: 'Best for new ideas'
             },
             {
@@ -127,7 +126,6 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 includes: 'Brand, product en launch-ondersteuning',
                 longDescription: 'Voor founders en teams die vanaf nul beginnen - we brengen je van idee naar een product dat klaar is voor lancering.',
                 detailedIncludes: ['Brand', 'Product (website of app)', 'Launch-ondersteuning'],
-                note: 'Typische doorlooptijd: 4-8 weken',
                 bestFor: 'Beste voor nieuwe ideeën'
             },
             {
@@ -185,7 +183,6 @@ export const workWithUsContent: Record<Locale, WorkWithUsContent> = {
                 includes: 'Brand, product และการซัพพอร์ตช่วง launch',
                 longDescription: 'สำหรับผู้ก่อตั้งและทีมที่เริ่มจากศูนย์ - เราพาคุณจากไอเดียไปสู่โปรดักต์ที่พร้อมเปิดตัว.',
                 detailedIncludes: ['Brand', 'Product (เว็บไซต์หรือแอป)', 'การซัพพอร์ตช่วง launch'],
-                note: 'ระยะเวลาโดยทั่วไป: 4-8 สัปดาห์',
                 bestFor: 'เหมาะกับไอเดียใหม่'
             },
             {

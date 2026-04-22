@@ -29,7 +29,7 @@ const serviceCardPolygonPoints = '18.6,0.9 99.1,0.9 99.1,99.1 0.9,99.1 0.9,14.6'
 
 const ServiceCardOutline = ({ hover }: { hover?: boolean }) => (
     <svg
-        className={`pointer-events-none absolute inset-0 z-10 h-full w-full transition-opacity duration-500 ease-out ${hover ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 group-hover:opacity-0'}`}
+        className={`pointer-events-none absolute inset-0 z-10 hidden h-full w-full transition-opacity duration-500 ease-out lg:block ${hover ? 'opacity-0 group-hover:opacity-100' : 'opacity-100 group-hover:opacity-0'}`}
         viewBox='0 0 100 100'
         preserveAspectRatio='none'
         aria-hidden='true'
@@ -56,15 +56,15 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
 
     return (
         <div
-            className='process-card process-card--static relative overflow-hidden px-7 py-8 shadow-[0_28px_70px_rgba(30,20,12,0.16)] sm:px-8 sm:py-9'
-            style={{ clipPath }}
+            className='process-card process-card--static relative overflow-hidden px-7 py-8 shadow-[0_28px_70px_rgba(30,20,12,0.16)] [clip-path:none] sm:px-8 sm:py-9 lg:[clip-path:var(--foundation-clip-path)]'
+            style={{ ['--foundation-clip-path' as string]: clipPath }}
         >
             <div className='process-card-surface absolute inset-0' />
             <ServiceCardOutline />
             <div className='absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(255,109,24,0.14),transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.03),transparent_42%,transparent_72%,rgba(255,255,255,0.04))]' />
 
             <div className='relative z-10 min-h-[31rem]'>
-                <div className='flex justify-end'>
+                <div className='flex justify-center lg:justify-end'>
                     <div
                         className='relative inline-grid border border-white/12 bg-black/12 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] [clip-path:polygon(0.9rem_0,100%_0,calc(100%-0.9rem)_100%,0_100%)]'
                         style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
@@ -153,8 +153,8 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                         <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0)_32%)]' />
                         {activeItem.visual ? (
                             <div
-                                className='relative z-10 aspect-[4/3] w-full overflow-hidden'
-                                style={{ clipPath }}
+                                className='relative z-10 aspect-[4/3] w-full overflow-hidden [clip-path:none] lg:[clip-path:var(--foundation-clip-path)]'
+                                style={{ ['--foundation-clip-path' as string]: clipPath }}
                             >
                                 <Image
                                     src={activeItem.visual}
@@ -166,8 +166,8 @@ const FoundationTabs = ({ items, clipPath }: FoundationTabsProps) => {
                             </div>
                         ) : (
                             <div
-                                className='relative z-10 aspect-[4/3] w-full overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]'
-                                style={{ clipPath }}
+                                className='relative z-10 aspect-[4/3] w-full overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))] [clip-path:none] lg:[clip-path:var(--foundation-clip-path)]'
+                                style={{ ['--foundation-clip-path' as string]: clipPath }}
                             />
                         )}
                     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import Reveal from '@/app/components/Reveal';
@@ -45,6 +45,13 @@ const TeamShowcase = ({ members, copy }: TeamShowcaseProps) => {
     const activeMember = members.find((member) => member.name === activeMemberName) ?? null;
     const activeIndex = activeMemberName ? members.findIndex((member) => member.name === activeMemberName) : -1;
     const expandedStartIndex = activeIndex >= 0 ? Math.min(activeIndex, members.length - 3) : -1;
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        if (window.innerWidth >= 1280) return;
+
+        setActiveMemberName((current) => current ?? 'Ace');
+    }, []);
 
     return (
         <section className='relative overflow-hidden bg-[#0E0E0E] px-4 py-12 sm:px-6 lg:px-8 lg:py-18 xl:min-h-[100svh]'>
@@ -192,52 +199,87 @@ const TeamShowcase = ({ members, copy }: TeamShowcaseProps) => {
                     </Reveal>
                 </div>
 
-                <div className='grid gap-4 xl:hidden'>
-                    {members.map((member) => {
-                        const isActive = member.name === activeMemberName;
+                <div className='xl:hidden'>
+                    {activeMember && (
+                        <Reveal delay={180} distance={24}>
+                            <div className='team-mobile-card process-card relative overflow-hidden p-6 text-left'>
+                                <div className='process-card-surface absolute inset-0' />
+                                <div className='relative z-10'>
+                                    <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
+                                        {activeMember.number}
+                                    </p>
+                                    <h3 className='mt-3 text-2xl font-semibold tracking-[-0.05em] text-white'>
+                                        {activeMember.name}
+                                    </h3>
+                                    <p className='mt-2 text-sm uppercase tracking-[0.28em] text-white/58'>
+                                        {activeMember.role}
+                                    </p>
 
-                        return (
-                            <Reveal key={member.name} delay={160 + Number(member.number) * 45} distance={24}>
-                                <button
-                                    type='button'
-                                    onClick={() => {
-                                        setActiveMemberName((current) => (current === member.name ? null : member.name));
-                                    }}
-                                    className='team-mobile-card process-card relative overflow-hidden p-6 text-left'
-                                >
-                                    <div className='process-card-surface absolute inset-0' />
-                                    <div className='relative z-10'>
-                                        <p className='text-[0.76rem] font-semibold uppercase tracking-[0.34em] text-[var(--agency-orange)]'>
-                                            {member.number}
-                                        </p>
-                                        <h3 className='mt-3 text-2xl font-semibold tracking-[-0.05em] text-white'>
-                                            {member.name}
-                                        </h3>
-                                        <p className='mt-2 text-sm uppercase tracking-[0.28em] text-white/58'>
-                                            {member.role}
-                                        </p>
-                                        <div
-                                            className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out ${
-                                                isActive ? 'mt-5 grid-rows-[1fr] opacity-100' : 'mt-0 grid-rows-[0fr] opacity-0'
-                                            }`}
-                                        >
-                                            <div className='overflow-hidden'>
-                                                <p className='text-base leading-8 text-white/74'>{member.summary}</p>
-                                                <p className='mt-4 text-sm leading-7 text-white/62'>{member.detail}</p>
-                                                <div className='mt-5 grid gap-3 sm:grid-cols-3'>
-                                                    {member.strengths.map((strength) => (
-                                                        <div key={strength} className='rounded-[1rem] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/78'>
-                                                            {strength}
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                    <div className='mt-5 overflow-hidden'>
+                                        <div className='process-card relative overflow-hidden'>
+                                            <div className='process-card-surface absolute inset-0' />
+                                            <div className='relative aspect-[4/3] w-full overflow-hidden'>
+                                                <Image
+                                                    src={activeMember.image}
+                                                    alt={activeMember.name}
+                                                    fill
+                                                    sizes='(max-width: 1279px) 100vw, 0vw'
+                                                    className='object-cover object-top'
+                                                />
                                             </div>
                                         </div>
                                     </div>
-                                </button>
-                            </Reveal>
-                        );
-                    })}
+
+                                    <p className='mt-5 text-base leading-8 text-white/74'>{activeMember.summary}</p>
+                                    <p className='mt-4 text-sm leading-7 text-white/62'>{activeMember.detail}</p>
+                                    <div className='mt-5 grid gap-3 sm:grid-cols-3'>
+                                        {activeMember.strengths.map((strength) => (
+                                            <div key={strength} className='rounded-[1rem] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/78'>
+                                                {strength}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </Reveal>
+                    )}
+
+                    <Reveal delay={240} distance={18}>
+                        <div className='mt-4 grid grid-cols-5 gap-2'>
+                            {members
+                                .filter((member) => member.name !== activeMemberName)
+                                .map((member) => (
+                                    <button
+                                        key={member.name}
+                                        type='button'
+                                        onClick={() => {
+                                            setActiveMemberName(member.name);
+                                        }}
+                                        className='team-mobile-card process-card relative aspect-[0.82] overflow-hidden p-0 text-left'
+                                    >
+                                        <div className='process-card-surface absolute inset-0' />
+                                        <div className='absolute inset-0'>
+                                            <Image
+                                                src={member.image}
+                                                alt={member.name}
+                                                fill
+                                                sizes='(max-width: 1279px) 20vw, 0vw'
+                                                className='object-cover object-top opacity-82'
+                                            />
+                                            <div className='absolute inset-0 bg-[linear-gradient(180deg,rgba(14,14,16,0.08)_0%,rgba(14,14,16,0.44)_48%,rgba(14,14,16,0.92)_100%)]' />
+                                        </div>
+                                        <div className='relative z-10 flex h-full flex-col justify-end p-3'>
+                                            <p className='text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-[var(--agency-orange)]'>
+                                                {member.number}
+                                            </p>
+                                            <p className='mt-2 text-sm font-semibold leading-tight tracking-[-0.04em] text-white'>
+                                                {member.name}
+                                            </p>
+                                        </div>
+                                    </button>
+                                ))}
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

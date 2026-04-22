@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import InteriorHero from '@/app/components/InteriorHero';
+import ContactPageView from '@/app/components/ContactPageView';
 import { locales } from '@/app/site-content';
 
 type Params = {
@@ -18,7 +18,7 @@ const ContactPage = async ({ params }: { params: Promise<Params> }) => {
         notFound();
     }
 
-    return <InteriorHero locale={locale} pageKey='contact' />;
+    return <ContactPageView locale={locale} />;
 };
 
 export default ContactPage;

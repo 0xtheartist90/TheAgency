@@ -37,7 +37,7 @@ export type ServiceDetailContent = {
         title: string;
         line: string;
     }>;
-    services: Record<'brand' | 'build' | 'grow' | 'automate', ServiceDetailConfig>;
+    services: Record<'brand' | 'build' | 'grow', ServiceDetailConfig>;
 };
 
 const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
@@ -46,8 +46,7 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
             { number: '01', title: 'Meet & Greet', line: 'Intro and fit check.' },
             { number: '02', title: 'Campfire', line: 'You talk, we listen.' },
             { number: '03', title: 'Discovery', line: 'We define direction.' },
-            { number: '04', title: 'Build', line: 'Design in the open.' },
-            { number: '05', title: 'Launch', line: 'Refine and deliver.' }
+            { number: '04', title: 'Build & Launch', line: 'Design, launch, and refine in the open.' }
         ],
         services: {
             brand: {
@@ -141,9 +140,9 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         number: '03',
                         title: 'Systems',
                         items: [
-                            { label: 'Frontend build', detail: 'Clean implementation that turns polished design into something production-ready.' },
-                            { label: 'Design systems', detail: 'Reusable UI foundations that help products stay consistent as they grow.' },
-                            { label: 'Implementation support', detail: 'Technical support that keeps delivery aligned from design decisions through launch.' }
+                            { label: 'Internal tools', detail: 'Internal systems built to make team workflows clearer, faster, and easier to manage.' },
+                            { label: 'AI workflows', detail: 'AI-supported workflows designed to remove repetitive steps and keep delivery moving.' },
+                            { label: 'AI agents', detail: 'Task-specific agents shaped to support research, routing, drafting, and operational follow-through.' }
                         ]
                     }
                 ],
@@ -217,21 +216,27 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                 workPreviews: [
                     {
                         detailLabel: 'Social',
-                        title: 'Paid campaigns',
-                        summary: 'Acquisition systems built around clearer structure, stronger creative, and cleaner conversion paths.',
-                        tags: ['Meta', 'Google', 'Campaigns']
+                        title: 'Social media management',
+                        summary: 'Content systems and channel management shaped to keep the brand active, sharp, and commercially useful.',
+                        tags: ['Content', 'Social', 'Direction'],
+                        visual: '/images/Services/grow - social media management.png',
+                        visualAlt: 'Social media management visual'
                     },
                     {
                         detailLabel: 'Ads',
-                        title: 'Social systems',
-                        summary: 'Content direction and channel management that keep the brand active, sharp, and commercially useful.',
-                        tags: ['Content', 'Social', 'Direction']
+                        title: 'Google ads',
+                        summary: 'Search and intent-driven campaigns built around clearer structure, stronger creative, and cleaner conversion paths.',
+                        tags: ['Google', 'Search', 'Campaigns'],
+                        visual: '/images/Services/grow - google ads.png',
+                        visualAlt: 'Google ads visual'
                     },
                     {
                         detailLabel: 'Optimization',
-                        title: 'Performance loops',
-                        summary: 'Testing, reporting, and scaling routines that turn attention into a more measurable growth engine.',
-                        tags: ['Testing', 'Reporting', 'Scaling']
+                        title: 'Reporting',
+                        summary: 'Reporting systems that make performance easier to read, easier to act on, and easier to scale from.',
+                        tags: ['Reporting', 'Signal', 'Scaling'],
+                        visual: '/images/Services/grow - reporting.png',
+                        visualAlt: 'Reporting visual'
                     }
                 ],
                 workIntro: 'A few examples of the kind of growth work we shape across paid campaigns, social systems, and ongoing optimization.',
@@ -242,64 +247,6 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                 secondaryCtaLabel: 'Explore Scale Package',
                 secondaryCtaHref: '/scale'
             },
-            automate: {
-                scopeGroups: [
-                    {
-                        number: '01',
-                        title: 'Workflows',
-                        items: [
-                            { label: 'Process automation', detail: 'Automate repetitive steps so the team spends less time moving information manually.' },
-                            { label: 'Task flows', detail: 'Build cleaner internal flows for handoff, follow-up, approvals, and routine operations.' },
-                            { label: 'Operational logic', detail: 'Map the rules behind the workflow so the system runs consistently instead of relying on memory.' }
-                        ]
-                    },
-                    {
-                        number: '02',
-                        title: 'Systems',
-                        items: [
-                            { label: 'Internal tools', detail: 'Create practical internal systems that make day-to-day work easier to manage and easier to scale.' },
-                            { label: 'CRM setup', detail: 'Structure the CRM so contacts, leads, and follow-up live in a cleaner working system.' },
-                            { label: 'Integrations', detail: 'Connect the platforms you already use so data and actions move without extra admin.' }
-                        ]
-                    },
-                    {
-                        number: '03',
-                        title: 'AI',
-                        items: [
-                            { label: 'AI workflows', detail: 'Use AI where it removes friction, speeds up output, and supports the team in practical ways.' },
-                            { label: 'Assistants', detail: 'Set up lightweight assistants for research, drafting, routing, and repetitive internal tasks.' },
-                            { label: 'Implementation support', detail: 'Help the team put the system into use so the automation actually sticks after setup.' }
-                        ]
-                    }
-                ],
-                workPreviews: [
-                    {
-                        detailLabel: 'Workflows',
-                        title: 'Workflow systems',
-                        summary: 'Operational flows mapped and automated so repetitive steps stop slowing the team down.',
-                        tags: ['Automation', 'Process', 'Logic']
-                    },
-                    {
-                        detailLabel: 'Systems',
-                        title: 'Internal tools',
-                        summary: 'Practical internal systems that make follow-up, approvals, and day-to-day work easier to run.',
-                        tags: ['Tools', 'CRM', 'Integrations']
-                    },
-                    {
-                        detailLabel: 'AI',
-                        title: 'AI automations',
-                        summary: 'AI-supported workflows that reduce friction without making the business harder to manage.',
-                        tags: ['AI', 'Assistants', 'Support']
-                    }
-                ],
-                workIntro: 'A few examples of the kind of automation work we shape across workflows, internal systems, and AI support.',
-                workVisualAlt: 'Automate work preview',
-                ctaVisualAlt: 'Next step visual',
-                finalTitle: "Let's remove the manual work",
-                finalIntro: "Start with a simple conversation and we'll figure out the right direction together. The Partner Package is the fastest way to build deeper systems support with us over time.",
-                secondaryCtaLabel: 'Explore Partner Package',
-                secondaryCtaHref: '/partner'
-            }
         }
     },
     nl: {
@@ -307,8 +254,7 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
             { number: '01', title: 'Kennismaking', line: 'Intro en fit check.' },
             { number: '02', title: 'Kampvuur', line: 'Jij praat, wij luisteren.' },
             { number: '03', title: 'Verkenning', line: 'We bepalen de richting.' },
-            { number: '04', title: 'Bouw', line: 'We ontwerpen openlijk.' },
-            { number: '05', title: 'Lancering', line: 'Verfijnen en opleveren.' }
+            { number: '04', title: 'Bouw & Lancering', line: 'We ontwerpen, lanceren en verfijnen openlijk.' }
         ],
         services: {
             brand: {
@@ -379,9 +325,9 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Flows', detail: 'Kernflows die frictie verminderen en het product vooruit laten bewegen.' }
                     ]},
                     { number: '03', title: 'Systems', items: [
-                        { label: 'Frontend build', detail: 'Schone implementatie die gepolijst design omzet naar iets production-ready.' },
-                        { label: 'Design systems', detail: 'Herbruikbare UI-basis die producten consistent houdt terwijl ze groeien.' },
-                        { label: 'Implementation support', detail: 'Technische support die delivery in lijn houdt van designbeslissingen tot launch.' }
+                        { label: 'Internal tools', detail: 'Interne systemen die teamworkflows helderder, sneller en makkelijker beheersbaar maken.' },
+                        { label: 'AI workflows', detail: 'AI-ondersteunde workflows die repetitieve stappen weghalen en delivery in beweging houden.' },
+                        { label: 'AI agents', detail: 'Taakspecifieke agents die research, routing, drafts en operationele opvolging ondersteunen.' }
                     ]}
                 ],
                 workPreviews: [
@@ -467,52 +413,6 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                 secondaryCtaLabel: 'Bekijk Scale Package',
                 secondaryCtaHref: '/scale'
             },
-            automate: {
-                scopeGroups: [
-                    { number: '01', title: 'Workflows', items: [
-                        { label: 'Process automation', detail: 'Herhalende stappen automatiseren zodat het team minder tijd kwijt is aan handmatig verschuiven van informatie.' },
-                        { label: 'Task flows', detail: 'Schonere interne flows bouwen voor handoff, follow-up, approvals en routine-operations.' },
-                        { label: 'Operational logic', detail: 'De regels achter de workflow vastleggen zodat het systeem consistent draait in plaats van op geheugen.' }
-                    ]},
-                    { number: '02', title: 'Systems', items: [
-                        { label: 'Internal tools', detail: 'Praktische interne systemen maken die dagelijks werk makkelijker beheren en makkelijker schalen.' },
-                        { label: 'CRM setup', detail: 'De CRM zo structureren dat contacten, leads en follow-up in een schoner werksysteem leven.' },
-                        { label: 'Integrations', detail: 'De platforms die je al gebruikt verbinden zodat data en acties bewegen zonder extra admin.' }
-                    ]},
-                    { number: '03', title: 'AI', items: [
-                        { label: 'AI workflows', detail: 'AI inzetten waar het frictie weghaalt, output versnelt en het team praktisch ondersteunt.' },
-                        { label: 'Assistants', detail: 'Lichtgewicht assistants opzetten voor research, drafts, routing en repetitieve interne taken.' },
-                        { label: 'Implementation support', detail: 'Het team helpen het systeem echt te gebruiken zodat de automation na setup blijft hangen.' }
-                    ]}
-                ],
-                workPreviews: [
-                    {
-                        detailLabel: 'Workflows',
-                        title: 'Workflowsystemen',
-                        summary: 'Operationele flows in kaart gebracht en geautomatiseerd zodat herhalend werk het team niet meer vertraagt.',
-                        tags: ['Automatisering', 'Proces', 'Logica']
-                    },
-                    {
-                        detailLabel: 'Systems',
-                        title: 'Interne tools',
-                        summary: 'Praktische interne systemen die follow-up, approvals en dagelijks werk makkelijker laten draaien.',
-                        tags: ['Tools', 'CRM', 'Integraties']
-                    },
-                    {
-                        detailLabel: 'AI',
-                        title: 'AI-automations',
-                        summary: 'AI-ondersteunde workflows die frictie wegnemen zonder de business lastiger te maken om te beheren.',
-                        tags: ['AI', 'Assistants', 'Support']
-                    }
-                ],
-                workIntro: 'Een paar voorbeelden van het soort Automate-werk dat we vormgeven over workflows, interne systemen en AI-support.',
-                workVisualAlt: 'Preview van automationwerk',
-                ctaVisualAlt: 'Visual voor volgende stap',
-                finalTitle: 'Laten we het handmatige werk weghalen',
-                finalIntro: 'Begin met een simpel gesprek en we bepalen samen de juiste richting. Het Partner Package is de snelste manier om dieper systemsupport met ons op te bouwen over tijd.',
-                secondaryCtaLabel: 'Bekijk Partner Package',
-                secondaryCtaHref: '/partner'
-            }
         }
     },
     th: {
@@ -520,8 +420,7 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
             { number: '01', title: 'คุยเบื้องต้น', line: 'เริ่มต้นและเช็กความเหมาะสม.' },
             { number: '02', title: 'วงคุย', line: 'คุณเล่า เราฟัง.' },
             { number: '03', title: 'สำรวจ', line: 'เรากำหนดทิศทาง.' },
-            { number: '04', title: 'ลงมือสร้าง', line: 'ออกแบบและทำงานแบบเปิดเผย.' },
-            { number: '05', title: 'เปิดใช้งาน', line: 'ปรับและส่งมอบ.' }
+            { number: '04', title: 'สร้าง & เปิดใช้งาน', line: 'ออกแบบ เปิดใช้งาน และปรับต่อแบบเปิดเผย.' }
         ],
         services: {
             brand: {
@@ -592,9 +491,9 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                         { label: 'Flows', detail: 'core user flows ที่ลดแรงเสียดทานและทำให้โปรดักต์เดินหน้าได้.' }
                     ]},
                     { number: '03', title: 'Systems', items: [
-                        { label: 'Frontend build', detail: 'งาน implement ที่สะอาด เปลี่ยนดีไซน์ที่คมให้กลายเป็นสิ่งที่พร้อมใช้งานจริง.' },
-                        { label: 'Design systems', detail: 'ฐาน UI ที่นำกลับมาใช้ซ้ำได้ เพื่อให้โปรดักต์ยังสม่ำเสมอเมื่อเติบโต.' },
-                        { label: 'Implementation support', detail: 'การซัพพอร์ตทางเทคนิคที่ทำให้การส่งมอบยังสอดคล้องตั้งแต่การตัดสินใจด้านดีไซน์ไปจนถึง launch.' }
+                        { label: 'Internal tools', detail: 'ระบบภายในที่ช่วยให้ workflow ของทีมชัดขึ้น เร็วขึ้น และจัดการได้ง่ายขึ้น.' },
+                        { label: 'AI workflows', detail: 'workflow ที่มี AI ช่วยลดขั้นตอนซ้ำ ๆ และทำให้งานเดินต่อได้ลื่นขึ้น.' },
+                        { label: 'AI agents', detail: 'agents เฉพาะงานที่ช่วยเรื่อง research, routing, drafting และการตามงานเชิงปฏิบัติการ.' }
                     ]}
                 ],
                 workPreviews: [
@@ -680,52 +579,6 @@ const serviceDetailContent: Record<Locale, ServiceDetailContent> = {
                 secondaryCtaLabel: 'ดู Scale Package',
                 secondaryCtaHref: '/scale'
             },
-            automate: {
-                scopeGroups: [
-                    { number: '01', title: 'Workflows', items: [
-                        { label: 'Process automation', detail: 'ทำขั้นตอนซ้ำ ๆ ให้เป็นอัตโนมัติ เพื่อลดเวลาที่ทีมต้องขยับข้อมูลด้วยมือ.' },
-                        { label: 'Task flows', detail: 'สร้าง flow ภายในที่สะอาดขึ้นสำหรับ handoff, follow-up, approvals และงาน routine.' },
-                        { label: 'Operational logic', detail: 'วางกติกาที่อยู่หลัง workflow เพื่อให้ระบบทำงานสม่ำเสมอ ไม่ต้องพึ่งความจำของคน.' }
-                    ]},
-                    { number: '02', title: 'Systems', items: [
-                        { label: 'Internal tools', detail: 'สร้างระบบภายในที่ใช้งานได้จริง ช่วยให้งานประจำวันจัดการง่ายขึ้นและขยายได้ง่ายขึ้น.' },
-                        { label: 'CRM setup', detail: 'จัดโครงสร้าง CRM ให้ contact, lead และ follow-up อยู่ในระบบทำงานที่สะอาดกว่าเดิม.' },
-                        { label: 'Integrations', detail: 'เชื่อมแพลตฟอร์มที่คุณใช้อยู่แล้วให้ข้อมูลและ action ไหลต่อกันได้โดยไม่ต้องทำ admin เพิ่ม.' }
-                    ]},
-                    { number: '03', title: 'AI', items: [
-                        { label: 'AI workflows', detail: 'ใช้ AI ในจุดที่ช่วยลดแรงเสียดทาน เร่ง output และซัพพอร์ตทีมได้จริง.' },
-                        { label: 'Assistants', detail: 'ตั้ง lightweight assistants สำหรับ research, drafting, routing และงานภายในที่ทำซ้ำ.' },
-                        { label: 'Implementation support', detail: 'ช่วยทีมเอาระบบไปใช้จริง เพื่อให้ automation ใช้งานต่อได้หลังจาก setup.' }
-                    ]}
-                ],
-                workPreviews: [
-                    {
-                        detailLabel: 'Workflows',
-                        title: 'ระบบเวิร์กโฟลว์',
-                        summary: 'วางและทำระบบการทำงานให้เป็นอัตโนมัติ เพื่อลดเวลาที่ทีมต้องเสียกับขั้นตอนซ้ำ ๆ.',
-                        tags: ['Automation', 'Process', 'Logic']
-                    },
-                    {
-                        detailLabel: 'Systems',
-                        title: 'เครื่องมือภายใน',
-                        summary: 'ระบบภายในที่ใช้งานได้จริง ช่วยให้ follow-up, approvals และงานประจำวันจัดการได้ง่ายขึ้น.',
-                        tags: ['Tools', 'CRM', 'Integrations']
-                    },
-                    {
-                        detailLabel: 'AI',
-                        title: 'AI automations',
-                        summary: 'เวิร์กโฟลว์ที่มี AI ช่วยลดแรงเสียดทาน โดยไม่ทำให้การบริหารธุรกิจซับซ้อนขึ้น.',
-                        tags: ['AI', 'Assistants', 'Support']
-                    }
-                ],
-                workIntro: 'ตัวอย่างบางส่วนของงาน Automate ที่เราดูแล ทั้งเวิร์กโฟลว์ ระบบภายใน และ AI support.',
-                workVisualAlt: 'ตัวอย่างงาน Automate',
-                ctaVisualAlt: 'ภาพประกอบขั้นถัดไป',
-                finalTitle: 'มาลดงาน manual ออกไป',
-                finalIntro: 'เริ่มจากบทสนทนาง่าย ๆ แล้วเราจะช่วยหาทิศทางที่เหมาะสมไปด้วยกัน Partner Package คือวิธีที่เร็วที่สุดในการสร้าง systems support ที่ลึกขึ้นร่วมกับเราในระยะยาว.',
-                secondaryCtaLabel: 'ดู Partner Package',
-                secondaryCtaHref: '/partner'
-            }
         }
     }
 };

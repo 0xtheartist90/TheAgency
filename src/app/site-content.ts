@@ -227,7 +227,6 @@ export const getNavItems = (locale: string): NavItem[] => {
     return [
         { href: `/${locale}/story`, label: copy.nav.story },
         { href: `/${locale}/services`, label: copy.nav.services },
-        { href: `/${locale}/work`, label: copy.nav.work },
-        { href: `/${locale}/work-with-us`, label: copy.nav.workWithUs }
+        { href: `/${locale}/work`, label: copy.nav.work }
     ];
 };

@@ -10,7 +10,12 @@ import { Toaster } from '@/registry/new-york-v4/ui/sonner';
 
 export const metadata: Metadata = {
     title: 'The Agency',
-    description: 'High-end creative, brand systems, and campaign design for modern growth brands.'
+    description: 'High-end creative, brand systems, and campaign design for modern growth brands.',
+    icons: {
+        icon: '/favicon.png',
+        shortcut: '/favicon.png',
+        apple: '/favicon.png'
+    }
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {

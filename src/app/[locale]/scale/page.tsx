@@ -7,7 +7,7 @@ type Params = {
 const ScalePage = async ({ params }: { params: Promise<Params> }) => {
     const { locale } = await params;
 
-    redirect(`/${locale}/work-with-us#scale`);
+    redirect(`/${locale}/contact#scale`);
 };
 
 export default ScalePage;

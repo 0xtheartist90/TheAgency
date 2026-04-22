@@ -7,7 +7,6 @@ import { getUiCopy } from '@/app/ui-content';
 
 const processCardClipPath = 'polygon(0 0, 82% 0, 100% 18%, 100% 100%, 18% 100%, 0 82%)';
 const processCardPolygonPoints = '0.9,0.9 81.4,0.9 99.1,18.6 99.1,99.1 18.6,99.1 0.9,81.4';
-const PROCESS_PAGE_SIZE = 3;
 
 const ProcessCardOutline = ({ hover }: { hover?: boolean }) => (
     <svg
@@ -31,16 +30,12 @@ const ProcessSection = ({ locale }: { locale: Locale }) => {
     const ui = getUiCopy(locale);
     const processSteps = ui.process.steps;
     const sectionRef = useRef<HTMLElement | null>(null);
+    const mobileSliderRef = useRef<HTMLDivElement | null>(null);
     const matrixTimerRef = useRef<number | null>(null);
     const [isVisible, setIsVisible] = useState(false);
     const [hoveredStep, setHoveredStep] = useState<string | null>(null);
     const [revealedLines, setRevealedLines] = useState<Record<string, string>>({});
-    const [currentPage, setCurrentPage] = useState(0);
-    const totalPages = processSteps.length;
-    const visibleSteps = Array.from({ length: PROCESS_PAGE_SIZE }, (_, offset) => {
-        return processSteps[(currentPage + offset) % processSteps.length];
-    });
-
+    const [mobilePage, setMobilePage] = useState(0);
     useEffect(() => {
         const section = sectionRef.current;
 
@@ -147,8 +142,85 @@ const ProcessSection = ({ locale }: { locale: Locale }) => {
                     </p>
                 </div>
 
-                <div className='grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3'>
-                    {visibleSteps.map((step, index) => (
+                <div
+                    ref={mobileSliderRef}
+                    className='no-scrollbar -mx-4 flex snap-x snap-mandatory gap-0 overflow-x-auto px-4 pb-2 md:hidden'
+                    onScroll={(event) => {
+                        const container = event.currentTarget;
+                        const cardWidth = container.clientWidth;
+                        const nextPage = Math.round(container.scrollLeft / cardWidth);
+                        setMobilePage(Math.max(0, Math.min(processSteps.length - 1, nextPage)));
+                    }}
+                >
+                    {processSteps.map((step, index) => {
+                        return (
+                            <div
+                                key={step.number}
+                                className='w-full min-w-full snap-center'
+                                style={{
+                                    opacity: isVisible ? 1 : 0,
+                                    transform: isVisible ? undefined : 'translateY(40px)',
+                                    filter: isVisible ? undefined : 'blur(10px)',
+                                    transition:
+                                        'opacity 1220ms cubic-bezier(0.22,1,0.36,1), transform 1220ms cubic-bezier(0.22,1,0.36,1), filter 1320ms cubic-bezier(0.22,1,0.36,1)'
+                                }}
+                            >
+                                <article
+                                    className='process-card relative h-[328px] overflow-hidden pb-16 pl-10 pr-6 pt-6 shadow-[0_24px_60px_rgba(0,0,0,0.18)]'
+                                    style={{ clipPath: processCardClipPath }}
+                                >
+                                    <div className='process-card-surface absolute inset-0' />
+                                    <ProcessCardOutline />
+                                    <p className='absolute right-6 bottom-7 z-10 text-[0.9rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)]'>
+                                        {step.number}/
+                                    </p>
+
+                                    <div className='relative z-10 mt-2 flex justify-center'>
+                                        <Image
+                                            src={step.icon}
+                                            alt={step.title}
+                                            width={78}
+                                            height={78}
+                                            className='h-[78px] w-[78px] object-contain'
+                                        />
+                                    </div>
+
+                                    <div className='relative z-10 mt-6 mx-auto max-w-[17ch] text-center'>
+                                        <h3 className='mx-auto max-w-[10ch] text-[1.45rem] font-semibold leading-[1.02] tracking-[-0.05em] text-white sm:text-[1.6rem]'>
+                                            {step.title}
+                                        </h3>
+                                        <p className='mt-4 text-[0.98rem] leading-6 text-white/80'>
+                                            {step.line}
+                                        </p>
+                                    </div>
+                                </article>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className='mt-5 flex items-center justify-center gap-2 md:hidden'>
+                    {processSteps.map((step, index) => (
+                        <button
+                            key={step.number}
+                            type='button'
+                            onClick={() => {
+                                const container = mobileSliderRef.current;
+                                if (!container) return;
+
+                                const cardWidth = container.clientWidth;
+                                container.scrollTo({
+                                    left: cardWidth * index,
+                                    behavior: 'smooth'
+                                });
+                            }}
+                            aria-label={ui.portfolio.goToPageAria(index + 1)}
+                            className={`slider-pagination-chip ${index === mobilePage ? 'slider-pagination-chip--active' : 'slider-pagination-chip--process'}`}
+                        />
+                    ))}
+                </div>
+
+                <div className='hidden grid-cols-1 gap-5 md:grid md:grid-cols-2 xl:grid-cols-4'>
+                    {processSteps.map((step, index) => (
                         <div
                             key={step.number}
                             className='h-full'
@@ -216,52 +288,6 @@ const ProcessSection = ({ locale }: { locale: Locale }) => {
                         </div>
                     ))}
                 </div>
-
-                {totalPages > 1 ? (
-                    <div className='mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
-                        <div className='flex items-center gap-3'>
-                            <button
-                                type='button'
-                                onClick={() => {
-                                    setCurrentPage((page) => (page - 1 + processSteps.length) % processSteps.length);
-                                    setHoveredStep(null);
-                                }}
-                                className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
-                            >
-                                {ui.process.prev}
-                            </button>
-                            <button
-                                type='button'
-                                onClick={() => {
-                                    setCurrentPage((page) => (page + 1) % processSteps.length);
-                                    setHoveredStep(null);
-                                }}
-                                className='inline-flex min-h-[2.6rem] items-center justify-center border border-white/14 bg-white/6 px-4 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-white transition hover:border-[var(--agency-orange)] hover:text-[var(--agency-orange)] [clip-path:polygon(0.85rem_0,100%_0,calc(100%-0.85rem)_100%,0_100%)]'
-                            >
-                                {ui.process.next}
-                            </button>
-                        </div>
-
-                        <div className='flex items-center gap-2'>
-                            {Array.from({ length: totalPages }).map((_, pageIndex) => (
-                                <button
-                                    key={pageIndex}
-                                    type='button'
-                                    onClick={() => {
-                                        setCurrentPage(pageIndex);
-                                        setHoveredStep(null);
-                                    }}
-                                    aria-label={ui.process.goToPageAria(pageIndex + 1)}
-                                    className={`h-2.5 rounded-full transition-all ${
-                                        pageIndex === currentPage
-                                            ? 'w-10 bg-[var(--agency-orange)]'
-                                            : 'w-2.5 bg-white/32 hover:bg-white/52'
-                                    }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                ) : null}
             </div>
         </section>
     );

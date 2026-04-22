@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 
 import BrandScopeSection from '@/app/components/BrandScopeSection';
 import Reveal from '@/app/components/Reveal';
+import ServiceProcessSlider from '@/app/components/ServiceProcessSlider';
 import ServiceWorkShowcase from '@/app/components/ServiceWorkShowcase';
 import SiteHeader from '@/app/components/SiteHeader';
 import { fireflies } from '@/app/fonts';
@@ -34,12 +35,9 @@ const customServiceVisuals = {
     grow: {
         workVisual: '/images/Services/grow.png',
         ctaVisual: '/images/Services/next3.png'
-    },
-    automate: {
-        workVisual: '/images/Services/automate.png',
-        ctaVisual: '/images/Services/next4.png'
     }
 } as const;
+
 
 export function generateStaticParams() {
     return locales.flatMap((locale) => serviceSlugs.map((service) => ({ locale, service })));
@@ -133,13 +131,14 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
         </footer>
     );
 
-    const customServiceConfig =
-        service === 'brand' || service === 'build' || service === 'grow' || service === 'automate'
-            ? {
-                  ...serviceDetail.services[service as keyof typeof serviceDetail.services],
-                  ...customServiceVisuals[service as keyof typeof customServiceVisuals]
-              }
-            : null;
+    const isCustomService = service === 'brand' || service === 'build' || service === 'grow';
+    const paginationLabels = Array.from({ length: 6 }, (_, index) => ui.portfolio.goToPageAria(index + 1));
+    const customServiceConfig = isCustomService
+        ? {
+              ...serviceDetail.services[service],
+              ...customServiceVisuals[service]
+          }
+        : null;
 
     if (customServiceConfig) {
         return (
@@ -193,7 +192,11 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                         </div>
 
                         <Reveal distance={30}>
-                            <BrandScopeSection groups={customServiceConfig.scopeGroups} clipPath={packageCardClipPath} />
+                            <BrandScopeSection
+                                groups={customServiceConfig.scopeGroups}
+                                clipPath={packageCardClipPath}
+                                paginationLabels={paginationLabels}
+                            />
                         </Reveal>
                     </div>
                 </section>
@@ -251,24 +254,11 @@ const ServiceDetailPage = async ({ params }: { params: Promise<Params> }) => {
                             </p>
                         </div>
 
-                        <div className='mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5'>
-                            {serviceDetail.processSteps.map((step, index) => (
-                                <Reveal key={step.number} delay={index * 70} distance={26}>
-                                    <article className='process-card process-card--static relative min-h-[200px] overflow-hidden p-6 sm:p-7' style={{ clipPath: detailCardClipPath }}>
-                                        <div className='process-card-surface absolute inset-0' />
-                                        <div className='relative z-10'>
-                                            <p className='text-[0.88rem] font-medium tracking-[-0.04em] text-[var(--agency-orange)]'>
-                                                {step.number}/
-                                            </p>
-                                            <p className='mt-5 text-[1.45rem] font-semibold leading-[1.04] tracking-[-0.05em] text-white'>
-                                                {step.title}
-                                            </p>
-                                            <p className='mt-4 text-sm leading-7 text-white/68'>{step.line}</p>
-                                        </div>
-                                    </article>
-                                </Reveal>
-                            ))}
-                        </div>
+                        <ServiceProcessSlider
+                            steps={serviceDetail.processSteps}
+                            clipPath={detailCardClipPath}
+                            paginationLabels={paginationLabels}
+                        />
                     </div>
                 </section>
 

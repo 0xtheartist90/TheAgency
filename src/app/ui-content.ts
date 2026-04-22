@@ -25,9 +25,6 @@ export type UiCopy = {
     };
     process: {
         label: string;
-        prev: string;
-        next: string;
-        goToPageAria: (page: number) => string;
         steps: Array<{
             number: string;
             title: string;
@@ -101,9 +98,6 @@ const uiContent: Record<Locale, UiCopy> = {
         },
         process: {
             label: 'Process',
-            prev: 'Prev',
-            next: 'Next',
-            goToPageAria: (page) => `Go to process page ${page}`,
             steps: [
                 {
                     number: '01',
@@ -128,16 +122,9 @@ const uiContent: Record<Locale, UiCopy> = {
                 },
                 {
                     number: '04',
-                    title: 'Build',
-                    line: 'We design and build in the open - sharing progress, gathering feedback, and refining as we go.',
-                    detail: 'Open. Shared. Refined.',
-                    icon: '/images/Icons/image 27.webp'
-                },
-                {
-                    number: '05',
-                    title: 'Launch',
-                    line: 'We go live, measure performance, and keep improving based on real data and feedback.',
-                    detail: 'Live. Measure. Improve.',
+                    title: 'Build & Launch',
+                    line: 'We design, build, launch, and refine in the open - sharing progress, gathering feedback, and improving from real-world use.',
+                    detail: 'Build. Launch. Refine.',
                     icon: '/images/Icons/image 11.webp'
                 }
             ]
@@ -206,9 +193,6 @@ const uiContent: Record<Locale, UiCopy> = {
         },
         process: {
             label: 'Proces',
-            prev: 'Vorige',
-            next: 'Volgende',
-            goToPageAria: (page) => `Ga naar procespagina ${page}`,
             steps: [
                 {
                     number: '01',
@@ -233,16 +217,9 @@ const uiContent: Record<Locale, UiCopy> = {
                 },
                 {
                     number: '04',
-                    title: 'Bouw',
-                    line: 'We ontwerpen en bouwen openlijk - delen voortgang, verzamelen feedback en verfijnen onderweg.',
-                    detail: 'Open. Gedeeld. Verfijnd.',
-                    icon: '/images/Icons/image 27.webp'
-                },
-                {
-                    number: '05',
-                    title: 'Lancering',
-                    line: 'We gaan live, meten performance en blijven verbeteren op basis van echte data en feedback.',
-                    detail: 'Live. Meten. Verbeteren.',
+                    title: 'Bouw & Lancering',
+                    line: 'We ontwerpen, bouwen, lanceren en verfijnen openlijk - delen voortgang, verzamelen feedback en verbeteren vanuit echt gebruik.',
+                    detail: 'Bouwen. Lanceren. Verfijnen.',
                     icon: '/images/Icons/image 11.webp'
                 }
             ]
@@ -311,9 +288,6 @@ const uiContent: Record<Locale, UiCopy> = {
         },
         process: {
             label: 'กระบวนการ',
-            prev: 'ก่อนหน้า',
-            next: 'ถัดไป',
-            goToPageAria: (page) => `ไปยังหน้ากระบวนการ ${page}`,
             steps: [
                 {
                     number: '01',
@@ -338,16 +312,9 @@ const uiContent: Record<Locale, UiCopy> = {
                 },
                 {
                     number: '04',
-                    title: 'ลงมือสร้าง',
-                    line: 'เราออกแบบและลงมือทำแบบเปิดเผย แชร์ความคืบหน้า รับฟีดแบ็ก และปรับไปพร้อมกัน.',
-                    detail: 'เปิดเผย. ทำร่วมกัน. ปรับให้คม.',
-                    icon: '/images/Icons/image 27.webp'
-                },
-                {
-                    number: '05',
-                    title: 'เปิดใช้งาน',
-                    line: 'เราเปิดใช้งานจริง วัดผล และปรับปรุงต่อจากข้อมูลและฟีดแบ็กที่เกิดขึ้นจริง.',
-                    detail: 'ใช้งานจริง. วัดผล. ปรับต่อ.',
+                    title: 'สร้าง & เปิดใช้งาน',
+                    line: 'เราออกแบบ สร้าง เปิดใช้งาน และปรับต่อแบบเปิดเผย แชร์ความคืบหน้า รับฟีดแบ็ก และพัฒนาจากการใช้งานจริง.',
+                    detail: 'สร้าง. เปิดใช้. ปรับต่อ.',
                     icon: '/images/Icons/image 11.webp'
                 }
             ]
